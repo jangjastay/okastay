@@ -38,7 +38,8 @@ function setup() {
   ensure_(ss, SHEET_ICAL, ['ID(객실)', '에어비앤비 iCal 주소']);
   ensure_(ss, SHEET_ICAL_CACHE, ['ID', '날짜', '가져온 시각']);
   var set = ensure_(ss, SHEET_SET, ['항목', '값', '설명']);
-  if (set.getLastRow() === 1) set.getRange(2, 1, SETTINGS_.length, 3).setValues(SETTINGS_);
+  var have = {}; set.getDataRange().getValues().forEach(function (r) { have[r[0]] = 1; });
+  SETTINGS_.forEach(function (r) { if (!have[r[0]]) set.appendRow(r); });
   var reqSh = ss.getSheetByName(SHEET_REQ);
   if (!reqSh.getRange(1, 21).getValue()) reqSh.getRange(1, 21).setValue('문자발송').setFontWeight('bold');
   var req = ss.getSheetByName(SHEET_REQ);
@@ -163,21 +164,22 @@ function icalOut_(room) {
 }
 
 
-/* ===================== 손님 자동 문자 (솔라피) ===================== */
+/* ===================== 손님 자동 카카오 알림톡 (솔라피) ===================== */
 
 var SETTINGS_ = [
   ['솔라피 API Key', '', 'solapi.com → 개발/연동 → API Key 관리'],
   ['솔라피 API Secret', '', '위와 같은 화면에서 발급'],
-  ['발신번호', '', '솔라피에 등록·인증한 번호 (예: 01012345678)'],
+  ['카카오 채널 ID(pfId)', '', '솔라피 → 카카오 채널 연동 후 나오는 pfId (KA01PF…)'],
+  ['발신번호', '', '솔라피에 등록한 번호 (솔라피가 요구하는 경우만)'],
   ['입금계좌', '', '예: 농협 000-0000-0000-00 장자스테이(주)'],
-  ['입금기한(시간)', '3', '입금대기 문자 보낸 뒤 몇 시간 안에 입금'],
-  ['주소', '충청북도 청주시 상당구 미원면 운암옥화길 186-16', '확정 문자에 들어감'],
-  ['문의전화', '', '문자 끝에 들어감'],
-  ['자동문자 사용', 'N', 'Y로 바꾸면 문자 발송 시작'],
-  ['문자_신청', '[오카맨션] {이름}님, 예약 신청이 접수됐어요.\n{상품} {날짜}\n빈 객실을 확인해 곧 입금 안내 드릴게요.\n문의 {문의전화}', '홈페이지 신청 직후'],
-  ['문자_입금대기', '[오카맨션] {이름}님, {상품} {날짜} 예약 가능합니다.\n\n입금 금액: {금액}\n입금 계좌: {입금계좌}\n입금 기한: {입금기한}까지\n\n입금자명은 예약자 성함으로 부탁드려요. 기한 내 미입금 시 자동 취소됩니다.\n문의 {문의전화}', '상태를 입금대기로 바꿀 때'],
-  ['문자_확정', '[오카맨션] {이름}님, 입금 확인되어 예약이 확정됐어요!\n\n{상품} {날짜}\n입실 {입실}\n주소: {주소}\n\n빈손으로 오셔서 편하게 쉬다 가세요.\n문의 {문의전화}', '상태를 확정으로 바꿀 때'],
-  ['문자_취소', '[오카맨션] {이름}님, {상품} {날짜} 예약이 취소 처리됐어요.\n문의 {문의전화}', '상태를 취소로 바꿀 때']
+  ['입금기한(시간)', '3', '입금대기 알림 보낸 뒤 몇 시간 안에 입금'],
+  ['주소', '충청북도 청주시 상당구 미원면 운암옥화길 186-16', '확정 알림에 들어감'],
+  ['문의전화', '', '알림 끝에 들어감'],
+  ['자동알림 사용', 'N', 'Y로 바꾸면 카카오 알림톡 발송 시작'],
+  ['템플릿ID_신청', '', '카카오 심사 통과 후 솔라피에 나오는 템플릿 ID (KA01TP…)'],
+  ['템플릿ID_입금대기', '', ''],
+  ['템플릿ID_확정', '', ''],
+  ['템플릿ID_취소', '', '']
 ];
 
 function settings_() {
@@ -199,11 +201,11 @@ function onStatusEdit(e) {
 
 function notifyGuest_(sh, row, status) {
   var S = settings_();
-  if (String(S['자동문자 사용']).toUpperCase() !== 'Y') return;
-  var tpl = S['문자_' + status]; if (!tpl) return;
+  if (String(S['자동알림 사용']).toUpperCase() !== 'Y') return;
+  var tid = String(S['템플릿ID_' + status] || '').trim(); if (!tid) return;
   var r = sh.getRange(row, 1, 1, 21).getValues()[0];
   var log = String(r[20] || '');
-  if (log.indexOf(status + ' ') >= 0) return; // 같은 상태 문자는 한 번만
+  if (log.indexOf(status + ' ') >= 0) return; // 같은 상태 알림은 한 번만
   var phone = String(r[16]).replace(/[^0-9]/g, '');
   if (!/^01\d{8,9}$/.test(phone)) return;
   var ci = d_(r[5]), co = r[6] ? d_(r[6]) : '';
@@ -211,27 +213,29 @@ function notifyGuest_(sh, row, status) {
   var due = Utilities.formatDate(new Date(Date.now() + hours * 3600000), 'Asia/Seoul', 'M월 d일 HH:mm');
   var inTime = r[2] === '숙박' ? ({ dokchae2: '17:00', campstay1: '18:00', campstay2: '18:00' }[r[4]] || '15:00') : (r[7] || '예약 시간');
   var amount = String(r[18] || '').trim().replace(/\s*\+\s*확인 후 안내/, '') || '안내드린 금액'; // 예상금액 칸을 최종 금액으로 고쳐 쓰면 그 금액이 나감
-  var map = {
+  var v = {
     '이름': r[15], '상품': r[3], '날짜': co ? ci + ' ~ ' + co : ci + (r[7] ? ' ' + r[7] : ''),
     '금액': amount, '입금계좌': S['입금계좌'], '입금기한': due, '입실': inTime,
     '주소': S['주소'], '문의전화': S['문의전화']
   };
-  var text = String(tpl).replace(/\{([^}]+)\}/g, function (_, k) { return map[k] != null ? map[k] : ''; });
-  var res = solapiSend_(S, phone, text);
+  var vars = {}; Object.keys(v).forEach(function (k) { vars['#{' + k + '}'] = String(v[k] == null ? '' : v[k]); });
+  var res = solapiSend_(S, phone, tid, vars);
   var stamp = Utilities.formatDate(new Date(), 'Asia/Seoul', 'M/d HH:mm');
-  sh.getRange(row, 21).setValue((log ? log + ' / ' : '') + status + ' ' + (res.ok ? '발송 ' : '실패(' + res.msg + ') ') + stamp);
+  sh.getRange(row, 21).setValue((log ? log + ' / ' : '') + status + ' ' + (res.ok ? '카톡발송 ' : '실패(' + res.msg + ') ') + stamp);
 }
 
-function solapiSend_(S, to, text) {
+function solapiSend_(S, to, templateId, vars) {
   try {
-    var key = String(S['솔라피 API Key']).trim(), secret = String(S['솔라피 API Secret']).trim(), from = String(S['발신번호']).replace(/[^0-9]/g, '');
-    if (!key || !secret || !from) return { ok: false, msg: '설정 비어있음' };
+    var key = String(S['솔라피 API Key']).trim(), secret = String(S['솔라피 API Secret']).trim(), pfId = String(S['카카오 채널 ID(pfId)']).trim();
+    if (!key || !secret || !pfId) return { ok: false, msg: '설정 비어있음' };
     var date = new Date().toISOString(), salt = Utilities.getUuid().replace(/-/g, '');
     var sig = Utilities.computeHmacSha256Signature(date + salt, secret).map(function (b) { return ('0' + (b & 255).toString(16)).slice(-2); }).join('');
+    var msg = { to: to, kakaoOptions: { pfId: pfId, templateId: templateId, variables: vars, disableSms: true } };
+    var from = String(S['발신번호'] || '').replace(/[^0-9]/g, ''); if (from) msg.from = from;
     var resp = UrlFetchApp.fetch('https://api.solapi.com/messages/v4/send', {
       method: 'post', contentType: 'application/json', muteHttpExceptions: true,
       headers: { Authorization: 'HMAC-SHA256 apiKey=' + key + ', date=' + date + ', salt=' + salt + ', signature=' + sig },
-      payload: JSON.stringify({ message: { to: to, from: from, text: text } })
+      payload: JSON.stringify({ message: msg })
     });
     var code = resp.getResponseCode();
     if (code >= 200 && code < 300) return { ok: true };
@@ -240,8 +244,10 @@ function solapiSend_(S, to, text) {
   } catch (err) { return { ok: false, msg: String(err).slice(0, 60) }; }
 }
 
-/** 설정 확인용: 발신번호로 시험 문자 1통 */
-function testSms() {
-  var S = settings_();
-  Logger.log(JSON.stringify(solapiSend_(S, String(S['발신번호']).replace(/[^0-9]/g, ''), '[오카맨션] 자동 문자 연결 시험입니다.')));
+/** 설정 확인용: 예약신청 시트 맨 아래 줄 손님에게 '확정' 알림을 시험 발송 (본인 번호로 신청한 줄에서 실행하세요) */
+function testKakao() {
+  var sh = book_().getSheetByName(SHEET_REQ), row = sh.getLastRow(), S = settings_();
+  var r = sh.getRange(row, 1, 1, 21).getValues()[0];
+  Logger.log(r[15] + ' ' + r[16] + ' 에게 시험 발송: ' + JSON.stringify(solapiSend_(S, String(r[16]).replace(/[^0-9]/g, ''), String(S['템플릿ID_확정']).trim(),
+    { '#{이름}': r[15], '#{상품}': r[3], '#{날짜}': d_(r[5]), '#{입실}': '15:00', '#{주소}': S['주소'], '#{문의전화}': S['문의전화'] })));
 }
