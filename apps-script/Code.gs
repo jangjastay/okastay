@@ -38,6 +38,8 @@ function setup() {
   ensure_(ss, SHEET_ICAL, ['ID(객실)', '에어비앤비 iCal 주소']);
   ensure_(ss, SHEET_ICAL_CACHE, ['ID', '날짜', '가져온 시각']);
   var set = ensure_(ss, SHEET_SET, ['항목', '값', '설명']);
+  var old = set.getDataRange().getValues();
+  for (var i = old.length - 1; i >= 1; i--) if (/^문자_|^자동문자 사용$/.test(String(old[i][0]))) set.deleteRow(i + 1); // 예전 문자용 항목 정리
   var have = {}; set.getDataRange().getValues().forEach(function (r) { have[r[0]] = 1; });
   SETTINGS_.forEach(function (r) { if (!have[r[0]]) set.appendRow(r); });
   var reqSh = ss.getSheetByName(SHEET_REQ);
