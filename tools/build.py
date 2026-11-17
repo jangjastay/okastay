@@ -294,6 +294,71 @@ def build_stories():
     layout("/story/", f"이야기 | {S['name']} 청주 애견동반 · 아이랑 여행 가이드", "청주 애견동반 펜션, 청주 아이랑 갈만한 곳, 청주 당일 바베큐, 옥화구곡 가족여행 가이드.", body)
 
 
+# ---------- 견종별 여행 가이드 ----------
+BREEDS = json.load(open(os.path.join(ROOT, "data", "breeds.json"), encoding="utf-8"))
+BREED_PHOTOS = ["pet/lawn", "pet/agility", "pet/dog-pool", "pet/poodles", "pet/amenity", "pet/dog-bbq", "rooms/2f-dog"]
+
+
+def breed_stay(b):
+    lo, hi = b["kg"]
+    small = f'<li><a href="{BASE}/rooms/">2층 객실 201~207호</a> — 12kg 미만 소형견은 2마리까지 함께 묵을 수 있어요. (1마리 {won(POL["pet_fee"])})</li>'
+    big = f'<li><a href="{BASE}/rooms/301.html">301호 단독 애견운동장 객실</a> — 대형견은 이 객실에서만 가능해요. ({won(POL["large_dog_fee"])}, 사전 문의)</li>'
+    if hi < 12:
+        return small, f"{b['name']}는 평균 체중이 {lo}~{hi}kg 정도라 오카맨션 전 객실에서 함께 묵을 수 있어요."
+    if lo >= 12:
+        return big, f"{b['name']}는 평균 체중이 {lo}~{hi}kg 정도로 12kg을 넘는 경우가 많아, 단독 애견운동장이 있는 301호에서 묵을 수 있어요. 예약 전에 꼭 문의해 주세요."
+    return small + big, f"{b['name']}는 평균 체중이 {lo}~{hi}kg로 개체마다 달라요. 12kg 미만이면 2층 객실, 그 이상이면 301호를 이용해 주세요."
+
+
+def build_breeds():
+    for i, b in enumerate(BREEDS):
+        stay_li, stay_txt = breed_stay(b)
+        ph = [BREED_PHOTOS[(i + k) % len(BREED_PHOTOS)] for k in (0, 3)]
+        name = b["name"]
+        rvs = [r for r in D["reviews"] if name.replace(" ", "")[:3] in r["text"].replace(" ", "")][:6]
+        same = [o for o in BREEDS if o["slug"] != b["slug"] and o["size"] == b["size"]][:4] or [o for o in BREEDS if o["slug"] != b["slug"]][:4]
+        faq = [(f"{name}와 함께 갈 수 있는 청주 애견동반 펜션이 있나요?", stay_txt + " 반려견 전용 수영장과 인조잔디 애견운동장도 함께 이용할 수 있어요."),
+               (f"{name}는 수영을 잘하나요?", b["swim"]),
+               (f"{name}와 여행 갈 때 무엇을 챙겨야 하나요?", "사료, 리드줄, 평소 쓰던 담요를 챙기세요. 오카맨션 객실에는 반려견 식기, 배변패드, 침대 계단이 준비돼 있어요. " + b["tips"][0])]
+        fq = "".join(f"<details><summary>{e(q)}</summary><p>{e(a)}</p></details>" for q, a in faq)
+        facts = "".join(f"<tr><th>{k}</th><td>{e(v)}</td></tr>" for k, v in [("영문명", b["en"]), ("원산지", b["origin"]), ("크기", b["size"]),
+                         ("평균 체중", f"{b['kg'][0]}~{b['kg'][1]}kg"), ("평균 수명", b["life"]), ("털", b["coat"]), ("활동량", "●" * b["energy"] + "○" * (5 - b["energy"]))])
+        body = f"""<section class="page-head"><div class="wrap narrow"><p class="eyebrow dark">견종별 여행 가이드</p><h1>{e(name)} 여행 가이드 — 성격, 역사, 애견동반 펜션 팁</h1>
+<p>{e(name)}({e(b['en'])})의 기본 정보와 역사, 함께 여행할 때 알아두면 좋은 점을 정리했어요.</p></div></section>
+<section class="sec pt0"><div class="wrap"><article class="story">
+<h2>{e(name)} 기본 정보</h2><table class="kv">{facts}</table>
+<h2>{e(name)}의 역사</h2><p>{e(b['history'])}</p>
+<div class="ph">{"".join(img(k, name + "와 함께하는 애견동반 여행") for k in ph)}</div>
+<h2>{e(name)} 성격과 특징</h2><ul class="dots">{"".join(f"<li>{e(t)}</li>" for t in b['traits'])}</ul>
+<h2>{e(name)}와 여행할 때 팁</h2><ul class="dots">{"".join(f"<li>{e(t)}</li>" for t in b['tips'])}</ul>
+<h2>{e(name)} 물놀이 · 수영</h2><p>{e(b['swim'])} 오카맨션 반려견 전용 수영장은 수심이 얕고, 구명조끼를 빌려 드려요.</p>
+<h2>{e(name)}와 오카맨션에서 묵으려면</h2><p>{e(stay_txt)}</p><ul class="dots">{stay_li}</ul>
+<h2>자주 묻는 질문</h2><div class="faq">{fq}</div>
+<p class="note">일반적인 견종 정보로, 아이마다 체중과 성격은 다를 수 있어요. 건강 문제는 수의사와 상담해 주세요.</p>
+<div class="center"><a class="btn lg" href="{BASE}/reserve.html">{e(name)}와 함께 예약 신청</a></div>
+</article></div></section>
+{review_section(rvs, name + " 보호자 실제 후기") if rvs else ""}
+<section class="sec tint"><div class="wrap"><h2>다른 견종 가이드</h2><div class="btn-row">{"".join(f'<a class="btn ghost" href="{BASE}/dog/{o["slug"]}.html">{e(o["name"])}</a>' for o in same)}<a class="btn ghost" href="{BASE}/dog/">전체 견종</a></div></div></section>"""
+        ld = [{"@context": "https://schema.org", "@type": "Article", "headline": f"{name} 여행 가이드 — 성격, 역사, 애견동반 펜션 팁",
+               "description": f"{name} 기본 정보·역사·여행 팁", "author": {"@type": "Organization", "name": S["name"]},
+               "publisher": {"@type": "Organization", "name": S["name"]}, "image": [f"{S['url']}/assets/img/{ph[0]}.jpg"],
+               "mainEntityOfPage": f"{S['url']}/dog/{b['slug']}.html", "dateModified": TODAY},
+              {"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [
+                  {"@type": "Question", "name": q, "acceptedAnswer": {"@type": "Answer", "text": a}} for q, a in faq]},
+              breadcrumb([("홈", "/"), ("견종별 여행 가이드", "/dog/"), (name, f"/dog/{b['slug']}.html")])]
+        layout(f"/dog/{b['slug']}.html", f"{name} 성격·역사·여행 팁 | 애견동반 펜션 가이드 {S['name']}",
+               f"{name}({b['en']}) 원산지 {b['origin']}, 평균 {b['kg'][0]}~{b['kg'][1]}kg. 성격과 역사, 수영 가능 여부, 애견동반 펜션 여행 팁을 정리했어요.", body, og_img=ph[0], jsonld=ld)
+    groups = ""
+    for sz in ["소형", "소형~중형", "중형", "대형"]:
+        items = [b for b in BREEDS if b["size"] == sz]
+        if items:
+            groups += f'<h2>{sz}견</h2><div class="btn-row">' + "".join(f'<a class="btn ghost" href="{BASE}/dog/{b["slug"]}.html">{e(b["name"])}</a>' for b in items) + "</div>"
+    body = f"""<section class="page-head"><div class="wrap"><p class="eyebrow dark">DOG GUIDE</p><h1>견종별 여행 가이드</h1>
+<p>우리 아이 견종에 맞는 여행 팁, 수영 가능 여부, 함께 묵을 수 있는 객실을 견종별로 정리했어요. 12kg 미만 소형견은 전 객실, 대형견은 301호에서 함께할 수 있어요.</p></div></section>
+<section class="sec pt0"><div class="wrap">{groups}</div></section>"""
+    layout("/dog/", f"견종별 여행 가이드 | 애견동반 펜션 {S['name']}", "말티즈, 푸들, 포메라니안, 웰시코기, 진돗개, 골든 리트리버 등 견종별 성격·역사·여행 팁과 애견동반 펜션 이용 안내.", body)
+
+
 # ---------- 메인 ----------
 def build_index():
     rooms = "".join(room_card(r) for r in D["rooms"])
@@ -397,7 +462,7 @@ def build_index():
 
 <section class="sec">
   <div class="wrap"><div class="sec-head"><h2>오카맨션 이야기</h2><a class="more" href="{BASE}/story/">전체 보기</a></div>
-  {story_cards(STORIES)}</div>
+  {story_cards(STORIES)}<p class="center" style="margin-top:20px"><a class="btn ghost" href="{BASE}/dog/">견종별 여행 가이드 30종 보기</a></p></div>
 </section>
 
 <section class="sec">
@@ -663,5 +728,5 @@ def build_misc():
 
 if __name__ == "__main__":
     os.makedirs(os.path.join(ROOT, "assets/js"), exist_ok=True)
-    build_index(); build_rooms(); build_day(); build_gallery(); build_guide(); build_reserve(); build_reviews(); build_stories(); build_misc()
+    build_index(); build_rooms(); build_day(); build_gallery(); build_guide(); build_reserve(); build_reviews(); build_stories(); build_breeds(); build_misc()
     print(f"{len(PAGES)} pages built")
