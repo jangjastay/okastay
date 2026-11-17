@@ -77,7 +77,7 @@ def jsonld_business():
         j["telephone"] = S["phone"]
     if S["lat"] and S["lng"]:
         j["geo"] = {"@type": "GeoCoordinates", "latitude": S["lat"], "longitude": S["lng"]}
-    same = [x for x in [S["instagram"], S["instagram_kids"]] if x]
+    same = [x for x in [S["instagram"], S["instagram_kids"], S.get("youtube_channel")] if x]
     if same:
         j["sameAs"] = same
     return j
@@ -144,6 +144,7 @@ def layout(path, title, desc, body, og_img=None, jsonld=None, scripts=(), noinde
     <div class="foot-links">
       <a href="{BASE}/rooms/">객실</a><a href="{BASE}/day/">당일 이용</a><a href="{BASE}/guide.html#refund">환불규정</a>
       {f'<a href="{e(S["instagram"])}" target="_blank" rel="noopener">인스타그램</a>' if S["instagram"] else ""}
+      {f'<a href="{e(S["youtube_channel"])}" target="_blank" rel="noopener">유튜브</a>' if S.get("youtube_channel") else ""}
     </div>
   </div>
 </footer>
@@ -464,7 +465,8 @@ def build_gallery():
 <p>보정이나 합성 없이 실제 오카맨션 모습 그대로 담았습니다.</p></div></section>
 <section class="sec pt0"><div class="wrap"><div class="masonry">{tiles}</div></div></section>{ev_sec}
 <section class="sec"><div class="wrap narrow center"><h2>영상으로 보기</h2>
-<div class="video" data-yt="{e(S['youtube_video'])}"><img src="https://i.ytimg.com/vi/{e(S['youtube_video'])}/hqdefault.jpg" alt="오카맨션 소개 영상" loading="lazy"><button class="play" aria-label="영상 재생">▶</button></div></div></section>"""
+<div class="video" data-yt="{e(S['youtube_video'])}"><img src="https://i.ytimg.com/vi/{e(S['youtube_video'])}/hqdefault.jpg" alt="오카맨션 소개 영상" loading="lazy"><button class="play" aria-label="영상 재생">▶</button></div>
+<div class="btn-row center">{f'<a class="btn ghost" href="{e(S["youtube_channel"])}" target="_blank" rel="noopener">유튜브 채널</a>' if S.get("youtube_channel") else ""}<a class="btn ghost" href="{e(S['instagram'])}" target="_blank" rel="noopener">인스타그램 @stay_oka</a></div></div></section>"""
     layout("/gallery.html", f"사진 · 영상 | {S['name']}", "오카맨션 실제 사진 — 객실, 애견운동장, 온수풀, 대형수영장, 데크존, 바베큐, 불멍존.", body)
 
 
