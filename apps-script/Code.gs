@@ -15,7 +15,9 @@ var SHEET_BLOCK = '막기';
 var SHEET_ICAL = 'iCal';
 var SHEET_ICAL_CACHE = 'iCal가져옴';
 var HEAD_REQ = ['접수시각', '상태', '구분', '객실/상품', 'ID', '체크인', '체크아웃', '시간', '동반', '성인', '어린이', '36개월미만',
-  '소형견', '대형견', '옵션', '이름', '연락처', '요청사항', '예상금액', '관리메모'];
+  '소형견', '대형견', '옵션', '이름', '연락처', '요청사항', '예상금액', '관리메모', '문자발송'];
+var SHEET_SET = '설정';
+var STATUS = ['신청', '입금대기', '확정', '취소'];
 
 /** 시트 찾기: 시트에서 연 스크립트면 그 시트, 따로 만든 스크립트면 '오카맨션 예약' 시트를 새로 만들어 기억 */
 function book_() {
@@ -35,11 +37,17 @@ function setup() {
   ensure_(ss, SHEET_BLOCK, ['ID(객실/상품)', '시작일', '종료일(체크아웃일, 비우면 하루)', '사유(야놀자·여기어때·네이버·전화 등)']);
   ensure_(ss, SHEET_ICAL, ['ID(객실)', '에어비앤비 iCal 주소']);
   ensure_(ss, SHEET_ICAL_CACHE, ['ID', '날짜', '가져온 시각']);
+  var set = ensure_(ss, SHEET_SET, ['항목', '값', '설명']);
+  if (set.getLastRow() === 1) set.getRange(2, 1, SETTINGS_.length, 3).setValues(SETTINGS_);
+  var reqSh = ss.getSheetByName(SHEET_REQ);
+  if (!reqSh.getRange(1, 21).getValue()) reqSh.getRange(1, 21).setValue('문자발송').setFontWeight('bold');
   var req = ss.getSheetByName(SHEET_REQ);
-  var rule = SpreadsheetApp.newDataValidation().requireValueInList(['신청', '확정', '취소'], true).build();
+  var rule = SpreadsheetApp.newDataValidation().requireValueInList(STATUS, true).build();
   req.getRange('B2:B').setDataValidation(rule);
   ScriptApp.getProjectTriggers().forEach(function (t) { if (t.getHandlerFunction() === 'syncIcal') ScriptApp.deleteTrigger(t); });
   ScriptApp.newTrigger('syncIcal').timeBased().everyMinutes(30).create();
+  ScriptApp.getProjectTriggers().forEach(function (t) { if (t.getHandlerFunction() === 'onStatusEdit') ScriptApp.deleteTrigger(t); });
+  ScriptApp.newTrigger('onStatusEdit').forSpreadsheet(ss).onEdit().create();
   var s1 = ss.getSheetByName('Sheet1') || ss.getSheetByName('시트1');
   if (s1 && ss.getSheets().length > 1 && s1.getLastRow() === 0) ss.deleteSheet(s1);
   Logger.log('예약 시트 주소: ' + ss.getUrl());
@@ -108,12 +116,13 @@ function doPost(e) {
     var withMap = { kids: '아이', pet: '반려견', all: '가족 모두' };
     sh.appendRow([now, '신청', d.type, d.item, d.itemId, d.checkin, d.checkout || '', d.time || '', withMap[d.with] || d.with,
       +d.adults || 0, +d.kids || 0, +d.infants || 0, +d.dogs || 0, +d.bigdogs || 0, d.addons || '', d.name, "'" + d.phone, d.memo || '', d.estimate || '', '']);
+    try { notifyGuest_(sh, sh.getLastRow(), '신청'); } catch (e2) { }
     var to = NOTIFY_EMAIL || Session.getEffectiveUser().getEmail();
     if (to) MailApp.sendEmail(to, '[오카맨션] 새 예약 신청 — ' + d.name + ' ' + d.checkin + ' ' + d.item,
       [d.type + ' · ' + d.item, d.checkin + (d.checkout ? ' ~ ' + d.checkout : '') + ' ' + (d.time || ''),
         '성인 ' + d.adults + ' / 어린이 ' + d.kids + ' / 36개월 미만 ' + d.infants + ' / 소형견 ' + d.dogs + ' / 대형견 ' + d.bigdogs,
         '옵션: ' + (d.addons || '-'), '예상 금액: ' + d.estimate, d.name + ' ' + d.phone, '요청: ' + (d.memo || '-'),
-        '', '→ 시트에서 날짜 확인 후 손님께 문자 → 입금 확인되면 상태를 "확정"으로 바꿔주세요.'].join('\n'));
+        '', '→ 시트에서 날짜 확인 → 상태를 "입금대기"로 바꾸면 계좌 안내 문자 자동 발송 → 입금 확인 후 "확정"으로 바꾸면 확정 문자 자동 발송'].join('\n'));
     return json_({ ok: true });
   } catch (err) {
     return json_({ ok: false, message: '접수 중 오류가 났어요. 전화로 문의해주세요.' });
@@ -151,4 +160,88 @@ function icalOut_(room) {
   });
   var cal = ['BEGIN:VCALENDAR', 'VERSION:2.0', 'PRODID:-//okastay.kr//KO', 'CALSCALE:GREGORIAN'].concat(ev, ['END:VCALENDAR']).join('\r\n');
   return ContentService.createTextOutput(cal).setMimeType(ContentService.MimeType.ICAL);
+}
+
+
+/* ===================== 손님 자동 문자 (솔라피) ===================== */
+
+var SETTINGS_ = [
+  ['솔라피 API Key', '', 'solapi.com → 개발/연동 → API Key 관리'],
+  ['솔라피 API Secret', '', '위와 같은 화면에서 발급'],
+  ['발신번호', '', '솔라피에 등록·인증한 번호 (예: 01012345678)'],
+  ['입금계좌', '', '예: 농협 000-0000-0000-00 장자스테이(주)'],
+  ['입금기한(시간)', '3', '입금대기 문자 보낸 뒤 몇 시간 안에 입금'],
+  ['주소', '충청북도 청주시 상당구 미원면 운암옥화길 186-16', '확정 문자에 들어감'],
+  ['문의전화', '', '문자 끝에 들어감'],
+  ['자동문자 사용', 'N', 'Y로 바꾸면 문자 발송 시작'],
+  ['문자_신청', '[오카맨션] {이름}님, 예약 신청이 접수됐어요.\n{상품} {날짜}\n빈 객실을 확인해 곧 입금 안내 드릴게요.\n문의 {문의전화}', '홈페이지 신청 직후'],
+  ['문자_입금대기', '[오카맨션] {이름}님, {상품} {날짜} 예약 가능합니다.\n\n입금 금액: {금액}\n입금 계좌: {입금계좌}\n입금 기한: {입금기한}까지\n\n입금자명은 예약자 성함으로 부탁드려요. 기한 내 미입금 시 자동 취소됩니다.\n문의 {문의전화}', '상태를 입금대기로 바꿀 때'],
+  ['문자_확정', '[오카맨션] {이름}님, 입금 확인되어 예약이 확정됐어요!\n\n{상품} {날짜}\n입실 {입실}\n주소: {주소}\n\n빈손으로 오셔서 편하게 쉬다 가세요.\n문의 {문의전화}', '상태를 확정으로 바꿀 때'],
+  ['문자_취소', '[오카맨션] {이름}님, {상품} {날짜} 예약이 취소 처리됐어요.\n문의 {문의전화}', '상태를 취소로 바꿀 때']
+];
+
+function settings_() {
+  var o = {}, sh = book_().getSheetByName(SHEET_SET);
+  if (!sh) return o;
+  sh.getDataRange().getValues().slice(1).forEach(function (r) { if (r[0]) o[String(r[0]).trim()] = r[1]; });
+  return o;
+}
+
+/** 상태 칸(B열)을 바꾸면 실행 (설치형 트리거) */
+function onStatusEdit(e) {
+  var sh = e.range.getSheet();
+  if (sh.getName() !== SHEET_REQ || e.range.getColumn() !== 2 || e.range.getRow() < 2) return;
+  for (var i = 0; i < e.range.getNumRows(); i++) {
+    var row = e.range.getRow() + i, st = String(sh.getRange(row, 2).getValue()).trim();
+    if (st && st !== '신청') notifyGuest_(sh, row, st);
+  }
+}
+
+function notifyGuest_(sh, row, status) {
+  var S = settings_();
+  if (String(S['자동문자 사용']).toUpperCase() !== 'Y') return;
+  var tpl = S['문자_' + status]; if (!tpl) return;
+  var r = sh.getRange(row, 1, 1, 21).getValues()[0];
+  var log = String(r[20] || '');
+  if (log.indexOf(status + ' ') >= 0) return; // 같은 상태 문자는 한 번만
+  var phone = String(r[16]).replace(/[^0-9]/g, '');
+  if (!/^01\d{8,9}$/.test(phone)) return;
+  var ci = d_(r[5]), co = r[6] ? d_(r[6]) : '';
+  var hours = Number(S['입금기한(시간)']) || 3;
+  var due = Utilities.formatDate(new Date(Date.now() + hours * 3600000), 'Asia/Seoul', 'M월 d일 HH:mm');
+  var inTime = r[2] === '숙박' ? ({ dokchae2: '17:00', campstay1: '18:00', campstay2: '18:00' }[r[4]] || '15:00') : (r[7] || '예약 시간');
+  var amount = String(r[18] || '').trim().replace(/\s*\+\s*확인 후 안내/, '') || '안내드린 금액'; // 예상금액 칸을 최종 금액으로 고쳐 쓰면 그 금액이 나감
+  var map = {
+    '이름': r[15], '상품': r[3], '날짜': co ? ci + ' ~ ' + co : ci + (r[7] ? ' ' + r[7] : ''),
+    '금액': amount, '입금계좌': S['입금계좌'], '입금기한': due, '입실': inTime,
+    '주소': S['주소'], '문의전화': S['문의전화']
+  };
+  var text = String(tpl).replace(/\{([^}]+)\}/g, function (_, k) { return map[k] != null ? map[k] : ''; });
+  var res = solapiSend_(S, phone, text);
+  var stamp = Utilities.formatDate(new Date(), 'Asia/Seoul', 'M/d HH:mm');
+  sh.getRange(row, 21).setValue((log ? log + ' / ' : '') + status + ' ' + (res.ok ? '발송 ' : '실패(' + res.msg + ') ') + stamp);
+}
+
+function solapiSend_(S, to, text) {
+  try {
+    var key = String(S['솔라피 API Key']).trim(), secret = String(S['솔라피 API Secret']).trim(), from = String(S['발신번호']).replace(/[^0-9]/g, '');
+    if (!key || !secret || !from) return { ok: false, msg: '설정 비어있음' };
+    var date = new Date().toISOString(), salt = Utilities.getUuid().replace(/-/g, '');
+    var sig = Utilities.computeHmacSha256Signature(date + salt, secret).map(function (b) { return ('0' + (b & 255).toString(16)).slice(-2); }).join('');
+    var resp = UrlFetchApp.fetch('https://api.solapi.com/messages/v4/send', {
+      method: 'post', contentType: 'application/json', muteHttpExceptions: true,
+      headers: { Authorization: 'HMAC-SHA256 apiKey=' + key + ', date=' + date + ', salt=' + salt + ', signature=' + sig },
+      payload: JSON.stringify({ message: { to: to, from: from, text: text } })
+    });
+    var code = resp.getResponseCode();
+    if (code >= 200 && code < 300) return { ok: true };
+    var j = {}; try { j = JSON.parse(resp.getContentText()); } catch (x) { }
+    return { ok: false, msg: j.errorMessage || ('HTTP ' + code) };
+  } catch (err) { return { ok: false, msg: String(err).slice(0, 60) }; }
+}
+
+/** 설정 확인용: 발신번호로 시험 문자 1통 */
+function testSms() {
+  var S = settings_();
+  Logger.log(JSON.stringify(solapiSend_(S, String(S['발신번호']).replace(/[^0-9]/g, ''), '[오카맨션] 자동 문자 연결 시험입니다.')));
 }
