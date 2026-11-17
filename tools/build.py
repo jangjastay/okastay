@@ -229,19 +229,69 @@ def gallery_strip(keys, label):
 def review_cards(items, cls="rv-grid"):
     if not items:
         return ""
-    cards = "".join(f'<figure class="review"><blockquote>{e(r["text"])}</blockquote><figcaption>{e(r["who"])} · {"객실 " + e(", ".join(r["rooms"])) + "호 · " if r.get("rooms") and r["rooms"][0].isdigit() else ""}{e(r["when"])} · 네이버 리뷰</figcaption></figure>' for r in items)
+    cards = "".join(f'<figure class="review"><blockquote>{e(r["text"])}</blockquote><figcaption>{e(r["who"])} · {("객실 " + e(", ".join(r["rooms"])) + "호 · ") if r.get("rooms") and r["rooms"][0].isdigit() else ("2층 객실 · " if r.get("rooms") == ["std"] else "")}{e(r["when"])} · 네이버 리뷰</figcaption></figure>' for r in items)
     return f'<div class="{cls}">{cards}</div>'
 
 
-def review_section(items, title):
+def review_section(items, title, cap=24):
     if not items:
         return ""
-    return f'<section class="sec"><div class="wrap"><div class="sec-head"><h2>{e(title)}</h2><a class="more" href="{BASE}/reviews.html">후기 전체 보기</a></div>{review_cards(items[:4])}</div></section>'
+    rest = items[6:cap]
+    more = f'<details class="rv-more"><summary>후기 {len(rest)}개 더 보기</summary>{review_cards(rest)}</details>' if rest else ""
+    return f'<section class="sec"><div class="wrap"><div class="sec-head"><h2>{e(title)}</h2><a class="more" href="{BASE}/reviews.html">후기 전체 보기</a></div>{review_cards(items[:6])}{more}</div></section>'
 
 
 def breadcrumb(items):
     return {"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [
         {"@type": "ListItem", "position": i + 1, "name": n, "item": S["url"] + u} for i, (n, u) in enumerate(items)]}
+
+
+# ---------- 이야기(SEO 글) ----------
+STORIES = json.load(open(os.path.join(ROOT, "data", "stories.json"), encoding="utf-8"))
+LINK_NAMES = {"/rooms/301.html": "301호 단독 애견운동장 객실", "/day/bbq.html": "바베큐 안내", "/reviews.html": "실제 이용 후기",
+              "/day/kids.html": "키즈 놀이터 · 물놀이장", "/day/pool.html": "대형 야외수영장", "/day/deck.html": "데크존 · 파라솔존",
+              "/day/warm-pool.html": "온수풀 대여", "/day/fire.html": "불멍", "/rooms/": "객실 안내", "/guide.html": "이용안내 · 오시는 길",
+              "/reserve.html": "예약 신청", "/gallery.html": "사진", "/day/": "당일 이용", "/day/cafe.html": "카페 · 무인 편의점"}
+
+
+def story_cards(items):
+    return '<div class="story-list">' + "".join(
+        f'<a class="story-card" href="{BASE}/story/{s["slug"]}.html">{img(s["cover"], s["h1"])}<div><b>{e(s["h1"])}</b><span>{e(s["desc"][:70])}…</span></div></a>'
+        for s in items) + "</div>"
+
+
+def build_stories():
+    topic_map = {"pet": "pet", "kids": "kids", "bbq": "bbq", "winter": "bbq", "local": "kids", "near": "pet"}
+    for s in STORIES:
+        secs = ""
+        for h, t, ph in s["sections"]:
+            pics = "".join(img(k, h) for k in ph if k != s["cover"])
+            secs += f'<h2>{e(h)}</h2><p>{e(t)}</p>' + (f'<div class="ph">{pics}</div>' if pics else "")
+        faq = "".join(f"<details><summary>{e(q)}</summary><p>{e(a)}</p></details>" for q, a in s["faq"])
+        tp = topic_map.get(s.get("topic"), s.get("topic"))
+        rvs = [r for r in D["reviews"] if tp in r.get("topics", [])][:6]
+        links = "".join(f'<li><a href="{BASE}{u}">{e(LINK_NAMES.get(u, u))}</a></li>' for u in s.get("links", []))
+        others = [o for o in STORIES if o["slug"] != s["slug"]][:3]
+        kw = "".join(f"<span>{e(k)}</span>" for k in s["keywords"])
+        body = f"""<section class="page-head"><div class="wrap narrow"><p class="eyebrow dark">OKA STORY</p><h1>{e(s['h1'])}</h1><p>{e(s['desc'])}</p></div></section>
+<section class="sec pt0"><div class="wrap"><article class="story">{img(s['cover'], s['h1'], eager=True)}{secs}
+<h2>자주 묻는 질문</h2><div class="faq">{faq}</div>
+<h2>함께 보면 좋아요</h2><ul class="dots">{links}<li><a href="{BASE}/reserve.html">직접 예약 신청</a></li></ul>
+<div class="kw">{kw}</div></article></div></section>
+{review_section(rvs, "실제 이용 후기")}
+<section class="sec tint"><div class="wrap"><h2>다른 이야기</h2>{story_cards(others)}</div></section>"""
+        ld = [{"@context": "https://schema.org", "@type": "Article", "headline": s["title"], "description": s["desc"],
+               "image": [f"{S['url']}/assets/img/{s['cover']}.jpg"], "keywords": ", ".join(s["keywords"]),
+               "author": {"@type": "Organization", "name": S["name"]}, "publisher": {"@type": "Organization", "name": S["name"]},
+               "mainEntityOfPage": f"{S['url']}/story/{s['slug']}.html", "dateModified": TODAY},
+              {"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [
+                  {"@type": "Question", "name": q, "acceptedAnswer": {"@type": "Answer", "text": a}} for q, a in s["faq"]]},
+              breadcrumb([("홈", "/"), ("이야기", "/story/"), (s["h1"], f"/story/{s['slug']}.html")])]
+        layout(f"/story/{s['slug']}.html", s["title"], s["desc"], body, og_img=s["cover"], jsonld=ld)
+    body = f"""<section class="page-head"><div class="wrap"><p class="eyebrow dark">OKA STORY</p><h1>오카맨션 이야기</h1>
+<p>청주 애견동반 펜션, 아이랑 물놀이, 당일 바베큐 — 오카맨션에서 하루를 보내는 방법을 정리했어요.</p></div></section>
+<section class="sec pt0"><div class="wrap">{story_cards(STORIES)}</div></section>"""
+    layout("/story/", f"이야기 | {S['name']} 청주 애견동반 · 아이랑 여행 가이드", "청주 애견동반 펜션, 청주 아이랑 갈만한 곳, 청주 당일 바베큐, 옥화구곡 가족여행 가이드.", body)
 
 
 # ---------- 메인 ----------
@@ -346,6 +396,11 @@ def build_index():
 </section>
 
 <section class="sec">
+  <div class="wrap"><div class="sec-head"><h2>오카맨션 이야기</h2><a class="more" href="{BASE}/story/">전체 보기</a></div>
+  {story_cards(STORIES)}</div>
+</section>
+
+<section class="sec">
   <div class="wrap narrow">
     <h2>자주 묻는 질문</h2>
     <div class="faq">{faq}</div>
@@ -413,11 +468,11 @@ def build_rooms():
 <section class="sec tint"><div class="wrap split">
 <div><h2>이 객실의 특징</h2><ul class="dots">{feats}</ul></div>
 <div><h2>함께 즐기면 좋아요</h2><ul class="dots">
-<li><a href="{BASE}/day/bbq.html">바베큐</a> — 바베큐 세트 신청 시 장보기 없이</li>
-<li><a href="{BASE}/day/fire.html">불멍존</a> — 저녁엔 불멍 {won(30000)}</li>
+<li><a href="{BASE}/day/bbq.html">바베큐</a> — 간편 고기세트 신청 시 장보기 없이</li>
+<li><a href="{BASE}/day/fire.html">불멍존</a> — 불멍세트 {won(15000)}</li>
 <li><a href="{BASE}/day/warm-pool.html">온수풀</a> — 2시간 프라이빗 대여</li></ul></div>
 </div></section>
-{review_section([x for x in D["reviews"] if r["slug"] in x.get("rooms", [])], r["name"] + " 다녀간 손님 후기")}
+{review_section([x for x in D["reviews"] if r["slug"] in x.get("rooms", [])] + ([x for x in D["reviews"] if x.get("rooms") == ["std"]][(int(r["slug"]) - 201) * 3:] if r["group"] == "standard" else []), r["name"] + " · 2층 객실 다녀간 손님 후기" if r["group"] == "standard" else r["name"] + " 다녀간 손님 후기")}
 <section class="sec"><div class="wrap"><h2>다른 객실</h2><div class="grid cards">{''.join(room_card(o) for o in same)}</div></div></section>"""
         ld = {"@context": "https://schema.org", "@type": "HotelRoom", "name": f"{S['name']} {r['name']}", "description": r["summary"],
               "url": f"{S['url']}/rooms/{r['slug']}.html", "petsAllowed": True}
@@ -608,5 +663,5 @@ def build_misc():
 
 if __name__ == "__main__":
     os.makedirs(os.path.join(ROOT, "assets/js"), exist_ok=True)
-    build_index(); build_rooms(); build_day(); build_gallery(); build_guide(); build_reserve(); build_reviews(); build_misc()
+    build_index(); build_rooms(); build_day(); build_gallery(); build_guide(); build_reserve(); build_reviews(); build_stories(); build_misc()
     print(f"{len(PAGES)} pages built")

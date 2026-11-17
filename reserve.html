@@ -43,7 +43,7 @@
   </div>
   <div class="step"><h2>2. 객실 / 상품</h2>
     <label class="field only-stay">객실<select name="room" required><option value="201" data-large="0">201호 — 반려견과 함께 머무는 2층 객실</option><option value="202" data-large="0">202호 — 반려견과 함께 머무는 2층 객실</option><option value="203" data-large="0">203호 — 반려견과 함께 머무는 2층 객실</option><option value="204" data-large="0">204호 — 반려견과 함께 머무는 2층 객실</option><option value="205" data-large="0">205호 — 반려견과 함께 머무는 2층 객실</option><option value="206" data-large="0">206호 — 반려견과 함께 머무는 2층 객실</option><option value="207" data-large="0">207호 — 반려견과 함께 머무는 2층 객실</option><option value="301" data-large="1">301호 — 단독 루프탑 애견운동장이 딸린 독채형 객실 · 대형견 가능</option><option value="dokchae1" data-large="0">독채 1호 — 감성캠핑룸 — 텐트 없이 즐기는 캠핑 감성</option><option value="dokchae2" data-large="0">독채 2호 — 개별 수영장이 있는 독채</option><option value="campstay1" data-large="0">캠핑스테이 1 — 장비 없이 몸만 와서 자는 캠핑</option><option value="campstay2" data-large="0">캠핑스테이 2 — 장비 없이 몸만 와서 자는 캠핑</option></select></label>
-    <label class="field only-day">당일 상품<select name="product"><option value="warm-pool">온수풀 공간 대여 (회차당 60,000원)</option><option value="pool">대형 야외수영장 (1인 10,000원 (24개월 미만 무료, 현장결제))</option><option value="deck">데크존 · 파라솔존 (숙박 손님 할인가: 데크존 4인 25,000원 · 파라솔존 4인 15,000원)</option><option value="bbq">바베큐 (셀프 바베큐장 20,000원 · 바베큐 세트 60,000원 / 98,000원)</option><option value="fire">불멍존 (30,000원)</option></select></label>
+    <label class="field only-day">당일 상품<select name="product"><option value="warm-pool">온수풀 공간 대여 (회차당 60,000원)</option><option value="kids">키즈 놀이터 · 물놀이장 (오카키즈 오후권(3시간) 15,000원 · 오후종일권 20,000원 · 야간권 10,000원)</option><option value="pool">대형 야외수영장 (1인 10,000원 (24개월 미만 무료, 현장결제))</option><option value="deck">데크존 · 파라솔존 (올데이 이용권 주중 40,000원 · 주말(금·토) 80,000원 · 야간권 29,000원부터)</option><option value="bbq">바베큐 (간편 고기세트 65,000원 · 실내 바베큐장 10,000원 · 야외 바베큐장 30,000원)</option><option value="fire">불멍존 (불멍세트 15,000원)</option><option value="cafe">카페 &amp; 24시 무인 편의점 (현장 구매)</option></select></label>
     <label class="field only-day">희망 시간<input name="time" placeholder="예: 14:00 ~ 16:00"></label>
   </div>
   <div class="step"><h2>3. 날짜</h2>
@@ -59,9 +59,9 @@
       <label class="num">소형견<input type="number" name="dogs" min="0" max="2" value="1"></label>
       <label class="num">대형견<input type="number" name="bigdogs" min="0" max="2" value="0"></label>
     </div>
-    <p class="note" id="petNote">반려견 1마리 30,000원 (12kg 미만은 2마리까지). 대형견 50,000원 · 301호만 가능, 사전 문의 필수.</p>
+    <p class="note" id="petNote">반려견 1마리 20,000원 (12kg 미만은 2마리까지). 대형견 50,000원 · 301호만 가능, 사전 문의 필수.</p>
   </div>
-  <div class="step"><h2>5. 추가 옵션</h2><div class="checks"><label class="check"><input type="checkbox" name="addons" value="fire"><span>불멍존 <em>30,000원</em></span></label><label class="check"><input type="checkbox" name="addons" value="bbq_self"><span>셀프 바베큐장 <em>20,000원</em></span></label><label class="check"><input type="checkbox" name="addons" value="bbq_set_s"><span>바베큐 세트 (60,000원) <em>60,000원</em></span></label><label class="check"><input type="checkbox" name="addons" value="bbq_set_l"><span>바베큐 세트 (98,000원) <em>98,000원</em></span></label></div></div>
+  <div class="step"><h2>5. 추가 옵션</h2><div class="checks"><label class="check"><input type="checkbox" name="addons" value="fire"><span>불멍세트 <em>15,000원</em></span></label><label class="check"><input type="checkbox" name="addons" value="bbq_gear"><span>바베큐 장비 대여 <em>10,000원</em></span></label><label class="check"><input type="checkbox" name="addons" value="bbq_in"><span>실내 바베큐장 이용 <em>10,000원</em></span></label><label class="check"><input type="checkbox" name="addons" value="bbq_out"><span>야외 바베큐장 이용 <em>30,000원</em></span></label><label class="check"><input type="checkbox" name="addons" value="bbq_set"><span>간편 고기세트 <em>65,000원</em></span></label></div></div>
   <div class="step"><h2>6. 예약자</h2>
     <label class="field">이름<input name="name" required autocomplete="name"></label>
     <label class="field">휴대폰<input name="phone" required inputmode="tel" autocomplete="tel" placeholder="010-0000-0000"></label>

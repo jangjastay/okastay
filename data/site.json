@@ -1,1127 +1,3475 @@
 {
-  "_설명": "이 파일 하나만 고치면 모든 페이지가 바뀝니다. 비워둔 값(\"\" 또는 null)은 사이트에서 자동으로 숨기거나 '확인 후 안내'로 표시됩니다.",
-  "site": {
-    "domain": "okastay.kr",
-    "url": "https://okastay.kr",
-    "name": "오카맨션",
-    "brand": "OKA BASECAMP",
-    "slogan": "준비 없는 하루여행",
-    "promise": "빈손으로 와서 놀고, 먹고, 쉬고. 집에 가기 싫으면 자고 가세요.",
-    "description": "청주 미원 애견동반 펜션 오카맨션. 반려견·아이와 함께 수영장, 바베큐, 불멍을 준비 없이 즐기는 당일 이용과 숙박. 옥화구곡·청석굴 가족여행 베이스캠프.",
-    "company": "장자스테이 주식회사",
-    "ceo": "",
-    "biz_no": "",
-    "mail_order_no": "",
-    "address": "충청북도 청주시 상당구 미원면 운암옥화길 186-16",
-    "lat": null,
-    "lng": null,
-    "phone": "010-7369-1855",
-    "kakao_channel": "",
-    "instagram": "https://www.instagram.com/stay_oka/",
-    "instagram_kids": "https://www.instagram.com/oka__kids/",
-    "youtube_video": "uMn8_S4UUx0",
-    "bank": {
-      "name": "",
-      "account": "",
-      "holder": ""
-    },
-    "apps_script_url": "https://script.google.com/macros/s/AKfycbx7G7D6okeIU7s8uEggqf1wJ1AdKU5RUtr5KTbDcjzoeFV2P32L7ZDQr-rRUH37OwHg/exec",
-    "naver_site_verification": "6638217286ba78dcff83208227e4af71ef3c1b64",
-    "google_site_verification": "",
-    "hero_photo": "site/aerial-wide",
-    "youtube_channel": "https://www.youtube.com/@%EC%98%A4%EC%B9%B4%EB%A9%98%EC%85%98"
+ "_설명": "이 파일 하나만 고치면 모든 페이지가 바뀝니다. 비워둔 값(\"\" 또는 null)은 사이트에서 자동으로 숨기거나 '확인 후 안내'로 표시됩니다.",
+ "site": {
+  "domain": "okastay.kr",
+  "url": "https://okastay.kr",
+  "name": "오카맨션",
+  "brand": "OKA BASECAMP",
+  "slogan": "준비 없는 하루여행",
+  "promise": "빈손으로 와서 놀고, 먹고, 쉬고. 집에 가기 싫으면 자고 가세요.",
+  "description": "청주 미원 애견동반 펜션 오카맨션. 반려견·아이와 함께 수영장, 바베큐, 불멍을 준비 없이 즐기는 당일 이용과 숙박. 옥화구곡·청석굴 가족여행 베이스캠프.",
+  "company": "장자스테이 주식회사",
+  "ceo": "",
+  "biz_no": "",
+  "mail_order_no": "",
+  "address": "충청북도 청주시 상당구 미원면 운암옥화길 186-16",
+  "lat": null,
+  "lng": null,
+  "phone": "010-7369-1855",
+  "kakao_channel": "",
+  "instagram": "https://www.instagram.com/stay_oka/",
+  "instagram_kids": "https://www.instagram.com/oka__kids/",
+  "youtube_video": "uMn8_S4UUx0",
+  "bank": {
+   "name": "",
+   "account": "",
+   "holder": ""
   },
-  "policy": {
-    "checkin": "15:00",
-    "checkout": "11:00",
-    "pet_fee": 30000,
-    "pet_rule": "반려견 1마리 30,000원 (12kg 미만은 2마리까지)",
-    "large_dog_fee": 50000,
-    "large_dog_rule": "대형견 50,000원 · 301호만 가능, 사전 문의 필수",
-    "extra_person_fee": 20000,
-    "infant_rule": "36개월 미만 무료",
-    "refund": [
-      [
-        "이용 6일 전까지",
-        "100% 환불"
-      ],
-      [
-        "이용 5일 전 ~ 2일 전",
-        "하루마다 단계적으로 차감"
-      ],
-      [
-        "이용 1일 전",
-        "30% 환불"
-      ],
-      [
-        "이용 당일",
-        "환불 불가"
-      ]
-    ],
-    "refund_note": "날짜 변경은 이용 7일 전까지 1회 가능 여부를 예약 확정 시 안내드립니다.",
-    "weekend_nights": [
-      6
-    ],
-    "_weekend_설명": "주말 요금을 받는 밤(0=일 … 5=금, 6=토). 금요일도 주말 요금이면 [5,6]",
-    "holiday_eves_are_weekend": true,
-    "holidays": [
-      "2026-01-01",
-      "2026-02-16",
-      "2026-02-17",
-      "2026-02-18",
-      "2026-03-01",
-      "2026-03-02",
-      "2026-05-05",
-      "2026-05-24",
-      "2026-05-25",
-      "2026-06-03",
-      "2026-06-06",
-      "2026-08-15",
-      "2026-08-17",
-      "2026-09-24",
-      "2026-09-25",
-      "2026-09-26",
-      "2026-10-03",
-      "2026-10-05",
-      "2026-10-09",
-      "2026-12-25",
-      "2027-01-01",
-      "2027-02-06",
-      "2027-02-07",
-      "2027-02-08",
-      "2027-02-09",
-      "2027-03-01",
-      "2027-05-05",
-      "2027-05-13",
-      "2027-06-06",
-      "2027-08-15",
-      "2027-08-16",
-      "2027-09-14",
-      "2027-09-15",
-      "2027-09-16",
-      "2027-10-03",
-      "2027-10-04",
-      "2027-10-09",
-      "2027-10-11",
-      "2027-12-25"
-    ],
-    "peak_ranges": [],
-    "_peak_설명": "성수기 기간. 예: [[\"2027-07-17\",\"2027-08-22\"]]",
-    "booking_months_ahead": 6
+  "apps_script_url": "https://script.google.com/macros/s/AKfycbx7G7D6okeIU7s8uEggqf1wJ1AdKU5RUtr5KTbDcjzoeFV2P32L7ZDQr-rRUH37OwHg/exec",
+  "naver_site_verification": "6638217286ba78dcff83208227e4af71ef3c1b64",
+  "google_site_verification": "",
+  "hero_photo": "site/aerial-wide",
+  "youtube_channel": "https://www.youtube.com/@%EC%98%A4%EC%B9%B4%EB%A9%98%EC%85%98"
+ },
+ "policy": {
+  "checkin": "15:00",
+  "checkout": "11:00",
+  "pet_fee": 20000,
+  "pet_rule": "반려견 1마리 20,000원 (12kg 미만은 2마리까지)",
+  "large_dog_fee": 50000,
+  "large_dog_rule": "대형견 50,000원 · 301호만 가능, 사전 문의 필수",
+  "extra_person_fee": 20000,
+  "infant_rule": "36개월 미만 무료",
+  "refund": [
+   [
+    "이용 6일 전까지",
+    "100% 환불"
+   ],
+   [
+    "이용 5일 전 ~ 2일 전",
+    "하루마다 단계적으로 차감"
+   ],
+   [
+    "이용 1일 전",
+    "30% 환불"
+   ],
+   [
+    "이용 당일",
+    "환불 불가"
+   ]
+  ],
+  "refund_note": "날짜 변경은 이용 7일 전까지 1회 가능 여부를 예약 확정 시 안내드립니다.",
+  "weekend_nights": [
+   6
+  ],
+  "_weekend_설명": "주말 요금을 받는 밤(0=일 … 5=금, 6=토). 금요일도 주말 요금이면 [5,6]",
+  "holiday_eves_are_weekend": true,
+  "holidays": [
+   "2026-01-01",
+   "2026-02-16",
+   "2026-02-17",
+   "2026-02-18",
+   "2026-03-01",
+   "2026-03-02",
+   "2026-05-05",
+   "2026-05-24",
+   "2026-05-25",
+   "2026-06-03",
+   "2026-06-06",
+   "2026-08-15",
+   "2026-08-17",
+   "2026-09-24",
+   "2026-09-25",
+   "2026-09-26",
+   "2026-10-03",
+   "2026-10-05",
+   "2026-10-09",
+   "2026-12-25",
+   "2027-01-01",
+   "2027-02-06",
+   "2027-02-07",
+   "2027-02-08",
+   "2027-02-09",
+   "2027-03-01",
+   "2027-05-05",
+   "2027-05-13",
+   "2027-06-06",
+   "2027-08-15",
+   "2027-08-16",
+   "2027-09-14",
+   "2027-09-15",
+   "2027-09-16",
+   "2027-10-03",
+   "2027-10-04",
+   "2027-10-09",
+   "2027-10-11",
+   "2027-12-25"
+  ],
+  "peak_ranges": [],
+  "_peak_설명": "성수기 기간. 예: [[\"2027-07-17\",\"2027-08-22\"]]",
+  "booking_months_ahead": 6
+ },
+ "rooms": [
+  {
+   "slug": "201",
+   "name": "201호",
+   "group": "standard",
+   "type": "객실",
+   "floor": "2층",
+   "summary": "반려견과 함께 머무는 2층 객실",
+   "tags": [
+    "소형견"
+   ],
+   "large_dog": false,
+   "pool": false,
+   "checkin": null,
+   "checkout": null,
+   "base": null,
+   "max": null,
+   "price": {
+    "weekday": null,
+    "weekend": null,
+    "peak": null
+   },
+   "features": [],
+   "photos": [
+    "rooms/2f-room-a",
+    "rooms/2f-room-b",
+    "rooms/2f-room-c",
+    "rooms/2f-dog",
+    "rooms/2f-hall"
+   ]
   },
-  "rooms": [
-    {
-      "slug": "201",
-      "name": "201호",
-      "group": "standard",
-      "type": "객실",
-      "floor": "2층",
-      "summary": "반려견과 함께 머무는 2층 객실",
-      "tags": [
-        "소형견"
-      ],
-      "large_dog": false,
-      "pool": false,
-      "checkin": null,
-      "checkout": null,
-      "base": null,
-      "max": null,
-      "price": {
-        "weekday": null,
-        "weekend": null,
-        "peak": null
-      },
-      "features": [],
-      "photos": [
-        "rooms/2f-room-a",
-        "rooms/2f-room-b",
-        "rooms/2f-room-c",
-        "rooms/2f-dog",
-        "rooms/2f-hall"
-      ]
-    },
-    {
-      "slug": "202",
-      "name": "202호",
-      "group": "standard",
-      "type": "객실",
-      "floor": "2층",
-      "summary": "반려견과 함께 머무는 2층 객실",
-      "tags": [
-        "소형견"
-      ],
-      "large_dog": false,
-      "pool": false,
-      "checkin": null,
-      "checkout": null,
-      "base": null,
-      "max": null,
-      "price": {
-        "weekday": null,
-        "weekend": null,
-        "peak": null
-      },
-      "features": [],
-      "photos": [
-        "rooms/2f-room-a",
-        "rooms/2f-room-b",
-        "rooms/2f-room-c",
-        "rooms/2f-dog",
-        "rooms/2f-hall"
-      ]
-    },
-    {
-      "slug": "203",
-      "name": "203호",
-      "group": "standard",
-      "type": "객실",
-      "floor": "2층",
-      "summary": "반려견과 함께 머무는 2층 객실",
-      "tags": [
-        "소형견"
-      ],
-      "large_dog": false,
-      "pool": false,
-      "checkin": null,
-      "checkout": null,
-      "base": null,
-      "max": null,
-      "price": {
-        "weekday": null,
-        "weekend": null,
-        "peak": null
-      },
-      "features": [],
-      "photos": [
-        "rooms/2f-room-a",
-        "rooms/2f-room-b",
-        "rooms/2f-room-c",
-        "rooms/2f-dog",
-        "rooms/2f-hall"
-      ]
-    },
-    {
-      "slug": "204",
-      "name": "204호",
-      "group": "standard",
-      "type": "객실",
-      "floor": "2층",
-      "summary": "반려견과 함께 머무는 2층 객실",
-      "tags": [
-        "소형견"
-      ],
-      "large_dog": false,
-      "pool": false,
-      "checkin": null,
-      "checkout": null,
-      "base": null,
-      "max": null,
-      "price": {
-        "weekday": null,
-        "weekend": null,
-        "peak": null
-      },
-      "features": [],
-      "photos": [
-        "rooms/2f-room-a",
-        "rooms/2f-room-b",
-        "rooms/2f-room-c",
-        "rooms/2f-dog",
-        "rooms/2f-hall"
-      ]
-    },
-    {
-      "slug": "205",
-      "name": "205호",
-      "group": "standard",
-      "type": "객실",
-      "floor": "2층",
-      "summary": "반려견과 함께 머무는 2층 객실",
-      "tags": [
-        "소형견"
-      ],
-      "large_dog": false,
-      "pool": false,
-      "checkin": null,
-      "checkout": null,
-      "base": null,
-      "max": null,
-      "price": {
-        "weekday": null,
-        "weekend": null,
-        "peak": null
-      },
-      "features": [],
-      "photos": [
-        "rooms/2f-room-a",
-        "rooms/2f-room-b",
-        "rooms/2f-room-c",
-        "rooms/2f-dog",
-        "rooms/2f-hall"
-      ]
-    },
-    {
-      "slug": "206",
-      "name": "206호",
-      "group": "standard",
-      "type": "객실",
-      "floor": "2층",
-      "summary": "반려견과 함께 머무는 2층 객실",
-      "tags": [
-        "소형견"
-      ],
-      "large_dog": false,
-      "pool": false,
-      "checkin": null,
-      "checkout": null,
-      "base": null,
-      "max": null,
-      "price": {
-        "weekday": null,
-        "weekend": null,
-        "peak": null
-      },
-      "features": [],
-      "photos": [
-        "rooms/2f-room-a",
-        "rooms/2f-room-b",
-        "rooms/2f-room-c",
-        "rooms/2f-dog",
-        "rooms/2f-hall"
-      ]
-    },
-    {
-      "slug": "207",
-      "name": "207호",
-      "group": "standard",
-      "type": "객실",
-      "floor": "2층",
-      "summary": "반려견과 함께 머무는 2층 객실",
-      "tags": [
-        "소형견"
-      ],
-      "large_dog": false,
-      "pool": false,
-      "checkin": null,
-      "checkout": null,
-      "base": null,
-      "max": null,
-      "price": {
-        "weekday": null,
-        "weekend": null,
-        "peak": null
-      },
-      "features": [],
-      "photos": [
-        "rooms/2f-room-a",
-        "rooms/2f-room-b",
-        "rooms/2f-room-c",
-        "rooms/2f-dog",
-        "rooms/2f-hall"
-      ]
-    },
-    {
-      "slug": "301",
-      "name": "301호",
-      "group": "dog",
-      "type": "객실",
-      "floor": "3층",
-      "summary": "단독 루프탑 애견운동장이 딸린 독채형 객실 · 대형견 가능",
-      "tags": [
-        "대형견",
-        "단독 운동장"
-      ],
-      "large_dog": true,
-      "pool": false,
-      "checkin": null,
-      "checkout": null,
-      "base": null,
-      "max": null,
-      "price": {
-        "weekday": null,
-        "weekend": null,
-        "peak": null
-      },
-      "features": [
-        "객실 전용 루프탑 애견운동장 (펫 어질리티, 미니 볼풀장, 불멍존, 캠핑 체어)",
-        "대형견 동반 가능 (사전 문의)"
-      ],
-      "photos": [
-        "rooms/301-room",
-        "rooms/301-yard",
-        "pet/agility"
-      ]
-    },
-    {
-      "slug": "dokchae1",
-      "name": "독채 1호",
-      "group": "private",
-      "type": "독채",
-      "floor": "독채",
-      "summary": "감성캠핑룸 — 텐트 없이 즐기는 캠핑 감성",
-      "tags": [
-        "소형견",
-        "캠핑감성"
-      ],
-      "large_dog": false,
-      "pool": false,
-      "checkin": null,
-      "checkout": null,
-      "base": null,
-      "max": null,
-      "price": {
-        "weekday": null,
-        "weekend": null,
-        "peak": null
-      },
-      "features": [
-        "감성캠핑룸 구성",
-        "단독 사용 독채"
-      ],
-      "photos": [
-        "rooms/dokchae1-room",
-        "rooms/dokchae1-bbq"
-      ]
-    },
-    {
-      "slug": "dokchae2",
-      "name": "독채 2호",
-      "group": "private",
-      "type": "독채",
-      "floor": "독채",
-      "summary": "개별 수영장이 있는 독채",
-      "tags": [
-        "소형견",
-        "개별 수영장"
-      ],
-      "large_dog": false,
-      "pool": true,
-      "checkin": "17:00",
-      "checkout": null,
-      "base": null,
-      "max": null,
-      "price": {
-        "weekday": null,
-        "weekend": null,
-        "peak": null
-      },
-      "features": [
-        "객실 전용 개별 수영장",
-        "단독 사용 독채"
-      ],
-      "photos": []
-    },
-    {
-      "slug": "campstay1",
-      "name": "캠핑스테이 1",
-      "group": "camp",
-      "type": "캠핑스테이",
-      "floor": "캠핑스테이",
-      "summary": "장비 없이 몸만 와서 자는 캠핑",
-      "tags": [
-        "소형견",
-        "캠핑"
-      ],
-      "large_dog": false,
-      "pool": false,
-      "checkin": "18:00",
-      "checkout": "09:00",
-      "base": null,
-      "max": null,
-      "price": {
-        "weekday": null,
-        "weekend": null,
-        "peak": null
-      },
-      "features": [
-        "캠핑 장비 준비 불필요"
-      ],
-      "photos": [
-        "rooms/campstay1-room",
-        "rooms/campstay1-terrace"
-      ]
-    },
-    {
-      "slug": "campstay2",
-      "name": "캠핑스테이 2",
-      "group": "camp",
-      "type": "캠핑스테이",
-      "floor": "캠핑스테이",
-      "summary": "장비 없이 몸만 와서 자는 캠핑",
-      "tags": [
-        "소형견",
-        "캠핑"
-      ],
-      "large_dog": false,
-      "pool": false,
-      "checkin": "18:00",
-      "checkout": "09:00",
-      "base": null,
-      "max": null,
-      "price": {
-        "weekday": null,
-        "weekend": null,
-        "peak": null
-      },
-      "features": [
-        "캠핑 장비 준비 불필요"
-      ],
-      "photos": [
-        "rooms/campstay2-room",
-        "rooms/campstay2-terrace"
-      ]
-    }
+  {
+   "slug": "202",
+   "name": "202호",
+   "group": "standard",
+   "type": "객실",
+   "floor": "2층",
+   "summary": "반려견과 함께 머무는 2층 객실",
+   "tags": [
+    "소형견"
+   ],
+   "large_dog": false,
+   "pool": false,
+   "checkin": null,
+   "checkout": null,
+   "base": null,
+   "max": null,
+   "price": {
+    "weekday": null,
+    "weekend": null,
+    "peak": null
+   },
+   "features": [],
+   "photos": [
+    "rooms/2f-room-a",
+    "rooms/2f-room-b",
+    "rooms/2f-room-c",
+    "rooms/2f-dog",
+    "rooms/2f-hall"
+   ]
+  },
+  {
+   "slug": "203",
+   "name": "203호",
+   "group": "standard",
+   "type": "객실",
+   "floor": "2층",
+   "summary": "반려견과 함께 머무는 2층 객실",
+   "tags": [
+    "소형견"
+   ],
+   "large_dog": false,
+   "pool": false,
+   "checkin": null,
+   "checkout": null,
+   "base": null,
+   "max": null,
+   "price": {
+    "weekday": null,
+    "weekend": null,
+    "peak": null
+   },
+   "features": [],
+   "photos": [
+    "rooms/2f-room-a",
+    "rooms/2f-room-b",
+    "rooms/2f-room-c",
+    "rooms/2f-dog",
+    "rooms/2f-hall"
+   ]
+  },
+  {
+   "slug": "204",
+   "name": "204호",
+   "group": "standard",
+   "type": "객실",
+   "floor": "2층",
+   "summary": "반려견과 함께 머무는 2층 객실",
+   "tags": [
+    "소형견"
+   ],
+   "large_dog": false,
+   "pool": false,
+   "checkin": null,
+   "checkout": null,
+   "base": null,
+   "max": null,
+   "price": {
+    "weekday": null,
+    "weekend": null,
+    "peak": null
+   },
+   "features": [],
+   "photos": [
+    "rooms/2f-room-a",
+    "rooms/2f-room-b",
+    "rooms/2f-room-c",
+    "rooms/2f-dog",
+    "rooms/2f-hall"
+   ]
+  },
+  {
+   "slug": "205",
+   "name": "205호",
+   "group": "standard",
+   "type": "객실",
+   "floor": "2층",
+   "summary": "반려견과 함께 머무는 2층 객실",
+   "tags": [
+    "소형견"
+   ],
+   "large_dog": false,
+   "pool": false,
+   "checkin": null,
+   "checkout": null,
+   "base": null,
+   "max": null,
+   "price": {
+    "weekday": null,
+    "weekend": null,
+    "peak": null
+   },
+   "features": [],
+   "photos": [
+    "rooms/2f-room-a",
+    "rooms/2f-room-b",
+    "rooms/2f-room-c",
+    "rooms/2f-dog",
+    "rooms/2f-hall"
+   ]
+  },
+  {
+   "slug": "206",
+   "name": "206호",
+   "group": "standard",
+   "type": "객실",
+   "floor": "2층",
+   "summary": "반려견과 함께 머무는 2층 객실",
+   "tags": [
+    "소형견"
+   ],
+   "large_dog": false,
+   "pool": false,
+   "checkin": null,
+   "checkout": null,
+   "base": null,
+   "max": null,
+   "price": {
+    "weekday": null,
+    "weekend": null,
+    "peak": null
+   },
+   "features": [],
+   "photos": [
+    "rooms/2f-room-a",
+    "rooms/2f-room-b",
+    "rooms/2f-room-c",
+    "rooms/2f-dog",
+    "rooms/2f-hall"
+   ]
+  },
+  {
+   "slug": "207",
+   "name": "207호",
+   "group": "standard",
+   "type": "객실",
+   "floor": "2층",
+   "summary": "반려견과 함께 머무는 2층 객실",
+   "tags": [
+    "소형견"
+   ],
+   "large_dog": false,
+   "pool": false,
+   "checkin": null,
+   "checkout": null,
+   "base": null,
+   "max": null,
+   "price": {
+    "weekday": null,
+    "weekend": null,
+    "peak": null
+   },
+   "features": [],
+   "photos": [
+    "rooms/2f-room-a",
+    "rooms/2f-room-b",
+    "rooms/2f-room-c",
+    "rooms/2f-dog",
+    "rooms/2f-hall"
+   ]
+  },
+  {
+   "slug": "301",
+   "name": "301호",
+   "group": "dog",
+   "type": "객실",
+   "floor": "3층",
+   "summary": "단독 루프탑 애견운동장이 딸린 독채형 객실 · 대형견 가능",
+   "tags": [
+    "대형견",
+    "단독 운동장"
+   ],
+   "large_dog": true,
+   "pool": false,
+   "checkin": null,
+   "checkout": null,
+   "base": null,
+   "max": null,
+   "price": {
+    "weekday": null,
+    "weekend": null,
+    "peak": null
+   },
+   "features": [
+    "객실 전용 루프탑 애견운동장 (펫 어질리티, 미니 볼풀장, 불멍존, 캠핑 체어)",
+    "대형견 동반 가능 (사전 문의)"
+   ],
+   "photos": [
+    "rooms/301-room",
+    "rooms/301-yard",
+    "pet/agility",
+    "pet/poodles"
+   ]
+  },
+  {
+   "slug": "dokchae1",
+   "name": "독채 1호",
+   "group": "private",
+   "type": "독채",
+   "floor": "독채",
+   "summary": "감성캠핑룸 — 텐트 없이 즐기는 캠핑 감성",
+   "tags": [
+    "소형견",
+    "캠핑감성"
+   ],
+   "large_dog": false,
+   "pool": false,
+   "checkin": null,
+   "checkout": null,
+   "base": null,
+   "max": null,
+   "price": {
+    "weekday": null,
+    "weekend": null,
+    "peak": null
+   },
+   "features": [
+    "감성캠핑룸 구성",
+    "단독 사용 독채"
+   ],
+   "photos": [
+    "rooms/dokchae1-room",
+    "rooms/dokchae1-bbq"
+   ]
+  },
+  {
+   "slug": "dokchae2",
+   "name": "독채 2호",
+   "group": "private",
+   "type": "독채",
+   "floor": "독채",
+   "summary": "개별 수영장이 있는 독채",
+   "tags": [
+    "소형견",
+    "개별 수영장"
+   ],
+   "large_dog": false,
+   "pool": true,
+   "checkin": "17:00",
+   "checkout": null,
+   "base": null,
+   "max": null,
+   "price": {
+    "weekday": null,
+    "weekend": null,
+    "peak": null
+   },
+   "features": [
+    "객실 전용 개별 수영장",
+    "단독 사용 독채"
+   ],
+   "photos": []
+  },
+  {
+   "slug": "campstay1",
+   "name": "캠핑스테이 1",
+   "group": "camp",
+   "type": "캠핑스테이",
+   "floor": "캠핑스테이",
+   "summary": "장비 없이 몸만 와서 자는 캠핑",
+   "tags": [
+    "소형견",
+    "캠핑"
+   ],
+   "large_dog": false,
+   "pool": false,
+   "checkin": "18:00",
+   "checkout": "09:00",
+   "base": null,
+   "max": null,
+   "price": {
+    "weekday": null,
+    "weekend": null,
+    "peak": null
+   },
+   "features": [
+    "캠핑 장비 준비 불필요"
+   ],
+   "photos": [
+    "rooms/campstay1-room",
+    "rooms/campstay1-terrace"
+   ]
+  },
+  {
+   "slug": "campstay2",
+   "name": "캠핑스테이 2",
+   "group": "camp",
+   "type": "캠핑스테이",
+   "floor": "캠핑스테이",
+   "summary": "장비 없이 몸만 와서 자는 캠핑",
+   "tags": [
+    "소형견",
+    "캠핑"
+   ],
+   "large_dog": false,
+   "pool": false,
+   "checkin": "18:00",
+   "checkout": "09:00",
+   "base": null,
+   "max": null,
+   "price": {
+    "weekday": null,
+    "weekend": null,
+    "peak": null
+   },
+   "features": [
+    "캠핑 장비 준비 불필요"
+   ],
+   "photos": [
+    "rooms/campstay2-room",
+    "rooms/campstay2-terrace"
+   ]
+  }
+ ],
+ "day_price_confirmed": false,
+ "day_products": [
+  {
+   "slug": "warm-pool",
+   "name": "온수풀 공간 대여",
+   "short": "2시간 프라이빗 온수풀",
+   "price": 60000,
+   "price_text": "회차당 60,000원",
+   "unit": "회차",
+   "detail": [
+    "1회차 2시간",
+    "기준 2인 · 최대 4인",
+    "계절과 관계없이 따뜻한 물"
+   ],
+   "keywords": [
+    "청주 온수풀",
+    "청주 애견동반 수영장",
+    "청주 당일 수영장"
+   ],
+   "bookable": true,
+   "photos": [
+    "day/warm-pool",
+    "day/warm-pool2"
+   ]
+  },
+  {
+   "slug": "kids",
+   "name": "키즈 놀이터 · 물놀이장",
+   "short": "짚라인, 에어바운스, 모래놀이, 물감놀이",
+   "price": 15000,
+   "price_text": "오카키즈 오후권(3시간) 15,000원 · 오후종일권 20,000원 · 야간권 10,000원",
+   "unit": "",
+   "detail": [
+    "오후권 3시간 15,000원 · 오후종일권 20,000원 · 야간권 10,000원",
+    "키즈 물놀이장, 에어바운스 미끄럼틀, 짚라인, 정글짐, 방방(트램폴린)",
+    "모래놀이장, 물감놀이, 바람개비 정원",
+    "애견존과 분리된 아이 전용 공간",
+    "평일(일~목) 숙박 손님 무료"
+   ],
+   "keywords": [
+    "청주 아이랑 갈만한 곳",
+    "청주 키즈카페 야외",
+    "청주 물놀이장",
+    "청주 키즈 수영장"
+   ],
+   "bookable": true,
+   "photos": [
+    "kids/overview",
+    "kids/zipline",
+    "kids/air-slide",
+    "kids/sand",
+    "kids/paint",
+    "kids/zipline-sunset",
+    "kids/pinwheel",
+    "kids/aerial"
+   ]
+  },
+  {
+   "slug": "pool",
+   "name": "대형 야외수영장",
+   "short": "여름 시즌 대형 야외수영장",
+   "price": 10000,
+   "price_text": "1인 10,000원 (24개월 미만 무료, 현장결제)",
+   "unit": "인",
+   "detail": [
+    "여름 시즌 운영 (운영 기간은 문의)",
+    "수심 1.3m, 유아·아동은 보호자 동반 필수",
+    "평일(일~목) 숙박 손님 무료",
+    "반려견은 대형 수영장 이용 불가 — 반려견 전용 수영장을 이용해 주세요"
+   ],
+   "keywords": [
+    "청주 아이랑 물놀이",
+    "청주 1박 없는 물놀이",
+    "미원 수영장"
+   ],
+   "bookable": true,
+   "photos": [
+    "day/pool",
+    "kids/slide-pool",
+    "day/pool3",
+    "day/pool2",
+    "kids/kids-pool",
+    "kids/shark-slide"
+   ]
+  },
+  {
+   "slug": "deck",
+   "name": "데크존 · 파라솔존",
+   "short": "우리 가족의 하루 자리",
+   "price": null,
+   "price_text": "올데이 이용권 주중 40,000원 · 주말(금·토) 80,000원 · 야간권 29,000원부터",
+   "unit": "구역",
+   "detail": [
+    "올데이 이용권 주중(일~목) 40,000원 · 주말(금·토) 80,000원",
+    "파라솔존 야간권 29,000원 · 애견동반존 야간권 39,000원 · 데크존 야간권 추가 50,000원",
+    "숙박 손님 할인가: 데크존 4인 25,000원 · 파라솔존 4인 15,000원",
+    "인원 추가 시 반일권 1인 10,000원 · 종일권 1인 15,000원"
+   ],
+   "keywords": [
+    "청주 캠프닉",
+    "청주 빈손캠핑",
+    "청주 아이랑 하루종일"
+   ],
+   "bookable": true,
+   "photos": [
+    "day/deck-a",
+    "day/deck-night",
+    "day/parasol2",
+    "day/deck-b",
+    "day/deck",
+    "day/deck-night2",
+    "day/parasol"
+   ]
+  },
+  {
+   "slug": "bbq",
+   "name": "바베큐",
+   "short": "장보기·설거지 없는 바베큐",
+   "price": null,
+   "price_text": "간편 고기세트 65,000원 · 실내 바베큐장 10,000원 · 야외 바베큐장 30,000원",
+   "unit": "",
+   "detail": [
+    "간편 고기세트 65,000원 (고기만 굽고 드시면 돼요)",
+    "실내 바베큐장 10,000원 · 야외 바베큐장 30,000원",
+    "바베큐 장비 대여 10,000원",
+    "당일 이용 손님도 함께 이용 가능"
+   ],
+   "keywords": [
+    "청주 당일 바베큐",
+    "청주 아이랑 바베큐",
+    "옥화구곡 바베큐"
+   ],
+   "bookable": true,
+   "photos": [
+    "day/bbq-set",
+    "day/bbq-meat",
+    "day/bbq",
+    "day/bbq-outdoor2",
+    "day/bbq-indoor",
+    "day/bbq-tools",
+    "pet/dog-bbq"
+   ]
+  },
+  {
+   "slug": "fire",
+   "name": "불멍존",
+   "short": "노을 다음은 불멍",
+   "price": 15000,
+   "price_text": "불멍세트 15,000원",
+   "unit": "",
+   "detail": [
+    "저녁 시간 이용",
+    "숙박·당일 고객 모두 추가 가능"
+   ],
+   "keywords": [
+    "청주 불멍",
+    "청주 감성 펜션"
+   ],
+   "bookable": true,
+   "photos": [
+    "day/fire",
+    "day/fire-marshmallow",
+    "day/fire4",
+    "day/fire-indoor",
+    "day/fire2",
+    "day/fire3"
+   ]
+  },
+  {
+   "slug": "cafe",
+   "name": "카페 & 24시 무인 편의점",
+   "short": "빈손으로 와도 괜찮아요",
+   "price": null,
+   "price_text": "현장 구매",
+   "unit": "",
+   "detail": [
+    "아이스커피, 슬러시, 밀키트, 간편 휴게음식",
+    "쌈장·라면·음료·주류·아이스크림",
+    "일회용품, 휴게용품, 반려견 간식",
+    "보드게임 대여"
+   ],
+   "keywords": [
+    "청주 펜션 매점",
+    "미원 편의점"
+   ],
+   "bookable": false,
+   "photos": [
+    "cafe/store",
+    "cafe/store2",
+    "cafe/slush",
+    "cafe/naengmyeon",
+    "cafe/shelf",
+    "cafe/boardgame"
+   ]
+  }
+ ],
+ "addons": [
+  {
+   "id": "fire",
+   "name": "불멍세트",
+   "price": 15000
+  },
+  {
+   "id": "bbq_gear",
+   "name": "바베큐 장비 대여",
+   "price": 10000
+  },
+  {
+   "id": "bbq_in",
+   "name": "실내 바베큐장 이용",
+   "price": 10000
+  },
+  {
+   "id": "bbq_out",
+   "name": "야외 바베큐장 이용",
+   "price": 30000
+  },
+  {
+   "id": "bbq_set",
+   "name": "간편 고기세트",
+   "price": 65000
+  }
+ ],
+ "nearby": [
+  {
+   "name": "옥화구곡",
+   "desc": "계곡을 따라 걷는 아홉 굽이 산책길"
+  },
+  {
+   "name": "청석굴",
+   "desc": "아이와 함께 보는 동굴 유적"
+  },
+  {
+   "name": "옥화자연휴양림",
+   "desc": "숲 산책과 자연 놀이"
+  },
+  {
+   "name": "미동산수목원",
+   "desc": "넓은 수목원 산책 코스"
+  }
+ ],
+ "reviews": [
+  {
+   "text": "깔끔하고 조용해서 가족또는 친구들과 놀기 좋은공간이에요 바베큐장도 크고 따뜻햇어용",
+   "who": "미시**",
+   "when": "2026년 11월",
+   "rooms": [],
+   "topics": [
+    "bbq"
+   ],
+   "main": true
+  },
+  {
+   "text": "커플끼리 반려견과 처음 함께한 여행 오카맨션 방문하자마자 친절히 고객 응대 및 필요한거 알아서 척척 내어주신 사장님 덕분에 너무 즐겁게 쉬다가 갑니다^^ 다음 방문에도 편히 대해주세요.",
+   "who": "rac****",
+   "when": "2026년 10월",
+   "rooms": [
+    "201"
+   ],
+   "topics": [
+    "pet"
+   ],
+   "main": false
+  },
+  {
+   "text": "넓은 인조잔디 공간에서 강아지랑 조카들이 뛰어다니며 놀 수 있어 좋습니다. 독채라 프라이빗한 공간에서 편하게 쉴 수 있고 바베큐 공간이 넓어 가족들과 다 같이 좋은 저녁 시간을 보냈습니다.",
+   "who": "tmd****",
+   "when": "2026년 9월",
+   "rooms": [
+    "301"
+   ],
+   "topics": [
+    "bbq"
+   ],
+   "main": true
+  },
+  {
+   "text": "바베큐세트와 매점도 있어서 물놀이용품만 챙기면 종일놀수있어요",
+   "who": "하랑****",
+   "when": "2026년 8월",
+   "rooms": [],
+   "topics": [
+    "bbq",
+    "deck"
+   ],
+   "main": false
+  },
+  {
+   "text": "지난 주에 학교에서 체험학습을 오카키즈로 왔었는데 아이가 너무 즐거워해서 주말 이용해서 다시 찾았어요. 물놀이는 역시 비 맞으면서 하는게 최고네요. 실컷 놀다 먹는 라면도 꿀맛이구요. 개학 전날이라 그런지 사람도 많지 않아서 전세낸 듯 놀았어요.",
+   "who": "음율**",
+   "when": "2026년 8월",
+   "rooms": [],
+   "topics": [
+    "kids",
+    "pool"
+   ],
+   "main": false
+  },
+  {
+   "text": "강아지 풀장이별도로 되어있어서 놀기너무 조용하고 좋았어요",
+   "who": "까꿍**",
+   "when": "2026년 8월",
+   "rooms": [],
+   "topics": [
+    "pet",
+    "pool"
+   ],
+   "main": false
+  },
+  {
+   "text": "아이들과 급하게 예약해서 왔는데요. 아이들 놀게 많고 가성비도 좋아요. 아이들이 셋이라서 어딜가도 부담인데 물놀이도 하고 좋네요. 화장실도 깨끗하고 매점에서 파는 치킨도 맛있어요!! 재방문의사 100% 입니다!!",
+   "who": "wh**",
+   "when": "2026년 8월",
+   "rooms": [],
+   "topics": [
+    "kids",
+    "pool",
+    "cafe"
+   ],
+   "main": false
+  },
+  {
+   "text": "물놀이하러왔는데즐겁게하고가요 물놀이하기 좋아요",
+   "who": "oh****",
+   "when": "2026년 8월",
+   "rooms": [],
+   "topics": [
+    "pool"
+   ],
+   "main": false
+  },
+  {
+   "text": "사장님 너무 친절하신고 물놀이공간도 많아서 아이들이 좋아했습니다 바베큐세트와 매점도 있어서 물놀이용품만 챙기면 종일놀수있어요",
+   "who": "하랑**",
+   "when": "2026년 8월",
+   "rooms": [],
+   "topics": [
+    "kids",
+    "pool",
+    "bbq",
+    "cafe"
+   ],
+   "main": false
+  },
+  {
+   "text": "애들이랑 너무 재미있게 잘 놀았어요~ 무엇보다 아토피 있는 울 막둥이도 피부 올라옴 하나도 없이 잘 놀았답니다~ 여름방학은 오카에서 보내야겠어요~ 친절하게 응대해주신 사장님 감사합니당",
+   "who": "vld****",
+   "when": "2026년 8월",
+   "rooms": [],
+   "topics": [
+    "kids"
+   ],
+   "main": false
+  },
+  {
+   "text": "아이랑 물놀이 하고 놀기 너무 좋아요!! 다양한 이벤트도 많고 편의시설도 정말 잘 돼있어요 물이 차갑지 않은게 가장 마음에 들었어요 최고예요!!",
+   "who": "창희**",
+   "when": "2026년 8월",
+   "rooms": [],
+   "topics": [
+    "kids",
+    "pool"
+   ],
+   "main": false
+  },
+  {
+   "text": "아이 방학이라 물놀이 할 곳 찾아 왔는데 운좋게 애들만있어서 실컷 놀고가요ㅎㅎ 다음엔 아빠랑 같이 또 올게요!",
+   "who": "rum****",
+   "when": "2026년 8월",
+   "rooms": [],
+   "topics": [
+    "kids",
+    "pool"
+   ],
+   "main": false
+  },
+  {
+   "text": "다양한 연령대의 아이들이 놀기 좋은 곳인 것 같습니다 꿀잼이에여",
+   "who": "wl**",
+   "when": "2026년 8월",
+   "rooms": [],
+   "topics": [
+    "kids"
+   ],
+   "main": false
+  },
+  {
+   "text": "6살 딸은 여기저기 뛰어다니며 신나게 놀고 8개월 아들도 안전하게 즐길 수 있는 공간과 미온수풀도 있어서 가족 모두 만족했습니다",
+   "who": "qwe****",
+   "when": "2026년 7월",
+   "rooms": [],
+   "topics": [
+    "pool",
+    "warm-pool"
+   ],
+   "main": true
+  },
+  {
+   "text": "옥화자연휴양림에 갔다가 근처에 있어서 방문했어요. 데크존에서는 아이들 노는게 잘 보여서 어른들은 맥주 한잔 하기에 너무 좋아요",
+   "who": "jeo****",
+   "when": "2026년 7월",
+   "rooms": [],
+   "topics": [
+    "deck",
+    "pool"
+   ],
+   "main": true
+  },
+  {
+   "text": "물 깊이도 좋고 미끄럼틀이나 짚라인도 재미있어하고 놀거리가 많아요 수영장도 애기들 놀 수 있는 곳도 따로 있어서 큰 수영장 작은 수영장 돌아가면서 재미있게 노네요",
+   "who": "롱59**",
+   "when": "2026년 7월",
+   "rooms": [],
+   "topics": [
+    "pool"
+   ],
+   "main": false
+  },
+  {
+   "text": "오카키즈에 6살 딸, 8개월 아들, 남편이랑 가족 모두 다녀왔어요 아이들 연령 차이가 있어서 둘 다 재미있게 놀 수 있을까 걱정했는데 시간 가는 줄 모를 정도로 정말 신나게 놀다 왔어요!!",
+   "who": "qw**",
+   "when": "2026년 7월",
+   "rooms": [],
+   "topics": [
+    "kids"
+   ],
+   "main": false
+  },
+  {
+   "text": "가까운곳에 아아와 즐길수 있는데가 있어 좋네요!! 바베큐도 해먹을수도 있고 넘 좋네요^^",
+   "who": "rkd****",
+   "when": "2026년 7월",
+   "rooms": [],
+   "topics": [
+    "bbq"
+   ],
+   "main": false
+  },
+  {
+   "text": "4시간 부족하게 잘놀다갑니다^^ 아이들이 아주 좋아했어요 친절해요",
+   "who": "bab****",
+   "when": "2026년 7월",
+   "rooms": [],
+   "topics": [
+    "kids"
+   ],
+   "main": false
+  },
+  {
+   "text": "너무좋네요 여름휴가로1박하기전에 와봤는데 청주에서 멀지도않고 좋네요",
+   "who": "행복**",
+   "when": "2026년 7월",
+   "rooms": [],
+   "topics": [],
+   "main": false
+  },
+  {
+   "text": "아이들이랑 가기 너무 좋은 수영장이에요 물 깊이도 좋고 미끄럼틀이나 짚라인도 재미있어하고 놀거리가 많아요 수영장도 애기들 놀 수 있는 곳도 따로 있어서 큰 수영장 작은 수영장 돌아가면서 재미있게 노네요",
+   "who": "롱5**",
+   "when": "2026년 7월",
+   "rooms": [],
+   "topics": [
+    "kids",
+    "pool"
+   ],
+   "main": false
+  },
+  {
+   "text": "미원에 새로운 물놀이장이 생겼다는 말을 듣고 이번 아이들 물놀이 장소로 선정.. 여러번 검색해보고 많은 분들이 아이들이 재미있게 놀수 있는 곳 이란 글을 보고 나쁘진 않겠다. 물놀이 당일이 다가오니 날씨가 걱정되었다. 비소식과 천둥번개.. 어떡하지 밤새 뒤척이며 걱정하면서 아침을 맞이하고.",
+   "who": "카타**",
+   "when": "2026년 7월",
+   "rooms": [],
+   "topics": [
+    "kids",
+    "pool"
+   ],
+   "main": false
+  },
+  {
+   "text": "주말에 아이와 함께 청주 오카키즈 다녀왔어요! 물도 깨끗하게 관리되어 있어서 안심하고 놀 수 있었고, 아이가 정말 시간 가는 줄 모르고 신나게 놀았어요. 시설도 깔끔하고 직원분들도 친절해서 기분 좋게 이용했습니다.",
+   "who": "이밈**",
+   "when": "2026년 7월",
+   "rooms": [],
+   "topics": [
+    "kids"
+   ],
+   "main": false
+  },
+  {
+   "text": "수영장 물도 깨끗하고 직원분들도 친절하셔서 기분 좋게 이용했습니다. 다양한 놀이 시설 덕분에 아이가 시간 가는 줄 모르고 놀았어요. 가족 나들이 장소로 추천합니다!",
+   "who": "eu**",
+   "when": "2026년 7월",
+   "rooms": [],
+   "topics": [
+    "kids",
+    "pool"
+   ],
+   "main": false
+  },
+  {
+   "text": "아이들이 10시부터 6시까지 엄마를 찾지않고 시간 가는줄 모르고 놀았어요ㅎㅎ 친절하시고, 깨끗해서 재방문의사 있습니다!",
+   "who": "zz****",
+   "when": "2026년 7월",
+   "rooms": [],
+   "topics": [
+    "kids"
+   ],
+   "main": false
+  },
+  {
+   "text": "아이들과 강아지와 편히 놀 수 있습니다 먹거리도 많고 수심도 적당해서 놀기 딱 좋아요",
+   "who": "es**",
+   "when": "2026년 7월",
+   "rooms": [],
+   "topics": [
+    "pet",
+    "kids"
+   ],
+   "main": false
+  },
+  {
+   "text": "시설너무 잘되어있어서 아이들이랑 편하게 놀고갑니다 ㅎㅎ 어린아이들도 강추",
+   "who": "뚜뚜**",
+   "when": "2026년 7월",
+   "rooms": [],
+   "topics": [
+    "kids"
+   ],
+   "main": false
+  },
+  {
+   "text": "아이랑 여름철 물놀이하러 왔어요^^ 청주에서 가깝고 놀이 시설도 잘되어있어서 아이랑 놀기 너무 좋아요ㅎㅎ 얕은곳과 깊은곳이 모두 있어서 다양하기 놀기 좋고 음식물 반입이 가능한것도 최고입니다",
+   "who": "hy**",
+   "when": "2026년 7월",
+   "rooms": [],
+   "topics": [
+    "kids",
+    "pool"
+   ],
+   "main": false
+  },
+  {
+   "text": "반려동물과 있기 너무 편하고 좋아요 ^^",
+   "who": "오늘**",
+   "when": "2026년 7월",
+   "rooms": [],
+   "topics": [],
+   "main": false
+  },
+  {
+   "text": "오전권으로 첫 방문했어요~ 아이들이 놀기좋고 대형수영장도있어서 어른들도 물놀이하기 좋아요!! 반려견존도 잘되있어서 강아지와 다시 와도 좋을것같아요",
+   "who": "jm****",
+   "when": "2026년 7월",
+   "rooms": [],
+   "topics": [
+    "pet",
+    "kids",
+    "pool"
+   ],
+   "main": false
+  },
+  {
+   "text": "아이들과 물놀이 하고 맛있는 음식먹을수있어서 너무 즐거운 시간을 보냈어요!! 10시부터 22시!! 늦게까지 아이들과 시간을 보낼수있고+ 깊은 물은 어른과 아이들이 함께 들어가기 너무 좋는 물높이에요! 키작은 저에게도 목까지..ㅎㅎ 구명조끼는 필수입니다!!",
+   "who": "co**",
+   "when": "2026년 7월",
+   "rooms": [],
+   "topics": [
+    "kids",
+    "pool"
+   ],
+   "main": false
+  },
+  {
+   "text": "강아지+부모님+아이 다 같이 있었는데 모두가 만족하는 숙소였어요! 강아지 전용 놀이터도 있고, 공기도 좋고 아이가 놀만한 곳도 있고!",
+   "who": "검정****",
+   "when": "2026년 6월",
+   "rooms": [
+    "206"
+   ],
+   "topics": [],
+   "main": true
+  },
+  {
+   "text": "강아지랑 여행을 진짜 많이 다니는데 여기 만큼 가성비 좋고 사장님 착하시고 삼박자가 다 맞는 곳은 못본거 같아요",
+   "who": "fly****",
+   "when": "2026년 6월",
+   "rooms": [],
+   "topics": [],
+   "main": true
+  },
+  {
+   "text": "미온수 수영장도 조그맣게 있어서 물놀이하다 약간쌀쌀하먄 미온수 들어갔다나오고 넘 잘놀았어용",
+   "who": "조녜****",
+   "when": "2026년 6월",
+   "rooms": [],
+   "topics": [
+    "warm-pool"
+   ],
+   "main": false
+  },
+  {
+   "text": "작은풀도 있고 온수풀도 있고 아이들 놀수 있는게 많아서 신나게 놀다가 갑니다^^",
+   "who": "밭솥****",
+   "when": "2026년 6월",
+   "rooms": [],
+   "topics": [
+    "warm-pool"
+   ],
+   "main": false
+  },
+  {
+   "text": "물도깨끗하고 사장님도 너무 친절하시고 데크에서 고기구워먹을건데 너무 좋네요",
+   "who": "rab****",
+   "when": "2026년 6월",
+   "rooms": [],
+   "topics": [
+    "deck",
+    "bbq"
+   ],
+   "main": false
+  },
+  {
+   "text": "주말에 아이들이랑 물놀이할 가까운곳 찾다가 왔습니다 작은풀도 있고 온수풀도 있고 아이들 놀수 있는게 많아서 신나게 놀다가 갑니다^^",
+   "who": "밭솥**",
+   "when": "2026년 6월",
+   "rooms": [],
+   "topics": [
+    "kids",
+    "pool",
+    "warm-pool"
+   ],
+   "main": false
+  },
+  {
+   "text": "깔끔하고 한전하고 분위기 좋고 힐링 되네요 ㅋ",
+   "who": "한종**",
+   "when": "2026년 6월",
+   "rooms": [],
+   "topics": [],
+   "main": false
+  },
+  {
+   "text": "애들이 너무 좋아해용 미온수 수영장도 조그맣게 있어서 물놀이하다 약간쌀쌀하먄 미온수 들어갔다나오고 넘 잘놀았어용 ㅎㅎ 또와야겠어요!!",
+   "who": "조녜**",
+   "when": "2026년 6월",
+   "rooms": [],
+   "topics": [
+    "kids",
+    "pool",
+    "warm-pool"
+   ],
+   "main": false
+  },
+  {
+   "text": "더워서 청주 근교 수영장 찾다가 오게 되었어요~~사장님도 친절하세요! 아이들이 물놀이 신난다고 즐거워하네요~ 매점도 있고 편하게 음식도 먹을 수 있고 좋네요. 에어바운스 미끄럼틀 재밌어요 ㅎㅎ 트램폴린도 있고 아래쪽엔 깊은 수영장도 있어요! 여름에 자주 와야겠어요!",
+   "who": "sL**",
+   "when": "2026년 6월",
+   "rooms": [],
+   "topics": [
+    "kids",
+    "pool",
+    "cafe"
+   ],
+   "main": false
+  },
+  {
+   "text": "가족이랑 가나디랑 방문했는데 사장님도 엄청 친절하시고 분위기랑 뷰 둘 다 너무 좋았어용ㅜㅜ 다음에 청주 오면 재방문 의사 100%입니당",
+   "who": "다룽**",
+   "when": "2026년 6월",
+   "rooms": [],
+   "topics": [],
+   "main": false
+  },
+  {
+   "text": "아이랑 놀러오기 정말 좋은 곳입니다. 시설도 깔끔하게 잘되어있고 아이들 풀어놓고 부모들이 쉬기도 좋습니다! 여름에 오카펜션만한 곳이 없는것 같아요. 추천합니다!!",
+   "who": "맛도**",
+   "when": "2026년 6월",
+   "rooms": [],
+   "topics": [
+    "kids"
+   ],
+   "main": false
+  },
+  {
+   "text": "날이 너무 더워 물놀이하러왔어요^^ 물도깨끗하고 사장님도 너무 친절하시고 데크에서 고기구워먹을건데 너무 좋네요 조만간 무조건 다시 올 예정입니다!!",
+   "who": "rab****",
+   "when": "2026년 6월",
+   "rooms": [],
+   "topics": [
+    "pool",
+    "bbq",
+    "deck"
+   ],
+   "main": false
+  },
+  {
+   "text": "아이랑 오기 너무 좋아요! 청주에사 30-40분이면 오고 거리도 가깝고 물놀이 시설도 깨끗하고 너무 재밌게 놀다갑니다 다음주에 또 방문할게요!!",
+   "who": "박지**",
+   "when": "2026년 6월",
+   "rooms": [],
+   "topics": [
+    "kids",
+    "pool"
+   ],
+   "main": false
+  },
+  {
+   "text": "강아지 데리고 처음 여행온건데 시설도 그렇고 전용 수영장도 있어서 지루하지않고 놀기 좋았습니다! 다음번에 애기들 데리고 한번 애기들 없이 한번 오려구요ㅎㅎ 애기들도 같이 온 남자친구도 엄청 만족하다 갑니다 사장님 너무 친절하셔서 기분이 더 좋았어요 감사합니다~~",
+   "who": "dlt****",
+   "when": "2026년 6월",
+   "rooms": [],
+   "topics": [
+    "pet",
+    "kids",
+    "pool"
+   ],
+   "main": false
+  },
+  {
+   "text": "아이들과 물놀이 하기 좋은곳. 청주에서 30분거리 최고의 물놀이장",
+   "who": "동남**",
+   "when": "2026년 6월",
+   "rooms": [],
+   "topics": [
+    "kids",
+    "pool"
+   ],
+   "main": false
+  },
+  {
+   "text": "친구들과 모임에서 찾은 곳입니다. 물놀이 하기 좋고, 애견과 동반으로 산책하기 및 놀기좋아요! 사장님이 친절하시고, 판매하는 음식도 맛있습니다 물놀이하다가 먹는 냉면은 꿀입니다. 재방문 의사 있으며, 말잘하면 사장님이 커피공짜로 주십니다!",
+   "who": "ljs****",
+   "when": "2026년 6월",
+   "rooms": [],
+   "topics": [
+    "pet",
+    "pool",
+    "cafe"
+   ],
+   "main": false
+  },
+  {
+   "text": "가성비 최고! 청주 근거리에서 물놀이하기 좋은 오카맨션 수영장! 연년생 형제들과 짧고 굵게 잘 놀다 갑니다. 날씨가 선선해서 파라솔 좌석도 충분했습니다. 다음에 또 오고 싶네요:)",
+   "who": "jeo****",
+   "when": "2026년 6월",
+   "rooms": [],
+   "topics": [
+    "pool",
+    "deck"
+   ],
+   "main": false
+  },
+  {
+   "text": "여기 너무~~좋아요 물놀이하기도 좋고 취사도 되고 애들이 안전하게 놀 수 있어서 맘이 놓여요! 날씨도 넘 좋고 사장님도 친절하세요!! 여기 찾은 나 칭찬해",
+   "who": "김은**",
+   "when": "2026년 6월",
+   "rooms": [],
+   "topics": [
+    "kids",
+    "pool"
+   ],
+   "main": false
+  },
+  {
+   "text": "아이들 풀어놓기 좋아요! 편의시설도 있어서 좋네요^^",
+   "who": "김긔**",
+   "when": "2026년 6월",
+   "rooms": [],
+   "topics": [
+    "kids"
+   ],
+   "main": false
+  },
+  {
+   "text": "시설이 엄청 깨끗하고 방도 엄청 깨끗하고 분위기 있고 이용하는 내내 기분 좋았습니다",
+   "who": "mjk****",
+   "when": "2026년 5월",
+   "rooms": [
+    "203"
+   ],
+   "topics": [],
+   "main": true
+  },
+  {
+   "text": "강아지도 아이도 재밌게 지낼수있는 숙소를 서치하다가 발견한 오카맨션!! 방은 아늑하고 반려견 용품도 잘 준비되어있구 침대올라가는 계단센스 까지 ㅎㅎ",
+   "who": "sta****",
+   "when": "2026년 5월",
+   "rooms": [],
+   "topics": [],
+   "main": true
+  },
+  {
+   "text": "사장님이 친절하고 강아지랑 오기 좋아요 !",
+   "who": "돈두**",
+   "when": "2026년 5월",
+   "rooms": [],
+   "topics": [
+    "pet"
+   ],
+   "main": false
+  },
+  {
+   "text": "여기너무좋아요 너무너무너무! 아이들 놀기좋아요",
+   "who": "류류**",
+   "when": "2026년 5월",
+   "rooms": [],
+   "topics": [
+    "kids"
+   ],
+   "main": false
+  },
+  {
+   "text": "너무 친절하시고 너무 좋았습니다!! 넘 편하고 즐겁게 잘 놀다가서 다음에 또 오려고요 감사했어요",
+   "who": "요미**",
+   "when": "2026년 5월",
+   "rooms": [],
+   "topics": [],
+   "main": false
+  },
+  {
+   "text": "강아지랑 놀기 너무 좋아요!! 시설이 엄청 깨끗하고 방도 엄청 깨끗하고 분위기 있고 그리고 사장님,여사장님 너무너무 친절하셔서 이용하는 내내 기분 좋았습니다 또 올 의향 100000000%입니다 가성비 최고 숙소",
+   "who": "mjk****",
+   "when": "2026년 5월",
+   "rooms": [
+    "203"
+   ],
+   "topics": [
+    "pet"
+   ],
+   "main": false
+  },
+  {
+   "text": "대전에서 딱 한시간 거리, 청주 미원면에 야외 키즈놀이터가 있는 오카맨션(오카키즈)에서 아이들과 즐거운 시간 보내고 왔어요. 실내에 지친 우리 아이들과 다양한 야외 놀이를 즐기면 좋을 것 같아요.",
+   "who": "jwk****",
+   "when": "2026년 5월",
+   "rooms": [],
+   "topics": [
+    "kids"
+   ],
+   "main": false
+  },
+  {
+   "text": "데크를 예약하고 방문하였는데 꽃가루가 너무 심한탓에 어쩌나 고민하던 찰나, 친절한사장님께서 실내안으로 안내해주셨습니다! 덕분에 실내에서 쾌적하게 고기구워먹고 갑니다^^ 유치원 아이랑 4세 아기 참 재밌게 놀다 가요^^ 그림도 그리고 모래놀이장 깨끗해서 넘 좋았네요",
+   "who": "spe****",
+   "when": "2026년 5월",
+   "rooms": [],
+   "topics": [
+    "kids",
+    "bbq",
+    "deck"
+   ],
+   "main": false
+  },
+  {
+   "text": "사장님도 친절하시고, 숙박 하고나서도 놀고 가도 된다고 하셔서 더 놀고 갑니다! 고기 구워먹기도 편하고 반려견 놀기도 좋았어요! 다음 주부터 수영장 한다고 해서 다음에 또 와야겠어요!",
+   "who": "jmh****",
+   "when": "2026년 5월",
+   "rooms": [],
+   "topics": [
+    "pet",
+    "pool",
+    "bbq"
+   ],
+   "main": false
+  },
+  {
+   "text": "아이와 강아지가 모두 만족할만한 곳입니다 사장님도 너무 친절하시고 만족합니당^^ 번창하세요",
+   "who": "suh****",
+   "when": "2026년 5월",
+   "rooms": [],
+   "topics": [
+    "pet",
+    "kids"
+   ],
+   "main": false
+  },
+  {
+   "text": "너무 좋은 곳에서 편하게 쉬다가 가요~~ 경치 좋고 물 좋고 아주 최고의 숙소입니다",
+   "who": "OK**",
+   "when": "2026년 5월",
+   "rooms": [],
+   "topics": [],
+   "main": false
+  },
+  {
+   "text": "작년에 이어 또 왔어요 아이들이 너무 좋아해요^^",
+   "who": "58**",
+   "when": "2026년 5월",
+   "rooms": [],
+   "topics": [
+    "kids"
+   ],
+   "main": false
+  },
+  {
+   "text": "반려견과 아이들 놀기 좋은 펜션입니다~ 사장님 친절 하시고 편한 분위기라 잘 놀다 갑니다^^",
+   "who": "결이**",
+   "when": "2026년 5월",
+   "rooms": [
+    "207"
+   ],
+   "topics": [
+    "pet",
+    "kids"
+   ],
+   "main": false
+  },
+  {
+   "text": "더 더워지기전에 아이친구들과 근교 야외로 놀러왔는데 에어바운서부터 점핑 미술 비눗방울까지 아이들이 좋아하는건 다 있네요ㅎ 6월부터 물놀이장도 연다는데 다시 와야겠어요ㅎ 즐겁게 놀다 갑니다~",
+   "who": "김진**",
+   "when": "2026년 5월",
+   "rooms": [],
+   "topics": [
+    "kids",
+    "pool"
+   ],
+   "main": false
+  },
+  {
+   "text": "가족모임으로 강아지 루루랑 찾아왓는데 감성적으로 잘 꾸며놓으셧고 푹 잘 쉬다 갑니다! 공용 강아지 운동장도 잇고 애견이랑 오기에 좋은 곳입니다! 사장님도 친절하시고 근처에서 애견숙소 찾으신다면 강추합니다 : D",
+   "who": "어릿**",
+   "when": "2026년 5월",
+   "rooms": [],
+   "topics": [
+    "pet"
+   ],
+   "main": false
+  },
+  {
+   "text": "사장님이 너무친절하시고 아이들이 뛰어놀기 정말잘되어있어서 편하게 잘놀고왔어요!",
+   "who": "kk**",
+   "when": "2026년 4월",
+   "rooms": [],
+   "topics": [
+    "kids"
+   ],
+   "main": false
+  },
+  {
+   "text": "청주 근교로 아이랑 놀러오기 좋은 곳이에요~ 요즘 날씨도 따뜻하고 점점 더워져서 물놀이까지 할수 있는 곳!! 음식 반입도 가능해서 아이들은 밑에서 재밌게 놀고 어른들은 위에서 바베큐 해먹기도 괜찮을 것 같더라고요~ 모래놀이, 물감놀이, 비눗방울, 에어바운스 놀이기구까지 시간이 금방 지나가네요^^ 아이와…",
+   "who": "sen****",
+   "when": "2026년 4월",
+   "rooms": [],
+   "topics": [
+    "kids",
+    "pool",
+    "bbq"
+   ],
+   "main": false
+  },
+  {
+   "text": "아이들과 함께 놀러왔는데 사장님께서 커피도 주시고 애들끼리 너무 잘놀아서 부모들도 쉬고 온 느낌이에요 에어바운스랑 모래놀이하느라 시간 가는지도 몰랐어요",
+   "who": "108****",
+   "when": "2026년 4월",
+   "rooms": [],
+   "topics": [
+    "kids",
+    "cafe"
+   ],
+   "main": false
+  },
+  {
+   "text": "야외 공간이 정말 넓고 쾌적해서 아이가 너무 좋아해요! 에어바운스부터 정글짐, 미술놀이, 모래놀이까지 놀 거리가 다양해서 시간 가는 줄 모르고 놀았습니다. 시설 관리도 깔끔하게 잘 되어 있고 사장님도 친절하셔서 기분 좋게 머물다 가요. 주말에 아이와 함께 방문하기 최고의 장소입니다! 추천해요‼",
+   "who": "우쭈**",
+   "when": "2026년 4월",
+   "rooms": [],
+   "topics": [
+    "kids"
+   ],
+   "main": false
+  },
+  {
+   "text": "애들 놀기 잘되어있어요 산 속에 있어서 공기도 좋고 수영장도 곧 오픈이라고하네요 추천합니다",
+   "who": "thk****",
+   "when": "2026년 4월",
+   "rooms": [],
+   "topics": [
+    "kids",
+    "pool"
+   ],
+   "main": false
+  },
+  {
+   "text": "예쁜 꽃과 맑은날씨 아이들이놀거리가 많아서 즐거운 하루가되었습니다~",
+   "who": "ch**",
+   "when": "2026년 4월",
+   "rooms": [],
+   "topics": [
+    "kids"
+   ],
+   "main": false
+  },
+  {
+   "text": "여사장님에 친절함과 배려함에 감동이였습니다 또한 가성비와 반려견에 대한 세심한 배려 너무 좋았습니다",
+   "who": "김영****",
+   "when": "2026년 3월",
+   "rooms": [
+    "301"
+   ],
+   "topics": [],
+   "main": false
+  },
+  {
+   "text": "숙소도 깔끔했고 있을게 다 있어서 따로 준비하지 않아도 되서 편하게 즐기고 갑니다",
+   "who": "밀크****",
+   "when": "2026년 3월",
+   "rooms": [
+    "201"
+   ],
+   "topics": [],
+   "main": false
+  },
+  {
+   "text": "주인분께서 친절하시고 따뜻하고 방음이 잘 되서 좋았어요. 푹 쉬었다 갑니다!",
+   "who": "주헌****",
+   "when": "2026년 3월",
+   "rooms": [
+    "202"
+   ],
+   "topics": [],
+   "main": false
+  },
+  {
+   "text": "반려 강아지와 함께 하기도 좋고 연인끼리 오기에도 너무 좋을것 같아요! 침구 좋구요 (강추) 또 재방문 할것 같아요!!!",
+   "who": "태양****",
+   "when": "2026년 3월",
+   "rooms": [
+    "207"
+   ],
+   "topics": [],
+   "main": false
+  },
+  {
+   "text": "안녕하세요 오카펜션 다녀갔는데 여사장님에 친절함과 배려함에 감동이였습니다 또한 가성비와 반려견에 대한 세심한 배려 너무 좋았습니다 재방문 또 할것이며 다녔던 펜션중 최고였습니다 물놀이 수영장 개장시 재차 방문계획 있습니다",
+   "who": "김영**",
+   "when": "2026년 3월",
+   "rooms": [
+    "301"
+   ],
+   "topics": [
+    "pet",
+    "pool"
+   ],
+   "main": false
+  },
+  {
+   "text": "여자친구와 조용히 쉴곳을 찾다가 반짝 특가로 방문하게 되었습니다 저녁에 도착하였는데 시설들이 잘 세팅되어있어 무인 체크인이어도 연락 할 일이 없었네요 숙소도 깔끔했고 있을게 다 있어서 따로 준비하지 않아도 되서 편하게 즐기고 갑니다",
+   "who": "밀크**",
+   "when": "2026년 3월",
+   "rooms": [
+    "201"
+   ],
+   "topics": [],
+   "main": false
+  },
+  {
+   "text": "급 하게 근교에 여행 가고 싶어서 써치 하는중에 말도 안되는 가격이 나와 있길래 반신반의하는 마음으로 예약을 해서 방문햇더니 너무 너무 좋았습니다! 반려 강아지와 함께 하기도 좋고 연인끼리 오기에도 너무 좋을것 같아요! 침구 좋구요 (강추) 또 재방문 할것 같아요!! 잘 쉬었다 가요~~ㅎㅎㅎ",
+   "who": "태양**",
+   "when": "2026년 3월",
+   "rooms": [
+    "207"
+   ],
+   "topics": [
+    "pet"
+   ],
+   "main": false
+  },
+  {
+   "text": "우리 집 상전 모시구 다녀왔어요! 실내 바베큐 장도 잘 되어있구 침구도 너무 깨끗하고 반려견 동반 펜션인데도 방에서 강아지 냄새도 안났어요! 넘 재밌게 놀다 왔습니다",
+   "who": "so**",
+   "when": "2026년 3월",
+   "rooms": [],
+   "topics": [
+    "pet",
+    "bbq"
+   ],
+   "main": false
+  },
+  {
+   "text": "친구가 추천해줘서 급 예약해서 와봤는데 진짜 너무 잘쉬다 갑니다! 방도 미리 따뜻하게 해주셔서 포근하고 좋았어요~! 다른데는 다 숯이라 저는 숯냄새랑 야외 추운거 때문에 좀 싫어하는데 여긴 1층에 실내바베큐장이라 식당에서 먹듯 편하게 먹었어요! 강아지도 맘껏 풀어놔서 다른 강아지들이랑 친구먹었어요",
+   "who": "쏭쏭**",
+   "when": "2026년 3월",
+   "rooms": [
+    "204"
+   ],
+   "topics": [
+    "pet",
+    "bbq"
+   ],
+   "main": false
+  },
+  {
+   "text": "친구와 함께 벌써 세번째 방문이네요 ㅎㅎ 바베큐 시설을 실내에서 이용할 수 있어서 따뜻하고 좋았습니다!",
+   "who": "shi****",
+   "when": "2026년 1월",
+   "rooms": [
+    "205"
+   ],
+   "topics": [
+    "bbq"
+   ],
+   "main": true
+  },
+  {
+   "text": "강아지가 신나게 뛰어놀고 목욕도 하는 즐거운 시간이였습니다~ 저희도 맛있는 고기도 구워먹고 보드게임도 하면서 재미있게 놀다갑니다!!",
+   "who": "o무**",
+   "when": "2025년 11월",
+   "rooms": [],
+   "topics": [
+    "pet",
+    "bbq"
+   ],
+   "main": false
+  },
+  {
+   "text": "오공이 너무 귀엽고 사장님 내외분들 너무 친절하세요",
+   "who": "ㄱㅇ**",
+   "when": "2025년 11월",
+   "rooms": [],
+   "topics": [],
+   "main": false
+  },
+  {
+   "text": "사장님이 너무너무 착하시고 쿨하십니다 덕분에 강아지랑 행복하게 잘 놀다가 갑니다 !",
+   "who": "whg****",
+   "when": "2025년 10월",
+   "rooms": [
+    "205"
+   ],
+   "topics": [],
+   "main": false
+  },
+  {
+   "text": "너무 친절하시고 깨끗합니다 ㅎㅎㅎ 매점이랑 카페도 있고 보드게임도 빌릴수있어용!!",
+   "who": "사랑**",
+   "when": "2025년 10월",
+   "rooms": [],
+   "topics": [
+    "cafe"
+   ],
+   "main": false
+  },
+  {
+   "text": "1층 매점 및 휴게시설 주차장 넓고 강아지들이랑 오기 좋아요",
+   "who": "Un**",
+   "when": "2025년 10월",
+   "rooms": [],
+   "topics": [
+    "pet",
+    "cafe"
+   ],
+   "main": false
+  },
+  {
+   "text": "옥화자연휴양림 근처에 있는데 산 언덕쪽에 위치하여 차량으로 이동해야 편해요 ~셀프 계산으로 이용해야 하고 저는 편의점 방문했는데 근처 마트가 없기에 여기가 유일하게 방문 추천합니다 !! 반려견과 함께 가기 좋은 숙소인 것같아요 ^^",
+   "who": "서울**",
+   "when": "2025년 10월",
+   "rooms": [],
+   "topics": [
+    "pet",
+    "cafe"
+   ],
+   "main": false
+  },
+  {
+   "text": "강아지들 뛰어놀기 너무 좋아요ㅜㅜ 우리는 바베큐 먹으면서 편하게 놀았네요 ㅎㅎ 아이들 놀 수 있는 놀이공간도 크고 놀이시설 잘 되있어서 아이들이랑 강쥐들 델고 오기좋아요 담에 또올거예여~~친절하신 사장님 쵝오",
+   "who": "로아**",
+   "when": "2025년 10월",
+   "rooms": [],
+   "topics": [
+    "pet",
+    "kids",
+    "bbq"
+   ],
+   "main": false
+  },
+  {
+   "text": "4살6살 꼬맹이들과 오기 너무 좋아요 친절해요",
+   "who": "홍찌**",
+   "when": "2025년 10월",
+   "rooms": [],
+   "topics": [],
+   "main": false
+  },
+  {
+   "text": "시설이 깨끗하고 아기랑 다녀오기 좋앗어요 강아지시설도 잘 관리되있어서 보기 좋고 제일높이있다보니 공기도 하늘도 너무 좋고이뻣어요 다음에 또 오려구여",
+   "who": "Kd**",
+   "when": "2025년 10월",
+   "rooms": [],
+   "topics": [
+    "pet",
+    "kids"
+   ],
+   "main": false
+  },
+  {
+   "text": "강아지 데리고 놀기 너무 좋아요! 사장님 너무 친절하시구 재밌게 놀다갑니다",
+   "who": "y2**",
+   "when": "2025년 10월",
+   "rooms": [],
+   "topics": [
+    "pet"
+   ],
+   "main": false
+  },
+  {
+   "text": "바베큐장 옆에 개별운동장있는데 먹으면서 같이 뛰어놀고 만족도 최상-! 애견의자 배변패드 등 애견용품도 구비 다 되어있어요",
+   "who": "ywn****",
+   "when": "2025년 9월",
+   "rooms": [
+    "301"
+   ],
+   "topics": [],
+   "main": true
+  },
+  {
+   "text": "처음으로 애견동반펜션 왔는데 진짜 대만족입니다.. 바베큐장 옆에 개별운동장있는데 먹으면서 같이 뛰어놀고 만족도 최상-! 펜션 컨디션도 너무 좋고, 무엇보다도 애견의자 배변패드 등 애견용품도 구비 다 되어있어요 !! 비오고 추워서 수영장 이용은 못했지만 날씨 좋아지면 무조건 재방문 입니다",
+   "who": "ywn****",
+   "when": "2025년 9월",
+   "rooms": [
+    "301"
+   ],
+   "topics": [
+    "pet",
+    "pool",
+    "bbq"
+   ],
+   "main": false
+  },
+  {
+   "text": "와이프랑 애기랑 반려견 동반 숙소 청주에는 여기가 좋아요 사장님도 친절하시고 푹쉬다 갑니다^^",
+   "who": "Ki**",
+   "when": "2025년 9월",
+   "rooms": [],
+   "topics": [
+    "pet",
+    "kids"
+   ],
+   "main": false
+  },
+  {
+   "text": "생각보다 너무 좋았어요! 28개월 아기도 언니들도 신나게 놀고 사람도 많지 않아서 넓은 자리로 주셨어요~ 주차도 바로 앞이고 깨끗하고 친절하세요",
+   "who": "tmf****",
+   "when": "2025년 9월",
+   "rooms": [],
+   "topics": [
+    "kids"
+   ],
+   "main": false
+  },
+  {
+   "text": "정말 깔끔 하고 편하게 즐기는 시간 이었습니다. 멍뭉이 풀장도 좋았고, 멍뭉이와 놀거리도 많아서 좋아요,, 주인분들도 매우 친절하고 , 여느 멍뭉 펜션 가보았지만 이렇게 좋은데는 처음이에요,",
+   "who": "마루**",
+   "when": "2025년 9월",
+   "rooms": [
+    "206"
+   ],
+   "topics": [
+    "pool"
+   ],
+   "main": false
+  },
+  {
+   "text": "우리 댕댕이랑 여행은 처음이였는데, 소중한 추억 쌓고 가요 조용히 힐링하기 딱 좋아요!",
+   "who": "pan****",
+   "when": "2025년 8월",
+   "rooms": [
+    "301"
+   ],
+   "topics": [],
+   "main": false
+  },
+  {
+   "text": "직원분 친절하시고 편하게 쉬고 물깊이있어 어른도 수영하기 좋았어요~",
+   "who": "정수****",
+   "when": "2025년 8월",
+   "rooms": [
+    "201"
+   ],
+   "topics": [
+    "pool"
+   ],
+   "main": false
+  },
+  {
+   "text": "반려동물 있으시면 꼭 가보시길 추천드립니다 시설도 잘 되어있고 계신 직원분도 친절하세요!",
+   "who": "dws****",
+   "when": "2025년 8월",
+   "rooms": [
+    "203"
+   ],
+   "topics": [],
+   "main": false
+  },
+  {
+   "text": "방도 깨끗하고 너무나 좋아요 울강아지의 견생여행 ㅋㅋ 신나게놀고 수영하고 뻗어자고 방도 아늑하니 좋았습니다",
+   "who": "MN ****",
+   "when": "2025년 8월",
+   "rooms": [
+    "204"
+   ],
+   "topics": [],
+   "main": false
+  },
+  {
+   "text": "목욕용품 물그릇 계단 애견용품 그냥 다 있어요~ 아,..꼭 독채로 예약하세요~ 물놀이하고 바로 앞에서 먹을거 먹고 고기도 구워먹고",
+   "who": "우쭈****",
+   "when": "2025년 8월",
+   "rooms": [],
+   "topics": [],
+   "main": true
+  },
+  {
+   "text": "바베큐 시켜서 먹으니 편하고 아이들 놀기 너무 좋아요",
+   "who": "나무****",
+   "when": "2025년 8월",
+   "rooms": [],
+   "topics": [
+    "bbq"
+   ],
+   "main": false
+  },
+  {
+   "text": "사장님 너무너무 친절하시고 방도 깨끗하고 너무나 좋아요︎ 울강아지의 견생여행 ㅋㅋ 신나게놀고 수영하고 뻗어자고 방도 아늑하니 좋았습니다",
+   "who": "MN**",
+   "when": "2025년 8월",
+   "rooms": [
+    "204"
+   ],
+   "topics": [
+    "pet",
+    "pool"
+   ],
+   "main": false
+  },
+  {
+   "text": "친구들이랑 친구 애기들 데리구 놀러왔는데 시설도 좋구 애기들도 재밌게 잘 놀았어요 애기들이 좋아해서 좋아요 매점도 시설도 잘 되있어서 필요한거 있을때 올수잇구 편해요!",
+   "who": "Ye**",
+   "when": "2025년 8월",
+   "rooms": [],
+   "topics": [
+    "kids",
+    "cafe"
+   ],
+   "main": false
+  },
+  {
+   "text": "아이들 놀기 천국이예요 사장님도 너무 친절하시구요 숲속에 힐링네요",
+   "who": "il**",
+   "when": "2025년 8월",
+   "rooms": [],
+   "topics": [
+    "kids"
+   ],
+   "main": false
+  },
+  {
+   "text": "직원분 친절하시고 그날저희밖에 없어서인지 편하게 쉬고 물깊이있어 어른도 수영하기 좋았어요~",
+   "who": "정수**",
+   "when": "2025년 8월",
+   "rooms": [
+    "201"
+   ],
+   "topics": [
+    "pool"
+   ],
+   "main": false
+  },
+  {
+   "text": "초코랑 함께 방문한 오카펜션 물놀이 하기에도 너무좋고 저녁에 캠핑느낌나는 바베큐까지 정말 즐거운 추억 만들고 가는거 같아요 다음에 또 방문할게요 ~",
+   "who": "zkd****",
+   "when": "2025년 8월",
+   "rooms": [],
+   "topics": [
+    "pool",
+    "bbq"
+   ],
+   "main": false
+  },
+  {
+   "text": "신나게 물놀이하고 오전에 알차게 잘 놀다왔습니다.",
+   "who": "팬더**",
+   "when": "2025년 8월",
+   "rooms": [],
+   "topics": [
+    "pool"
+   ],
+   "main": false
+  },
+  {
+   "text": "친절하셔서 좋았습니다. 강아지도 너무 귀여웠고 스무디도 서비스로 주셔서 맛있게 먹었습니다. 바베큐장도 에어컨 시원하게 틀어주셔서 좋았습니다.",
+   "who": "바보**",
+   "when": "2025년 8월",
+   "rooms": [],
+   "topics": [
+    "pet",
+    "bbq",
+    "cafe"
+   ],
+   "main": false
+  },
+  {
+   "text": "강추인곳입니다~강아지때문에 급하게 구한곳인데 이곳은 정말 애견을 위한 숙소에요~목욕용품 물그릇 계단 애견용품 그냥 다 있어요~ 양념통 매점도 있어서 너무 편하고 잠자리도 토퍼를 넉넉하게 주셔서 편하게 잤습니다",
+   "who": "우쭈**",
+   "when": "2025년 8월",
+   "rooms": [],
+   "topics": [
+    "pet",
+    "cafe"
+   ],
+   "main": false
+  },
+  {
+   "text": "강아지와 함께 여행왔는데 힐링 여행하기 좋아요!! 잘 쉬다가 갑니다!!",
+   "who": "jan****",
+   "when": "2025년 8월",
+   "rooms": [],
+   "topics": [
+    "pet"
+   ],
+   "main": false
+  },
+  {
+   "text": "사장님 넘 친절하세요 아이랑 재밌게 놀다가요 또 오자고하네요 ㅎㅎ 샤워장에 따뜻한 물도 잘나와요",
+   "who": "ho**",
+   "when": "2025년 8월",
+   "rooms": [],
+   "topics": [
+    "kids"
+   ],
+   "main": false
+  },
+  {
+   "text": "아이들 놀기에 적합한 물깊이에여!! 미꾸라지잡기놀이도 할 수 있고 일층 매점에서 다양하게 간식도 팔아여!! 전자레인지 구비되어있고 버너도 빌릴수 있고 사장님도 너무 친절하시고~ 뭣보다 펜션도 저렴 하게 이용할수 있는데 오카펜션 오카키즈 같이 붙어있는데 성수기 비수기 비용 다",
+   "who": "min****",
+   "when": "2025년 8월",
+   "rooms": [],
+   "topics": [
+    "kids",
+    "cafe"
+   ],
+   "main": false
+  },
+  {
+   "text": "너무좋아여! 두번째방문 !! 대전에서 오는데두 ㅎㅎ너무친절하시고 시설이잘되있어서 또왔습니당 여름끝나고 겨울시즌에 또 다른거하시면 또 놀러올게용",
+   "who": "dlg****",
+   "when": "2025년 8월",
+   "rooms": [],
+   "topics": [],
+   "main": false
+  },
+  {
+   "text": "멍멍이랑 일요일에 오니 다른 손님이 없어서 편하게 놀다 갑니다! 멍멍이랑 수영도 하고 고기구울때도 풀어놓고 있을 수 있고 실내에서 고기구워먹어서 더위도 피할 수 있습니다!",
+   "who": "키민**",
+   "when": "2025년 8월",
+   "rooms": [],
+   "topics": [
+    "pet",
+    "pool",
+    "bbq"
+   ],
+   "main": false
+  },
+  {
+   "text": "반려강아지와 함께 하기 딱 좋은 장소입니다. 방음도 잘되고, 편하게 쉬다왔습니다. 아이들 물놀이하기에도 좋고, 고기구워먹는 테이블도 상당히 잘 정리되어 있습니다. 사장님과 직원분들이 매우 친절하셔서 부담없이 잘놀았네요^^ 반려동물과 놀러가실 장소로 추천입니다.",
+   "who": "보리**",
+   "when": "2025년 8월",
+   "rooms": [
+    "204"
+   ],
+   "topics": [
+    "pet",
+    "kids",
+    "pool",
+    "bbq"
+   ],
+   "main": false
+  },
+  {
+   "text": "우연히 알게된 오카맨션 아이와 강아지 신랑 친구와 함께 했습니다 .아이 수영장 필수 였고 강아지도 함께 해야 해서 제한된 곳이 많았습니다 찾다가 알게된 오카맨션 우선 너무 깨끗합니다 입실 전부터 에어컨이 틀어져 있어 센스에 놀랐습니다.수영장에 미끄럼틀부터 짐라인 방방이 등 놀게 너무 많았어요",
+   "who": "dbt****",
+   "when": "2025년 8월",
+   "rooms": [
+    "202"
+   ],
+   "topics": [
+    "pet",
+    "kids",
+    "pool"
+   ],
+   "main": false
+  },
+  {
+   "text": "지인에게 좋다는 얘기만 많이들었는데 시간내서 와봤더니 역시 놀기좋고 잘쉬다갑니다^^",
+   "who": "ksy****",
+   "when": "2025년 8월",
+   "rooms": [],
+   "topics": [],
+   "main": false
+  },
+  {
+   "text": "팬션에 사는 강아지가 너무 귀여워요.. 너무 친절하시고 서비스도 많이 주셔서 또 올거 같아요! 오늘 하루 정말 재밌게 놀았습니다",
+   "who": "kim****",
+   "when": "2025년 8월",
+   "rooms": [],
+   "topics": [
+    "pet"
+   ],
+   "main": false
+  },
+  {
+   "text": "너무 깨끗하고 친절하세요!! 나중에 강아지랑도 오면 엄청 좋을거 같아요. 강아지랑 즐길수 있는 시설도 너무 잘 돼있습니다.",
+   "who": "qus****",
+   "when": "2025년 8월",
+   "rooms": [],
+   "topics": [
+    "pet"
+   ],
+   "main": false
+  },
+  {
+   "text": "강아지 수영장 공간이나 뛰어 놀 수 있는 공간도 있어서 좋았고 직원분들 너무 친절하셔서 재미있게 놀다 갔습니당",
+   "who": "vvv****",
+   "when": "2025년 7월",
+   "rooms": [
+    "301"
+   ],
+   "topics": [
+    "pool"
+   ],
+   "main": false
+  },
+  {
+   "text": "아이들은 키카 못지않은 시설에 잠수 가능한 놀기좋은 수심의 수영장!!! 짚라인에 방방까지!!!! 부모를 찾지 않으니 어른들은 너무너무 편했답니다!!",
+   "who": "이른****",
+   "when": "2025년 7월",
+   "rooms": [],
+   "topics": [
+    "pool"
+   ],
+   "main": true
+  },
+  {
+   "text": "위에 수영장은 아이와 함께하기 좋고 밑에 애견수영장이 따로 있어서 너무 좋았어요! 바베큐장도 에어컨을 풀로 틀어주셔서 시원하게 고기 먹어서 너무 좋았습니다!",
+   "who": "rla****",
+   "when": "2025년 7월",
+   "rooms": [],
+   "topics": [
+    "bbq",
+    "pool"
+   ],
+   "main": true
+  },
+  {
+   "text": "진짜 부모와 아이들의 니즈를 정확하게 공격한 공간입니다!! 아이들은 키카 못지않은 시설에 잠수 가능한 놀기좋은 수심의 수영장!! 짚라인에 방방까지!! 밥먹으러 오라고 불러도 안오는게 단점이자 장점이예요!! 부모를 찾지 않으니 어른들은 너무너무 편했답니다!! 정말 잘 놀고 왔습니다!!",
+   "who": "이른**",
+   "when": "2025년 7월",
+   "rooms": [],
+   "topics": [
+    "kids",
+    "pool"
+   ],
+   "main": false
+  },
+  {
+   "text": "강아지와 함께 가족들과 놀러갔는데 수영장 깊이도 어른들 놀기 딱 좋았고, 늦은시간까지 수영장에서 놀 수 있어서 더 좋았어요!! 강아지 수영장 공간이나 뛰어 놀 수 있는 공간도 있어서 좋았고 직원분들 너무 친절하셔서 재미있게 놀다 갔습니당 재방문의사 있어요!! 내년 여름에 또 갈거에용~",
+   "who": "vv**",
+   "when": "2025년 7월",
+   "rooms": [
+    "301"
+   ],
+   "topics": [
+    "pet",
+    "pool"
+   ],
+   "main": false
+  },
+  {
+   "text": "아이들이 놀기도 좋고 방도 깨끗하고 방음도 잘되며 수영장도 크고 사장님이 친절하십니다 다음에 또 오고싶어요 적극추천합니다",
+   "who": "모범**",
+   "when": "2025년 7월",
+   "rooms": [],
+   "topics": [
+    "kids",
+    "pool"
+   ],
+   "main": false
+  },
+  {
+   "text": "아이와 함께 와 즐거운 물놀이도 하구 편하게 쉬기도 너무 좋았어요~ 힐링하기 좋아요!!",
+   "who": "sh**",
+   "when": "2025년 7월",
+   "rooms": [
+    "std"
+   ],
+   "topics": [
+    "kids",
+    "pool"
+   ],
+   "main": false
+  },
+  {
+   "text": "강아지들 데리고 다녀왔어요. 아이들이 신나게 뛰어놀고 수영도 했지요. 카페도 있어서 쉬기 좋고 친절하세요^^ 감사합니다 잘 놀다가 갑니다.",
+   "who": "별이**",
+   "when": "2025년 7월",
+   "rooms": [],
+   "topics": [
+    "pet",
+    "kids",
+    "pool",
+    "cafe"
+   ],
+   "main": false
+  },
+  {
+   "text": "청주에도 이런 펜션이?? 청주에서 강아지와 함께 하고싶고 수영도 하고 싶다면 오카멘션 강추 드립니다!! 숙소는 감성있고 안에 카페 공간도 넓고 쾌적합니다! 위에 수영장은 아이와 함께하기 좋고 밑에 애견수영장이 따로 있어서 너무 좋았어요!",
+   "who": "rla****",
+   "when": "2025년 7월",
+   "rooms": [],
+   "topics": [
+    "pet",
+    "kids",
+    "pool",
+    "cafe"
+   ],
+   "main": false
+  },
+  {
+   "text": "강아지랑 같이 즐기기 너무 좋은 숙소예요! 너무 귀엽고 예쁘게 센스있게 꾸미셨더라구쵸 ㅎㅎ ㅎ 공용공간 너무 넓고 예뻐서 놀러운 분들이랑도 친해지고 행복한 휴가 보내고있어요!",
+   "who": "WI**",
+   "when": "2025년 7월",
+   "rooms": [],
+   "topics": [
+    "pet"
+   ],
+   "main": false
+  },
+  {
+   "text": "편하게 잘 쉬다 갑니다! 남자 사장님이 엄청 친절하세요!! 덕분에 온전히 쉴수있는 여행이 되었습니다.! 감사합니다!",
+   "who": "룰ㄹ**",
+   "when": "2025년 7월",
+   "rooms": [],
+   "topics": [],
+   "main": false
+  },
+  {
+   "text": "청주에 이렇게 좋은 펜션이 있었다니 ㅠㅠㅠ 가까워서 자주 놀러오려구요 애견 운동장도 있어서 강아지랑 같이 산책하며 놀수있고 사진도 예쁘게 나와요!!",
+   "who": "hor****",
+   "when": "2025년 7월",
+   "rooms": [
+    "301"
+   ],
+   "topics": [
+    "pet"
+   ],
+   "main": false
+  },
+  {
+   "text": "우연히 처음 방문해서 묵고 이번이 두번째 방문입니다 사장님도 너무 좋으시고 시설 좋고 반려견과 청주에서 숙박하실 분들 무조건 추천입니다",
+   "who": "wkd****",
+   "when": "2025년 7월",
+   "rooms": [
+    "std"
+   ],
+   "topics": [
+    "pet"
+   ],
+   "main": false
+  },
+  {
+   "text": "반려견과 함께라 펜션 선택을 신경써서 했더니 좋은 곳에 들러서 잘 쉬고 갑니다. 생각보다 공간 넓고 깨끗해서 좋았고 편했어요",
+   "who": "pok****",
+   "when": "2025년 7월",
+   "rooms": [
+    "301"
+   ],
+   "topics": [
+    "pet"
+   ],
+   "main": false
+  },
+  {
+   "text": "강아지와 함께놀기도 졸고 친구들과 놀기도 좋은곳 객실상태 좋고 사장님도 친절하고 잘쉬다 갑니다!",
+   "who": "마기**",
+   "when": "2025년 7월",
+   "rooms": [],
+   "topics": [
+    "pet"
+   ],
+   "main": false
+  },
+  {
+   "text": "너무 잘 쉬다가 갑니다~! 덕분에 강아지도 저도 힐링했습니다~! 감사합니다~!",
+   "who": "WI**",
+   "when": "2025년 7월",
+   "rooms": [],
+   "topics": [
+    "pet"
+   ],
+   "main": false
+  },
+  {
+   "text": "객실도 깨끗하고 시설도 너무 좋았어요 강아지랑 같이 오기 좋은 거 같아요!!",
+   "who": "rhd****",
+   "when": "2025년 7월",
+   "rooms": [],
+   "topics": [
+    "pet"
+   ],
+   "main": false
+  },
+  {
+   "text": "애견 수영장부터 바베큐장, 놀이터, 산책로 등등 즐길 수 있는 것들이 너무 다양해 즐거운 가족여행 다녀왔어요!! 숙소도 너무 깔끔하고 침대도 편했어요",
+   "who": "보하**",
+   "when": "2025년 6월",
+   "rooms": [
+    "202"
+   ],
+   "topics": [],
+   "main": false
+  },
+  {
+   "text": "강아지 수건,배변패드,빗,샴푸,배변봉투도 전부 준비되어있어서 이번 여행에 비가왔는데도 부담없이 놀 수 있었어요! 바베큐장도 깔끔하고 식기류나 조미료도 준비가 잘 되어있었구요!",
+   "who": "방톨",
+   "when": "2025년 6월",
+   "rooms": [],
+   "topics": [
+    "bbq"
+   ],
+   "main": true
+  },
+  {
+   "text": "청주 오카맨션^^뷰도 좋고 수영장도 넓고 아이가.놀좋았습니다 아이가 너무 좋아하더군요 사장님도 친절하시고 모처럼 즐거운 가족여행이였습니다",
+   "who": "한결**",
+   "when": "2025년 6월",
+   "rooms": [],
+   "topics": [
+    "kids",
+    "pool"
+   ],
+   "main": false
+  },
+  {
+   "text": "이번 여행은 제가 주도해서 계획 짜고 숙소도 처음으로 직접 선택한 숙소였는데 진짜 대대대대만족!! 분위기도 좋고 숙소도 깨끗하고 아주아주 좋았어요~~ 그리고 사장님도 너무 친절하셨습니다",
+   "who": "dad****",
+   "when": "2025년 6월",
+   "rooms": [
+    "301"
+   ],
+   "topics": [],
+   "main": false
+  },
+  {
+   "text": "물관리도 중간에 해주시고 아이들 놀거리가 다양하게 있어서 가족나들이에 가기 좋아요! 바베큐도 해먹고 매점도 있어서 멀리 안나가도 되서 좋았어여!",
+   "who": "eow****",
+   "when": "2025년 6월",
+   "rooms": [],
+   "topics": [
+    "kids",
+    "bbq",
+    "cafe"
+   ],
+   "main": false
+  },
+  {
+   "text": "아이들이 물놀이하기에 너무 좋아요 정글짐, 에어바운서, 수영장 시설이 너무 좋고 샤워시설이 잘되어있어서 너무 좋아요!!",
+   "who": "ri**",
+   "when": "2025년 6월",
+   "rooms": [],
+   "topics": [
+    "kids",
+    "pool"
+   ],
+   "main": false
+  },
+  {
+   "text": "와이프랑 친구들이랑 강아지랑 왔는데 너무 깨끗하고 사장님도 완전 친철하십니다 반려동물이랑 오기 너무 좋고 진짜 공기도 좋고 시설이 잘 되있습니다 매점도 무인매점이라 늦게까지 사용할수 있고 진짜 편합니다 방도 너무 깔끔하고 완전 추천이요 나중에 또 오고 싶어요",
+   "who": "tid****",
+   "when": "2025년 6월",
+   "rooms": [],
+   "topics": [
+    "pet",
+    "cafe"
+   ],
+   "main": false
+  },
+  {
+   "text": "숙소 너무깨끗해서 좋아요 바베큐장도 잘 되어있고 너무 편하게 잘 먹고 놀다 갑니다ㅎㅎ",
+   "who": "fan****",
+   "when": "2025년 6월",
+   "rooms": [],
+   "topics": [
+    "bbq"
+   ],
+   "main": false
+  },
+  {
+   "text": "사장님이 너무 친절하시고 가볍게 놀고가기 좋아요!! 대전에서 1시간 10분 거리고 애기들 데리고 오시면 윗층에는 수영장도 있는데 애견은 출입 안되고 되게 잘되어있어요 나도 가고싶을만큼 침구 푹신하고 바베큐 장소 시원하고 좋습니다 바베큐 장소에 냉장고 있어서 술 쟁여놓기 좋아요 ㅋㅋ 오신 분들도 다",
+   "who": "019****",
+   "when": "2025년 6월",
+   "rooms": [],
+   "topics": [
+    "pet",
+    "kids",
+    "pool",
+    "bbq"
+   ],
+   "main": false
+  },
+  {
+   "text": "시설도 너무 좋고 사장님도 너무 친절하세요^^ 바베큐 하기도 편리하고 덥지 않고 시원해요 강아지들 마음껏 뛰어놀 수도 있고 강아지를 위한 포토존 수영장 산책길 등이 있어 같이 오기 너무 좋아요 저는 조만간 또 올 겁니다^^",
+   "who": "fra****",
+   "when": "2025년 6월",
+   "rooms": [],
+   "topics": [
+    "pet",
+    "pool",
+    "bbq"
+   ],
+   "main": false
+  },
+  {
+   "text": "숙소 자체가 넘 이뻐서 사진 백만장 찍고 왔어요! ㅎㅎ 뷰가 예술이에요!! 힐링 제대로 하고 에너지 충전했답니당:)",
+   "who": "cj**",
+   "when": "2025년 6월",
+   "rooms": [
+    "301"
+   ],
+   "topics": [],
+   "main": false
+  },
+  {
+   "text": "강아지랑 같이 가기 좋아요 시설도 깔끔하고 강아지 수건,배변패드,빗,샴푸,배변봉투도 전부 준비되어있어서 이번 여행에 비가왔는데도 부담없이 놀 수 있었어요! 덕분에 강아지가 엄청 행복했습니다 바베큐장도 깔끔하고 식기류나 조미료도 준비가 잘 되어있었구요!",
+   "who": "방톨**",
+   "when": "2025년 6월",
+   "rooms": [],
+   "topics": [
+    "pet",
+    "bbq"
+   ],
+   "main": false
+  },
+  {
+   "text": "분위기가 좋고 사장님이 친절하세요 강아지들과 함께 놀러올 수 있고 수영장도 따로 있어서 더운 여름 반려견과 함께 놀러오기 좋은 곳 인거 같아요",
+   "who": "gs**",
+   "when": "2025년 6월",
+   "rooms": [],
+   "topics": [
+    "pet",
+    "pool"
+   ],
+   "main": false
+  },
+  {
+   "text": "땅콩이랑 즐겁게 놀러온 청주 오카맨션 애견 수영장부터 바베큐장, 놀이터, 산책로 등등 즐길 수 있는 것들이 너무 다양해 즐거운 가족여행 다녀왔어요!! 숙소도 너무 깔끔하고 침대도 편했어요 :) 또 놀러오고 싶은 곳 강추합니다 !",
+   "who": "보하**",
+   "when": "2025년 6월",
+   "rooms": [
+    "202"
+   ],
+   "topics": [
+    "pet",
+    "pool",
+    "bbq"
+   ],
+   "main": false
+  },
+  {
+   "text": "강아지들이랑 방문했어요. 자유롭고 편안한 분위기라서 눈치안보고 일행들이랑 이것저것 해먹고 정말 좋았습니다. 강아지 데려온 다른 팀들도 많아서 좋았어요! 물놀이 너무 즐거워",
+   "who": "깜똥**",
+   "when": "2025년 6월",
+   "rooms": [],
+   "topics": [
+    "pet",
+    "pool"
+   ],
+   "main": false
+  },
+  {
+   "text": "사진보다 더 예쁜 곳이에요 ~ 인테리어가 아기자기하고 감성적이라 사진 찍을 곳도 많고 여름 휴가 계획 세우고 있다면 완전 추천 해요 주변 산책 하기도 조혹 전체적으로 차분한 분위기라 푹 쉬다 왔어요",
+   "who": "adk****",
+   "when": "2025년 6월",
+   "rooms": [
+    "std"
+   ],
+   "topics": [
+    "kids"
+   ],
+   "main": false
+  },
+  {
+   "text": "쾌적하고 깨끗한 내부에 냉방도 잘돼서 반려견과 함께 한 여행으로 너무 좋아요~ 야외키즈카페도 있어 편해요!!",
+   "who": "k9**",
+   "when": "2025년 6월",
+   "rooms": [
+    "std"
+   ],
+   "topics": [
+    "pet",
+    "kids",
+    "cafe"
+   ],
+   "main": false
+  },
+  {
+   "text": "날씨도 좋고 저희 강아지도 너무 행복해 하는 모습에 정신없이 놀았네요ㅎㅎ 가까운 거리에 너무 괜찮은 펜션을 발견해서 기분이 좋구만요ㅎㅎ 자주 놀러 올게요",
+   "who": "khh****",
+   "when": "2025년 6월",
+   "rooms": [
+    "std"
+   ],
+   "topics": [
+    "pet"
+   ],
+   "main": false
+  },
+  {
+   "text": "몇달사이에 두번이나 방문한 곳!! 여기가 애견펜션 원탑인거 같아요!! 올때마다 기분 좋게 이용하는 펜션이라고할까! 쾌적하고 깨끗하고 최고최고",
+   "who": "yjh****",
+   "when": "2025년 6월",
+   "rooms": [
+    "std"
+   ],
+   "topics": [
+    "pet"
+   ],
+   "main": false
+  },
+  {
+   "text": "방이 정말 포근하고 아늑해서 들어가자마자 마음이 편안해졌어요 하루 종일 쉬면서 힐링하기 딱 좋은 곳이에요",
+   "who": "간다**",
+   "when": "2025년 6월",
+   "rooms": [
+    "std"
+   ],
+   "topics": [],
+   "main": false
+  },
+  {
+   "text": "여기서 청소해주신분이 깨끗하게 청소도 해주시는 거보고 좋았어요~~ 개구리도 와서 놀더라구요 정글짐(?)도 있는 수영장은 처음이라 청소할땐 거기서 놀았어요~",
+   "who": "ss**",
+   "when": "2025년 6월",
+   "rooms": [],
+   "topics": [
+    "pool"
+   ],
+   "main": false
+  },
+  {
+   "text": "숙소에서 머무르는 동안 이게 바로 힐링이지!! 라고 생각이 들었네요 ㅎㅎ 별다른 일정 없이 쉬기만 해도 기분이 한결 가벼워졌어요~~",
+   "who": "del****",
+   "when": "2025년 6월",
+   "rooms": [
+    "std"
+   ],
+   "topics": [],
+   "main": false
+  },
+  {
+   "text": "아이들 물놀이하기 강추요 친절하고 깨끗하고 너무 좋아요 올여름 여러번 올꺼예요",
+   "who": "CO**",
+   "when": "2025년 6월",
+   "rooms": [],
+   "topics": [
+    "kids",
+    "pool"
+   ],
+   "main": false
+  },
+  {
+   "text": "강아지 동반 펜션 알아보다 오카맨션으로 선택했어요 키즈수영장도 이번에 오픈 하셔서 아이들도 강아지도 함께 즐길수 있는 오카맨션 사장님도 친절하시고 첫 폭염주의보 뜬 날 시원하게 물놀이 하고 갑니다",
+   "who": "god****",
+   "when": "2025년 6월",
+   "rooms": [],
+   "topics": [
+    "pet",
+    "kids",
+    "pool"
+   ],
+   "main": false
+  },
+  {
+   "text": "친구생일이라 생일파티할겸 강쥐데리고 오카맨션에서 놀다갑니다!! 오랜만에 바베큐도 해먹고 재밌게 잘놀다갑니다:) 재방문의 100% 또 놀러올게요! 바베큐장도 냉난방 너무 잘되있고 숙소에 침구에서 완전 좋은냄새나서 완전 꿀잠잤어요 사장님 너무 친절하셔요",
+   "who": "ㅎ모**",
+   "when": "2025년 6월",
+   "rooms": [],
+   "topics": [
+    "bbq"
+   ],
+   "main": false
+  },
+  {
+   "text": "애견없이 친구들이랑 방문했는데요! 수영장도 잘 되어있고, 바베큐도 독채에서 따로 할 수 있어서 너무 좋았습니다 :) 여름에 이른 휴가겸 오게 되었는데, 주차장도 아주 넉넉해서 각각 다른 지역에서 모였는데도 부담없이 즐길 수 있었어요! 24시간 매점이 운영되는 점도 좋았구요!",
+   "who": "mi**",
+   "when": "2025년 6월",
+   "rooms": [],
+   "topics": [
+    "pet",
+    "pool",
+    "bbq",
+    "cafe"
+   ],
+   "main": false
+  },
+  {
+   "text": "강아지들과 함께 잘쉬었다갑니다^^ 숙소 가격도너무 좋고 강아지들 놀고 지내기 편하고 무엇보다 사장님이 너무 친절하셔서 편하게 기분좋게 쉬었다 갑니다~",
+   "who": "rla****",
+   "when": "2025년 6월",
+   "rooms": [],
+   "topics": [
+    "pet"
+   ],
+   "main": false
+  },
+  {
+   "text": "부모님이랑 강아지들 데리고 갔다 왔는데 너무너무 좋았어요 단독이라 이렇게 저희 강아지들끼리 뛰어놀기 좋았고 바비큐 하기도 좋았어요 ㅎㅎ 숙소 내부도 깔끔하고 1층에 라면, 음료, 아이스크림, 과자 등 무인시설로 되어있는 것도 너무 좋았습니다 로비에 보드게임도 많아서 재밌고 편하게 쉴 수 있었고 무엇보다",
+   "who": "gm**",
+   "when": "2025년 6월",
+   "rooms": [
+    "301"
+   ],
+   "topics": [
+    "pet",
+    "kids"
+   ],
+   "main": false
+  },
+  {
+   "text": "애견동반 되는 숙소 찾다가 발견해서 왔는데, 시설도 깔끔하고 쾌적하게 잘 놀다가 갑니다! 사장님도 친절하시고 어매니티도 다 준비되어 있어서 편하게 놀다 갑니다! 강력 추천해요.",
+   "who": "샤이**",
+   "when": "2025년 6월",
+   "rooms": [],
+   "topics": [
+    "pet"
+   ],
+   "main": false
+  },
+  {
+   "text": "밤에 분위기 너무 좋고 방도 너무 깔끔합니다!! 애기랑 강아지랑 놀러오기 너무 좋은거같아요!! 올 여름도 아기랑 강아지랑 또 놀러올겁니다",
+   "who": "복하**",
+   "when": "2025년 6월",
+   "rooms": [],
+   "topics": [
+    "pet",
+    "kids"
+   ],
+   "main": false
+  },
+  {
+   "text": "우리 노을이 완전 댕기절 했어욬ㅋㅋㅋㅋ 넘 좋았어요 !! 청주 가까이 이런곳이 있다니!! 입소문 많이 낼게요 !! 사랑해요 오카맨션 !!",
+   "who": "딩가**",
+   "when": "2025년 6월",
+   "rooms": [],
+   "topics": [
+    "pet"
+   ],
+   "main": false
+  },
+  {
+   "text": "청주여행으로 반려견과 함께왔어요~ 내부도 쾌적하고 깨끗히 관리가 되어있어 편하게 힐링하기좋아요~",
+   "who": "po**",
+   "when": "2025년 6월",
+   "rooms": [
+    "std"
+   ],
+   "topics": [
+    "pet"
+   ],
+   "main": false
+  },
+  {
+   "text": "강아지랑 아주 잘 놀고 왔답니다 강아지 수영장과 구명조끼까지 준비 돼 있어서 새로운 시도도 해볼 수 있고 정말 좋았어요!! 공용 공간도 아주 넓고 보드게임도 있어요 재방문 의사 완전 만땅이용ㅎㅋ",
+   "who": "rl**",
+   "when": "2025년 6월",
+   "rooms": [],
+   "topics": [
+    "pet",
+    "pool"
+   ],
+   "main": false
+  },
+  {
+   "text": "펜션 덕분에 즐거움이 두 배였어요 깔끔한 숙소에 경치도 끝내주고 사진도 예쁘게 잘 나왔어요 조용해서 힐링하기 딱 좋은 곳이에요",
+   "who": "ve**",
+   "when": "2025년 5월",
+   "rooms": [
+    "std"
+   ],
+   "topics": [],
+   "main": false
+  },
+  {
+   "text": "절친과 함께온 여행인데 펜션관리도 청결하고 애견동반까지 되니 너무 편하고 좋았어요~ 친절하고 깨끗해용!!",
+   "who": "pa**",
+   "when": "2025년 5월",
+   "rooms": [
+    "std"
+   ],
+   "topics": [
+    "pet"
+   ],
+   "main": false
+  },
+  {
+   "text": "날도 좋고 숙소도 좋고 무엇하나 빠질게 없었던 여행이였어요^^ 가족들과 오래도록 기억에 남을 여행이였답니당!!",
+   "who": "gr**",
+   "when": "2025년 5월",
+   "rooms": [
+    "std"
+   ],
+   "topics": [],
+   "main": false
+  },
+  {
+   "text": "청주여행으로 아이와 함께 반려견 댕댕이 데리고 여행왔어요^^ 내부청소나 시설도 깨끗하고 친절히 응대도 해주셔서 넘 편하게 하루 놀구 왓어요!!",
+   "who": "gl**",
+   "when": "2025년 5월",
+   "rooms": [
+    "std"
+   ],
+   "topics": [
+    "pet",
+    "kids"
+   ],
+   "main": false
+  },
+  {
+   "text": "늘 반려견과 함께하는 여행은 진지하게 숙소 고민하고 예약하는데 오카멘션 정말 만족스러웠습니당 내부도 깨끗하고 어떻게 사진 찍어도 잘 나오고 방음도 잘되고 난방도 잘돼서 잘 쉬었어요 다시 여행 간다면 다시 묵고 싶은 청주펜션이에요 최고~",
+   "who": "jan****",
+   "when": "2025년 5월",
+   "rooms": [
+    "std"
+   ],
+   "topics": [
+    "pet"
+   ],
+   "main": false
+  },
+  {
+   "text": "방도 깨끗하고 인테리어도 감성 가득이라 사진 백만장 찍은 건 안 비밀요ㅎㅎㅎㅎ 주변 구경할 곳도 많아서 이번 여행 백퍼 만족합니당!!",
+   "who": "몽대**",
+   "when": "2025년 5월",
+   "rooms": [
+    "std"
+   ],
+   "topics": [],
+   "main": false
+  },
+  {
+   "text": "간만에 여행이라 모두가 기분좋게 다녀왔어요~ 모든 시설이 완벽하게 갖추어져 있어서 편히 지낼 수 있었어요 또 떠나고 싶어 지네요 ㅎㅎ",
+   "who": "vnv****",
+   "when": "2025년 5월",
+   "rooms": [
+    "std"
+   ],
+   "topics": [],
+   "main": false
+  },
+  {
+   "text": "절친과 함께한 여행인데 내부관리도 청결하고 친절히 맞아주셔서 너무 편하고 좋았어요~ 애견동반이라 다음에도 또 올 예정입니다^^",
+   "who": "ki**",
+   "when": "2025년 5월",
+   "rooms": [
+    "std"
+   ],
+   "topics": [
+    "pet"
+   ],
+   "main": false
+  },
+  {
+   "text": "레전드 숙소 발견이에요 !! 저만 사진으로 보고 예약 하고 간 건데 도착 후에 친구도 너무 만족해 했고 저도 만족 했어요 위치 좋고 친절한 사장님과 좋은 숙소 덕분에 즐거운 여행 하다 갑니다.다음에 휴가 때 무조건 또 올게요",
+   "who": "un**",
+   "when": "2025년 5월",
+   "rooms": [
+    "std"
+   ],
+   "topics": [
+    "pet"
+   ],
+   "main": false
+  },
+  {
+   "text": "반려견과 함께 올수가있어 너무 좋아요~ 내부 관리나 청소 상태도 생각보다 더 깔끔하니 다음에도 재방문예정^^",
+   "who": "gi**",
+   "when": "2025년 5월",
+   "rooms": [
+    "std"
+   ],
+   "topics": [
+    "pet"
+   ],
+   "main": false
+  },
+  {
+   "text": "바쁜 일상에서 벗어나 제대로 쉬고 왔던 오카맨션 애견 동반 펜션 찾다가 알게되서 예약한 곳인데 펜션 사장님도 너무 친절하시고 펜션도 너무 예쁘고 도란도란 힐링하는 시간 보내고 갑니다",
+   "who": "don****",
+   "when": "2025년 5월",
+   "rooms": [
+    "std"
+   ],
+   "topics": [
+    "pet"
+   ],
+   "main": false
+  },
+  {
+   "text": "이 가격에 이런 시설의 펜션 이라니 ~ 너무 너무 좋아서 진짜 행복한 여행 이었어요 방도 깨끗하게 잘 관리 되어 있고 반려견이랑 따뜻하고 좋은 추억 많이 만들고 왔어요 ~",
+   "who": "fix****",
+   "when": "2025년 5월",
+   "rooms": [
+    "std"
+   ],
+   "topics": [
+    "pet"
+   ],
+   "main": false
+  },
+  {
+   "text": "조용하고 아늑한 분위기라 가족끼리 오붓하게 쉬기에 딱 좋았고 숙소도 청결하고 넓어서 편하게 지낼 수 있었어요 아이들도 신나하고 어른들도 편안하게 쉴 수 있어서 모두가 만족한 여행이었습니다",
+   "who": "wld****",
+   "when": "2025년 5월",
+   "rooms": [
+    "std"
+   ],
+   "topics": [
+    "kids"
+   ],
+   "main": false
+  },
+  {
+   "text": "방도 깨끗하고 내부가 청결하게 잘 관리되어 있어서 쾌적하고 침대도 푹신하니 좋았어요ㅎㅎ 야외도 예쁘게 관리해놓으셔서 마음에 드는 사진 많이 찍었어요",
+   "who": "lk****",
+   "when": "2025년 5월",
+   "rooms": [
+    "std"
+   ],
+   "topics": [],
+   "main": false
+  },
+  {
+   "text": "사장님께서 너무 친절하시고, 또 그만큼 실내도 구석구석 깔끔히 관리 잘 되어 있더라구요 ~ 친구랑 오랜만에 여행이었는데 펜션 잘 예약했다고 친구한테 칭찬 받았어요ㅎㅎ",
+   "who": "dl**",
+   "when": "2025년 5월",
+   "rooms": [
+    "std"
+   ],
+   "topics": [],
+   "main": false
+  },
+  {
+   "text": "너~~무 좋아요.. 진짜 분위기 좋고 조용히 쉬기 딱 좋은 곳! 댕댕이와 추억 많이 만들고 좋은 시간 보내고 갑니다",
+   "who": "sj**",
+   "when": "2025년 5월",
+   "rooms": [
+    "std"
+   ],
+   "topics": [
+    "pet"
+   ],
+   "main": false
+  },
+  {
+   "text": "조용히 쉬기 좋은 곳 이예요~~ 일상에서 많이 지쳐있었는데 편히 쉬다 올 수 있었어요~~",
+   "who": "sma****",
+   "when": "2025년 5월",
+   "rooms": [
+    "std"
+   ],
+   "topics": [],
+   "main": false
+  },
+  {
+   "text": "전부터 가보고 싶었던 곳이여서 이번 기념일에 예약해서 왔는데 너무너무 좋아요ㅎㅎ 전체적인 분위기도 너무 좋고 편하게 쉬다 왔어요",
+   "who": "dbw****",
+   "when": "2025년 5월",
+   "rooms": [
+    "std"
+   ],
+   "topics": [],
+   "main": false
+  },
+  {
+   "text": "너무 깨끗하고 이뿌고 사진도 잘나옴! 사진 그대로였어요~~ 너무 너무 만족하고 다음에도 또 가고 싶어요!",
+   "who": "gy**",
+   "when": "2025년 5월",
+   "rooms": [
+    "std"
+   ],
+   "topics": [],
+   "main": false
+  },
+  {
+   "text": "오랜만에 가족들끼리 왔는데 애기(강아지)가 너무 좋아해서 행복한 시간을 보냈네요~ 독채라서 우리들끼리만 사용할수 있어서 더욱 더 좋았어요 엄마아빠도 좋아하시고 강아지도 좋아하니까 잘 왔다는 생각이 들어요! 그리고 무엇보다 펜션이 너무 깨끗하고 분위기 있어서 좋아요",
+   "who": "쇼리**",
+   "when": "2025년 5월",
+   "rooms": [],
+   "topics": [
+    "pet",
+    "kids"
+   ],
+   "main": false
+  },
+  {
+   "text": "오랜만에 마음 편히 쉬고 온것 같아요 깨끗하고 아늑한 공간 침구류도 뽀송뽀송해서 꿀잠 잘 수 이엇고요 전체적으로 깔끔해서 다음에 또 방문할게요",
+   "who": "com****",
+   "when": "2025년 5월",
+   "rooms": [
+    "std"
+   ],
+   "topics": [],
+   "main": false
+  },
+  {
+   "text": "정말 대만족 이에요 ! 위치도 침구도 정말 다 만족합니다. 힐링하고 가요 ~ 저희 여름에도 꼭 다시 오려고 합니다 좋은 추억 만들고 가요 사진도 너무 이쁘게 잘 나왔어요 ^^",
+   "who": "sml****",
+   "when": "2025년 5월",
+   "rooms": [
+    "std"
+   ],
+   "topics": [],
+   "main": false
+  },
+  {
+   "text": "이렇게 예쁜 곳에서 하루 묵을 수 있어서 행복 두배ㅎㅎ 그리고 우리집 댕댕이가 있어 세배 네배로 행복했어요 강추강추!! 후회없으실거에요",
+   "who": "pbj****",
+   "when": "2025년 5월",
+   "rooms": [
+    "std"
+   ],
+   "topics": [
+    "pet"
+   ],
+   "main": false
+  },
+  {
+   "text": "뷰가 좋고 침구도 깨끗하고 펜션도 이쁘고 해서 힐링되고요ㅋㅋ 요새 바쁘고 힘들었던지라 새로 힐링하러 온건데 정말 지내는 동안 너무 좋았어요!!",
+   "who": "im**",
+   "when": "2025년 5월",
+   "rooms": [
+    "std"
+   ],
+   "topics": [],
+   "main": false
+  },
+  {
+   "text": "방문해봤는데 시설도 너무 잘 되어 있고 사장님도 엄청 친절!! 너무 예뻐서 사진 엄청 찍고 잘 놀다 갑니다 여름휴가에 한 번 더 방문 하도록 할게요",
+   "who": "tot****",
+   "when": "2025년 5월",
+   "rooms": [
+    "std"
+   ],
+   "topics": [],
+   "main": false
+  },
+  {
+   "text": "따뜻한 온수 수영장에서 반려견과 함께 편하게 쉬고 왔어요~ 친절하고 내부관리도 깨끗해서 다음에 재방문요~",
+   "who": "wj**",
+   "when": "2025년 5월",
+   "rooms": [
+    "std"
+   ],
+   "topics": [
+    "pet",
+    "pool",
+    "warm-pool"
+   ],
+   "main": false
+  },
+  {
+   "text": "지내는 내내 모든것이 완벽했던 오카맨션 공간이 너무 잘 꾸며져 있어서 강아지와 지내기 너무 좋았습니다 사진도 예쁘게 잘 나오고 다음에 또 방문할게요!!",
+   "who": "yjh****",
+   "when": "2025년 4월",
+   "rooms": [
+    "std"
+   ],
+   "topics": [
+    "pet"
+   ],
+   "main": false
+  },
+  {
+   "text": "자연 속에 있어서 공기도 맑고 조용해서 힐링 제대로 했어요! 방도 넓고 침구도 포근해서 꿀잠 잤답니다 특히 야경이 너무 예뻐서 사진도 엄청 많이 찍었어요 가족 여행지로도 완전 추천드려요!",
+   "who": "Ur**",
+   "when": "2025년 4월",
+   "rooms": [
+    "std"
+   ],
+   "topics": [],
+   "main": false
+  },
+  {
+   "text": "이 곳은 편한안 분위기로 힐링을 경험할 수 있는 곳이에요 쾌적해서 조용한 휴식을 즐길 수 있었고 멋진 인테리어는 특별한 시간을 만들어 주었어요",
+   "who": "la**",
+   "when": "2025년 4월",
+   "rooms": [
+    "std"
+   ],
+   "topics": [],
+   "main": false
+  },
+  {
+   "text": "커플여행으로 왔어요~ 침구나 내부관리도 깨끗하고 반려견과 함께 올수가있어 다음여행으로 반려견과 함께와야할것 같아요^^",
+   "who": "so**",
+   "when": "2025년 4월",
+   "rooms": [
+    "std"
+   ],
+   "topics": [
+    "pet"
+   ],
+   "main": false
+  },
+  {
+   "text": "여기 완전 내 스타일!! 방도 깨끗하고 아늑해서 하루 종일 뒹굴고 싶었어요ㅎㅎ 근처에 예쁜 포토존이 한가득이라 카메라만 들면 인생샷 각! 자연 풍경이 너무 멋져서 그냥 바라만 봐도 힐링 그 자체!!",
+   "who": "ght****",
+   "when": "2025년 4월",
+   "rooms": [
+    "std"
+   ],
+   "topics": [],
+   "main": false
+  },
+  {
+   "text": "정말 마음에 들었던 숙소 입니다 깨끗하고 감성인테리어가 사진찍기도 너무 좋았고 반려견과 아주 잘 쉬고 갑니다 다음에 또 방문할게요",
+   "who": "hw****",
+   "when": "2025년 4월",
+   "rooms": [
+    "std"
+   ],
+   "topics": [
+    "pet"
+   ],
+   "main": false
+  },
+  {
+   "text": "펜션 완전 깔끔해서 기분 업! 시설도 알차고 사용하기 넘 편했어요 조용하고 아늑해서 힐링 제대로~ 다음엔 친구들이랑 또 올 거예요!",
+   "who": "민거**",
+   "when": "2025년 4월",
+   "rooms": [
+    "std"
+   ],
+   "topics": [],
+   "main": false
+  },
+  {
+   "text": "펜션 분위기가 너무 좋아서 힐링 제대로 하고 왔어요! 전체적으로 정돈이 잘 되어 있어서 기분 좋게 머물 수 있었고 인테리어도 감성 뿜뿜이라 사진 찍기 딱 좋았어요 야외 공간도 예뻐서 친구들이랑 사진 백 장은 찍은 것 같아요ㅎㅎ 조용하고 아늑해서 쉬기에도 딱 좋은 곳 이네요!!",
+   "who": "su**",
+   "when": "2025년 4월",
+   "rooms": [
+    "std"
+   ],
+   "topics": [],
+   "main": false
+  },
+  {
+   "text": "후기로 본 사진보다 실제분위기가 너~~무 좋았어요 완전 깨끗하고 인테리어도 마음에 들고 반려견을 위한 배려나 물건들도 잘 구비되어 있었습니다 편안하고 즐거운 여행 보내고 갑니다",
+   "who": "sst****",
+   "when": "2025년 4월",
+   "rooms": [
+    "std"
+   ],
+   "topics": [
+    "pet"
+   ],
+   "main": false
+  },
+  {
+   "text": "펜션이 깨끗하고 친절하고 아늑하고 다 좋았던 숙소 반려견과 함께 더할 나위없이 좋았던 갓벽한 숙소였어요 재방문의사 100% 완전 추천 펜션!!",
+   "who": "so**",
+   "when": "2025년 4월",
+   "rooms": [
+    "std"
+   ],
+   "topics": [
+    "pet"
+   ],
+   "main": false
+  },
+  {
+   "text": "반려견과 가기 좋은 펜션 찾다가 리뷰가 좋아 가보게 되었는데 너무너무 잘 머물고 왔습니다 사장님도 친절하시고 펜션은 인테리어도 예쁘고 깨끗하고 최고였어요 날 더 따뜻해지면 다시 놀러 갈게요",
+   "who": "ji**",
+   "when": "2025년 4월",
+   "rooms": [
+    "std"
+   ],
+   "topics": [
+    "pet"
+   ],
+   "main": false
+  },
+  {
+   "text": "숙소 깨끗하고 예쁘고 편했고.. 더러운 곳 하나 없이 강아지와 오기 너무 좋았습니다 사장님도 너무 친절하셔서 다음에 청주가면 또 가려구요",
+   "who": "yjp****",
+   "when": "2025년 4월",
+   "rooms": [
+    "std"
+   ],
+   "topics": [
+    "pet"
+   ],
+   "main": false
+  },
+  {
+   "text": "너무 좋아요 ~ 낭만 있고 사장님도 정말 친절하셨어요 방도 깨끗하고 애견동반이라도 청결하게 잘 관리 되어 있어서 잘 지내다 왔습니다",
+   "who": "kar****",
+   "when": "2025년 4월",
+   "rooms": [
+    "std"
+   ],
+   "topics": [
+    "pet"
+   ],
+   "main": false
+  },
+  {
+   "text": "토토와 여행은 처음이었는데 진짜 너무 힐링여행이었네요 댕댕이들을 위한 마당을 너무 잘 꾸며 놓으셔서 하루 종일 산책만 해도 좋을 정도였고 너무 잘 즐기는 토토와 사진도 많이 찍고 예쁜 추억 만들고 온 거 같아요 또 놀러 올게요",
+   "who": "kid****",
+   "when": "2025년 4월",
+   "rooms": [
+    "std"
+   ],
+   "topics": [
+    "pet"
+   ],
+   "main": false
+  },
+  {
+   "text": "친절하고 깨끗한 내부에 반려견이 편하게 놀기도 좋았구 온수풀장도 있어 넘 즐거운 하루 지내구 왔어요!!",
+   "who": "sn**",
+   "when": "2025년 4월",
+   "rooms": [
+    "std"
+   ],
+   "topics": [
+    "pet",
+    "pool",
+    "warm-pool"
+   ],
+   "main": false
+  },
+  {
+   "text": "펜션도 깨끗한데다 애견도 같이 동반할수가 있어 다음에 반려견과 함떼 와서 놀면 좋을것 같아요~ 너무 좋아요!!",
+   "who": "ac**",
+   "when": "2025년 4월",
+   "rooms": [
+    "std"
+   ],
+   "topics": [
+    "pet"
+   ],
+   "main": false
+  },
+  {
+   "text": "쾌적하고 깔끔 내부에 넷플릭스 나와 친구와 편하게 영화도 보구 힐링도 하기 좋아요~",
+   "who": "do**",
+   "when": "2025년 4월",
+   "rooms": [
+    "std"
+   ],
+   "topics": [],
+   "main": false
+  },
+  {
+   "text": "오랜만에 반려견과 떠난 여행에서 예약했어요 화장실이며 방이며 깨끗하고 깔끔하게 잘 관리되어 있어서 편하게 쉬었어요 사장님도 너무 좋으시고 반려견과 함께여서 너무 좋았습니다 날 따듯해지면 다시 오고 싶네요",
+   "who": "로얄**",
+   "when": "2025년 4월",
+   "rooms": [
+    "std"
+   ],
+   "topics": [
+    "pet"
+   ],
+   "main": false
+  },
+  {
+   "text": "너무 친절하시고 다음에 여행 와도 다시 예약 할 만큼 좋았고 잘 쉬고 왔어요 ~ 깨끗하고 남자친구도 어떻게 이런 곳을 찾았냐며 완전 만족하고 갑니다.",
+   "who": "zx**",
+   "when": "2025년 4월",
+   "rooms": [
+    "std"
+   ],
+   "topics": [],
+   "main": false
+  },
+  {
+   "text": "같이 여행간 친구가 너무 좋아 하네요 나의 선택이 굿이었어요 ^^ 사장님의 관심이 느껴지게 청결하고 깔끔한 곳이에요 만족하고 갑니다",
+   "who": "메이**",
+   "when": "2025년 4월",
+   "rooms": [
+    "std"
+   ],
+   "topics": [],
+   "main": false
+  },
+  {
+   "text": "시설이 전체적으로 깨끗하고 너무 친절하게 설명 해주시고 서비스도 좋았어요 위치 좋아서 다음에 다시 한 번 또 오게 될거 같아요",
+   "who": "vv**",
+   "when": "2025년 4월",
+   "rooms": [
+    "std"
+   ],
+   "topics": [],
+   "main": false
+  },
+  {
+   "text": "내부 청소나 시설도 청결하고 친절해서 반려견과 함께 여행으로 너무 좋았어요~강추!!",
+   "who": "sd**",
+   "when": "2025년 4월",
+   "rooms": [
+    "std"
+   ],
+   "topics": [
+    "pet"
+   ],
+   "main": false
+  },
+  {
+   "text": "사장님도 친절하셨고 시설도 뷰도 너무 좋았어요 정말 만족하는 여행이었고 힐링하고 왔어요~",
+   "who": "tmd****",
+   "when": "2025년 4월",
+   "rooms": [
+    "std"
+   ],
+   "topics": [],
+   "main": false
+  },
+  {
+   "text": "여긴 진짜 숨겨진 보석이에요 사진보다 실물이 백배 더 예쁜 펜션! 자연 뷰 보며 커피 한 잔 마시니까 스트레스가 싹~ 날아갔어요 인생샷도 마구 건지고 친구들이랑 행복한 시간 보내고 왔답니다! 또 가고 싶어요~",
+   "who": "win****",
+   "when": "2025년 4월",
+   "rooms": [
+    "std"
+   ],
+   "topics": [
+    "cafe"
+   ],
+   "main": false
+  },
+  {
+   "text": "반려견과 함께 온수 풀장에서 즐겁고 편하게 물놀이도 하며 하루 쉬고 가기 좋은하루 였어요~",
+   "who": "pa**",
+   "when": "2025년 4월",
+   "rooms": [
+    "std"
+   ],
+   "topics": [
+    "pet",
+    "pool",
+    "warm-pool"
+   ],
+   "main": false
+  },
+  {
+   "text": "진짜 너무너무 잘 놀다 갑니다 두 달 뒤에 또 힐링하러 와야 겠어요 아지트 당첨이에요 사장님도 친절하셔서 이쁜 추억 쌓고 왔어요 아이 임신해서 더 뜻깊었고 최근 여행중에 가장 만족 하고 갑니다.",
+   "who": "iii****",
+   "when": "2025년 4월",
+   "rooms": [
+    "std"
+   ],
+   "topics": [
+    "kids"
+   ],
+   "main": false
+  },
+  {
+   "text": "도심을 벗어나니 공기부터 다르더라구요 조용하고 한적한 분위기에 저절로 힐링!! 방도 따뜻하고 청결해서 아이가 편하게 쉬고 놀 수 있었어요 오랜만에 아이와 오롯이 함께한 시간 소중함이 뭔지 다시 느꼈답니다",
+   "who": "als****",
+   "when": "2025년 4월",
+   "rooms": [
+    "std"
+   ],
+   "topics": [
+    "kids"
+   ],
+   "main": false
+  },
+  {
+   "text": "정말 힐링 그 자체였어요! 펜션 뷰가 너무 예쁘고 사장님도 친절하셔서 기분이 절로 좋아졌답니다~ 침구도 폭신하고 청결 상태도 완벽했어요 사진도 엄청 많이 찍었는데 인생샷 건졌어요! 또 가고 싶은 곳이에요",
+   "who": "wow****",
+   "when": "2025년 4월",
+   "rooms": [
+    "std"
+   ],
+   "topics": [],
+   "main": false
+  },
+  {
+   "text": "굉장히 친절하게 체크인 해주셔서 기분좋게 입실했어요 ~ 룸에 들어서자 마자 너무 멋졌고 깔끔한 분위기라 사진보다 훨씬 훌륭 했어요 ~ 여기로 오길 잘한거 같아요!",
+   "who": "rl**",
+   "when": "2025년 4월",
+   "rooms": [
+    "std"
+   ],
+   "topics": [],
+   "main": false
+  },
+  {
+   "text": "퇴근하고 바로 가는 여행인지라 숙소예약하며 바베큐 세트 2~3인 용으로 예약해서 구매했는데 퀄리티가 넘 괜찮네요ㅎㅎ 삼겹살이며 야채 질도 좋고 술만사서 즐거운 바베큐 즐겼습니다 1박 2일 잘 지내고 가요~~ 다음에 또 방문할게요",
+   "who": "wkd****",
+   "when": "2025년 4월",
+   "rooms": [
+    "std"
+   ],
+   "topics": [
+    "bbq"
+   ],
+   "main": false
+  },
+  {
+   "text": "리뷰 17사진 01번째 방문 방문일2025. 4. 8(화)예약 예약자이*화 완료 1 작성일2025. 4. 10(목) 애견동반/넷플릭스(랜덤배정)2 내부시설도 청결한데다 반려견과 함께 와서 힐링 할 수가 있어 너무 편하고 좋았던 하루 였어요^^",
+   "who": "60**",
+   "when": "2025년 4월",
+   "rooms": [
+    "std"
+   ],
+   "topics": [
+    "pet"
+   ],
+   "main": false
+  },
+  {
+   "text": "조용한 분위기 속에서 편하게 쉬었고 직원분도 친절하셔서 기분 좋았어요 숙소 내부도 깔끔하고 아늑해서 잘 쉬다 왔어요 또 갈 의향이 있는 곳 이네요~",
+   "who": "악마**",
+   "when": "2025년 4월",
+   "rooms": [
+    "std"
+   ],
+   "topics": [],
+   "main": false
+  },
+  {
+   "text": "깔끔한 독채라 가족여행으로 반려견 데리고 함께 왔어요~ 가족과 편하게 쉬며 감성캠핑도 하며 힐링하구 갑니다!!",
+   "who": "ha**",
+   "when": "2025년 4월",
+   "rooms": [],
+   "topics": [
+    "pet"
+   ],
+   "main": false
+  },
+  {
+   "text": "펜션안에 웬만한건 다 있어서 너무 편하게 쉬다왔어요!!",
+   "who": "gr**",
+   "when": "2025년 2월",
+   "rooms": [],
+   "topics": [],
+   "main": false
+  }
+ ],
+ "events": [
+  {
+   "slug": "bbq-party",
+   "name": "바베큐 파티",
+   "when": "",
+   "desc": "",
+   "photos": []
+  },
+  {
+   "slug": "cherry-blossom",
+   "name": "벚꽃놀이",
+   "when": "",
+   "desc": "",
+   "photos": []
+  }
+ ],
+ "faq": [
+  [
+   "반려견은 몇 마리까지 함께 갈 수 있나요?",
+   "12kg 미만 소형견은 2마리까지 가능하며 1마리당 20,000원입니다. 대형견은 301호에서만 가능하며 50,000원, 사전 문의가 필요합니다."
   ],
-  "day_price_confirmed": false,
-  "day_products": [
-    {
-      "slug": "warm-pool",
-      "name": "온수풀 공간 대여",
-      "short": "2시간 프라이빗 온수풀",
-      "price": 60000,
-      "price_text": "회차당 60,000원",
-      "unit": "회차",
-      "detail": [
-        "1회차 2시간",
-        "기준 2인 · 최대 4인",
-        "계절과 관계없이 따뜻한 물"
-      ],
-      "keywords": [
-        "청주 온수풀",
-        "청주 애견동반 수영장",
-        "청주 당일 수영장"
-      ],
-      "bookable": true,
-      "photos": [
-        "day/warm-pool",
-        "day/warm-pool2"
-      ]
-    },
-    {
-      "slug": "pool",
-      "name": "대형 야외수영장",
-      "short": "여름 시즌 대형 야외수영장",
-      "price": 10000,
-      "price_text": "1인 10,000원 (24개월 미만 무료, 현장결제)",
-      "unit": "인",
-      "detail": [
-        "여름 시즌 운영 (운영 기간은 문의)",
-        "수심 1.3m, 유아·아동은 보호자 동반 필수",
-        "평일(일~목) 숙박 손님 무료",
-        "반려견은 대형 수영장 이용 불가 — 반려견 전용 수영장을 이용해 주세요"
-      ],
-      "keywords": [
-        "청주 아이랑 물놀이",
-        "청주 1박 없는 물놀이",
-        "미원 수영장"
-      ],
-      "bookable": true,
-      "photos": [
-        "day/pool",
-        "day/pool2"
-      ]
-    },
-    {
-      "slug": "deck",
-      "name": "데크존 · 파라솔존",
-      "short": "우리 가족의 하루 자리",
-      "price": null,
-      "price_text": "숙박 손님 할인가: 데크존 4인 25,000원 · 파라솔존 4인 15,000원",
-      "unit": "구역",
-      "detail": [
-        "데크존 4인 기준 25,000원 (숙박 손님 할인가)",
-        "파라솔존 4인 기준 15,000원 (숙박 손님 할인가)",
-        "4인 초과 시 1인 5,000원 추가 (현장결제)",
-        "만석일 수 있어 사전 문의 권장 · 당일 이용 요금은 문의"
-      ],
-      "keywords": [
-        "청주 캠프닉",
-        "청주 빈손캠핑",
-        "청주 아이랑 하루종일"
-      ],
-      "bookable": true,
-      "photos": [
-        "day/deck-night",
-        "day/deck",
-        "day/deck2",
-        "day/parasol"
-      ]
-    },
-    {
-      "slug": "bbq",
-      "name": "바베큐",
-      "short": "장보기·설거지 없는 바베큐",
-      "price": null,
-      "price_text": "셀프 바베큐장 20,000원 · 바베큐 세트 60,000원 / 98,000원",
-      "unit": "",
-      "detail": [
-        "셀프 바베큐장 20,000원",
-        "바베큐 세트 60,000원 / 98,000원",
-        "당일 이용 바베큐 테이블 운영"
-      ],
-      "keywords": [
-        "청주 당일 바베큐",
-        "청주 아이랑 바베큐",
-        "옥화구곡 바베큐"
-      ],
-      "bookable": true,
-      "photos": [
-        "day/bbq-set",
-        "day/bbq",
-        "day/bbq-indoor",
-        "day/bbq-outdoor"
-      ]
-    },
-    {
-      "slug": "fire",
-      "name": "불멍존",
-      "short": "노을 다음은 불멍",
-      "price": 30000,
-      "price_text": "30,000원",
-      "unit": "",
-      "detail": [
-        "저녁 시간 이용",
-        "숙박·당일 고객 모두 추가 가능"
-      ],
-      "keywords": [
-        "청주 불멍",
-        "청주 감성 펜션"
-      ],
-      "bookable": true,
-      "photos": [
-        "day/fire",
-        "day/fire-marshmallow",
-        "day/fire2",
-        "day/fire3"
-      ]
-    }
+  [
+   "숙박하지 않고 당일만 이용할 수 있나요?",
+   "네. 온수풀 대여, 대형수영장, 데크·파라솔존, 바베큐, 불멍존을 당일로 이용하실 수 있습니다. 놀다가 피곤하시면 빈 객실이 있을 때 숙박으로 바꾸실 수도 있습니다."
   ],
-  "addons": [
-    {
-      "id": "fire",
-      "name": "불멍존",
-      "price": 30000
-    },
-    {
-      "id": "bbq_self",
-      "name": "셀프 바베큐장",
-      "price": 20000
-    },
-    {
-      "id": "bbq_set_s",
-      "name": "바베큐 세트 (60,000원)",
-      "price": 60000
-    },
-    {
-      "id": "bbq_set_l",
-      "name": "바베큐 세트 (98,000원)",
-      "price": 98000
-    }
+  [
+   "예약은 어떻게 확정되나요?",
+   "홈페이지에서 예약 신청 → 숙소가 날짜를 확인해 연락 → 안내받은 계좌로 입금하시면 확정됩니다. 입금 전에는 확정이 아닙니다."
   ],
-  "nearby": [
-    {
-      "name": "옥화구곡",
-      "desc": "계곡을 따라 걷는 아홉 굽이 산책길"
-    },
-    {
-      "name": "청석굴",
-      "desc": "아이와 함께 보는 동굴 유적"
-    },
-    {
-      "name": "옥화자연휴양림",
-      "desc": "숲 산책과 자연 놀이"
-    },
-    {
-      "name": "미동산수목원",
-      "desc": "넓은 수목원 산책 코스"
-    }
+  [
+   "아이 인원도 요금이 붙나요?",
+   "기준 인원을 넘으면 1인 20,000원이 추가되며, 36개월 미만은 무료입니다."
   ],
-  "reviews": [
-    {
-      "text": "깔끔하고 조용해서 가족또는 친구들과 놀기 좋은공간이에요 바베큐장도 크고 따뜻햇어용",
-      "who": "미시**",
-      "when": "2026년 11월",
-      "rooms": [],
-      "topics": [
-        "bbq"
-      ],
-      "main": true
-    },
-    {
-      "text": "넓은 인조잔디 공간에서 강아지랑 조카들이 뛰어다니며 놀 수 있어 좋습니다. 독채라 프라이빗한 공간에서 편하게 쉴 수 있고 바베큐 공간이 넓어 가족들과 다 같이 좋은 저녁 시간을 보냈습니다.",
-      "who": "tmd****",
-      "when": "2026년 9월",
-      "rooms": [
-        "301"
-      ],
-      "topics": [
-        "bbq"
-      ],
-      "main": true
-    },
-    {
-      "text": "바베큐세트와 매점도 있어서 물놀이용품만 챙기면 종일놀수있어요",
-      "who": "하랑****",
-      "when": "2026년 8월",
-      "rooms": [],
-      "topics": [
-        "bbq",
-        "deck"
-      ],
-      "main": false
-    },
-    {
-      "text": "6살 딸은 여기저기 뛰어다니며 신나게 놀고 8개월 아들도 안전하게 즐길 수 있는 공간과 미온수풀도 있어서 가족 모두 만족했습니다",
-      "who": "qwe****",
-      "when": "2026년 7월",
-      "rooms": [],
-      "topics": [
-        "pool",
-        "warm-pool"
-      ],
-      "main": true
-    },
-    {
-      "text": "옥화자연휴양림에 갔다가 근처에 있어서 방문했어요. 데크존에서는 아이들 노는게 잘 보여서 어른들은 맥주 한잔 하기에 너무 좋아요",
-      "who": "jeo****",
-      "when": "2026년 7월",
-      "rooms": [],
-      "topics": [
-        "deck",
-        "pool"
-      ],
-      "main": true
-    },
-    {
-      "text": "물 깊이도 좋고 미끄럼틀이나 짚라인도 재미있어하고 놀거리가 많아요 수영장도 애기들 놀 수 있는 곳도 따로 있어서 큰 수영장 작은 수영장 돌아가면서 재미있게 노네요",
-      "who": "롱59**",
-      "when": "2026년 7월",
-      "rooms": [],
-      "topics": [
-        "pool"
-      ],
-      "main": false
-    },
-    {
-      "text": "강아지+부모님+아이 다 같이 있었는데 모두가 만족하는 숙소였어요! 강아지 전용 놀이터도 있고, 공기도 좋고 아이가 놀만한 곳도 있고!",
-      "who": "검정****",
-      "when": "2026년 6월",
-      "rooms": [
-        "206"
-      ],
-      "topics": [],
-      "main": true
-    },
-    {
-      "text": "강아지랑 여행을 진짜 많이 다니는데 여기 만큼 가성비 좋고 사장님 착하시고 삼박자가 다 맞는 곳은 못본거 같아요",
-      "who": "fly****",
-      "when": "2026년 6월",
-      "rooms": [],
-      "topics": [],
-      "main": true
-    },
-    {
-      "text": "미온수 수영장도 조그맣게 있어서 물놀이하다 약간쌀쌀하먄 미온수 들어갔다나오고 넘 잘놀았어용",
-      "who": "조녜****",
-      "when": "2026년 6월",
-      "rooms": [],
-      "topics": [
-        "warm-pool"
-      ],
-      "main": false
-    },
-    {
-      "text": "작은풀도 있고 온수풀도 있고 아이들 놀수 있는게 많아서 신나게 놀다가 갑니다^^",
-      "who": "밭솥****",
-      "when": "2026년 6월",
-      "rooms": [],
-      "topics": [
-        "warm-pool"
-      ],
-      "main": false
-    },
-    {
-      "text": "물도깨끗하고 사장님도 너무 친절하시고 데크에서 고기구워먹을건데 너무 좋네요",
-      "who": "rab****",
-      "when": "2026년 6월",
-      "rooms": [],
-      "topics": [
-        "deck",
-        "bbq"
-      ],
-      "main": false
-    },
-    {
-      "text": "시설이 엄청 깨끗하고 방도 엄청 깨끗하고 분위기 있고 이용하는 내내 기분 좋았습니다",
-      "who": "mjk****",
-      "when": "2026년 5월",
-      "rooms": [
-        "203"
-      ],
-      "topics": [],
-      "main": true
-    },
-    {
-      "text": "강아지도 아이도 재밌게 지낼수있는 숙소를 서치하다가 발견한 오카맨션!! 방은 아늑하고 반려견 용품도 잘 준비되어있구 침대올라가는 계단센스 까지 ㅎㅎ",
-      "who": "sta****",
-      "when": "2026년 5월",
-      "rooms": [],
-      "topics": [],
-      "main": true
-    },
-    {
-      "text": "여사장님에 친절함과 배려함에 감동이였습니다 또한 가성비와 반려견에 대한 세심한 배려 너무 좋았습니다",
-      "who": "김영****",
-      "when": "2026년 3월",
-      "rooms": [
-        "301"
-      ],
-      "topics": [],
-      "main": false
-    },
-    {
-      "text": "숙소도 깔끔했고 있을게 다 있어서 따로 준비하지 않아도 되서 편하게 즐기고 갑니다",
-      "who": "밀크****",
-      "when": "2026년 3월",
-      "rooms": [
-        "201"
-      ],
-      "topics": [],
-      "main": false
-    },
-    {
-      "text": "주인분께서 친절하시고 따뜻하고 방음이 잘 되서 좋았어요. 푹 쉬었다 갑니다!",
-      "who": "주헌****",
-      "when": "2026년 3월",
-      "rooms": [
-        "202"
-      ],
-      "topics": [],
-      "main": false
-    },
-    {
-      "text": "반려 강아지와 함께 하기도 좋고 연인끼리 오기에도 너무 좋을것 같아요! 침구 좋구요 (강추) 또 재방문 할것 같아요!!!",
-      "who": "태양****",
-      "when": "2026년 3월",
-      "rooms": [
-        "207"
-      ],
-      "topics": [],
-      "main": false
-    },
-    {
-      "text": "친구와 함께 벌써 세번째 방문이네요 ㅎㅎ 바베큐 시설을 실내에서 이용할 수 있어서 따뜻하고 좋았습니다!",
-      "who": "shi****",
-      "when": "2026년 1월",
-      "rooms": [
-        "205"
-      ],
-      "topics": [
-        "bbq"
-      ],
-      "main": true
-    },
-    {
-      "text": "사장님이 너무너무 착하시고 쿨하십니다 덕분에 강아지랑 행복하게 잘 놀다가 갑니다 !",
-      "who": "whg****",
-      "when": "2025년 10월",
-      "rooms": [
-        "205"
-      ],
-      "topics": [],
-      "main": false
-    },
-    {
-      "text": "바베큐장 옆에 개별운동장있는데 먹으면서 같이 뛰어놀고 만족도 최상-! 애견의자 배변패드 등 애견용품도 구비 다 되어있어요",
-      "who": "ywn****",
-      "when": "2025년 9월",
-      "rooms": [
-        "301"
-      ],
-      "topics": [],
-      "main": true
-    },
-    {
-      "text": "우리 댕댕이랑 여행은 처음이였는데, 소중한 추억 쌓고 가요 조용히 힐링하기 딱 좋아요!",
-      "who": "pan****",
-      "when": "2025년 8월",
-      "rooms": [
-        "301"
-      ],
-      "topics": [],
-      "main": false
-    },
-    {
-      "text": "직원분 친절하시고 편하게 쉬고 물깊이있어 어른도 수영하기 좋았어요~",
-      "who": "정수****",
-      "when": "2025년 8월",
-      "rooms": [
-        "201"
-      ],
-      "topics": [
-        "pool"
-      ],
-      "main": false
-    },
-    {
-      "text": "반려동물 있으시면 꼭 가보시길 추천드립니다 시설도 잘 되어있고 계신 직원분도 친절하세요!",
-      "who": "dws****",
-      "when": "2025년 8월",
-      "rooms": [
-        "203"
-      ],
-      "topics": [],
-      "main": false
-    },
-    {
-      "text": "방도 깨끗하고 너무나 좋아요 울강아지의 견생여행 ㅋㅋ 신나게놀고 수영하고 뻗어자고 방도 아늑하니 좋았습니다",
-      "who": "MN ****",
-      "when": "2025년 8월",
-      "rooms": [
-        "204"
-      ],
-      "topics": [],
-      "main": false
-    },
-    {
-      "text": "목욕용품 물그릇 계단 애견용품 그냥 다 있어요~ 아,..꼭 독채로 예약하세요~ 물놀이하고 바로 앞에서 먹을거 먹고 고기도 구워먹고",
-      "who": "우쭈****",
-      "when": "2025년 8월",
-      "rooms": [],
-      "topics": [],
-      "main": true
-    },
-    {
-      "text": "바베큐 시켜서 먹으니 편하고 아이들 놀기 너무 좋아요",
-      "who": "나무****",
-      "when": "2025년 8월",
-      "rooms": [],
-      "topics": [
-        "bbq"
-      ],
-      "main": false
-    },
-    {
-      "text": "강아지 수영장 공간이나 뛰어 놀 수 있는 공간도 있어서 좋았고 직원분들 너무 친절하셔서 재미있게 놀다 갔습니당",
-      "who": "vvv****",
-      "when": "2025년 7월",
-      "rooms": [
-        "301"
-      ],
-      "topics": [
-        "pool"
-      ],
-      "main": false
-    },
-    {
-      "text": "아이들은 키카 못지않은 시설에 잠수 가능한 놀기좋은 수심의 수영장!!! 짚라인에 방방까지!!!! 부모를 찾지 않으니 어른들은 너무너무 편했답니다!!",
-      "who": "이른****",
-      "when": "2025년 7월",
-      "rooms": [],
-      "topics": [
-        "pool"
-      ],
-      "main": true
-    },
-    {
-      "text": "위에 수영장은 아이와 함께하기 좋고 밑에 애견수영장이 따로 있어서 너무 좋았어요! 바베큐장도 에어컨을 풀로 틀어주셔서 시원하게 고기 먹어서 너무 좋았습니다!",
-      "who": "rla****",
-      "when": "2025년 7월",
-      "rooms": [],
-      "topics": [
-        "bbq",
-        "pool"
-      ],
-      "main": true
-    },
-    {
-      "text": "애견 수영장부터 바베큐장, 놀이터, 산책로 등등 즐길 수 있는 것들이 너무 다양해 즐거운 가족여행 다녀왔어요!! 숙소도 너무 깔끔하고 침대도 편했어요",
-      "who": "보하**",
-      "when": "2025년 6월",
-      "rooms": [
-        "202"
-      ],
-      "topics": [],
-      "main": false
-    },
-    {
-      "text": "강아지 수건,배변패드,빗,샴푸,배변봉투도 전부 준비되어있어서 이번 여행에 비가왔는데도 부담없이 놀 수 있었어요! 바베큐장도 깔끔하고 식기류나 조미료도 준비가 잘 되어있었구요!",
-      "who": "방톨",
-      "when": "2025년 6월",
-      "rooms": [],
-      "topics": [
-        "bbq"
-      ],
-      "main": true
-    }
+  [
+   "바베큐 장보기를 해 가야 하나요?",
+   "간편 고기세트(65,000원)를 신청하시면 빈손으로 오셔도 됩니다."
+  ]
+ ],
+ "gallery": [
+  [
+   "전경",
+   "site/aerial"
   ],
-  "events": [
-    {
-      "slug": "bbq-party",
-      "name": "바베큐 파티",
-      "when": "",
-      "desc": "",
-      "photos": []
-    },
-    {
-      "slug": "cherry-blossom",
-      "name": "벚꽃놀이",
-      "when": "",
-      "desc": "",
-      "photos": []
-    }
+  [
+   "전경",
+   "site/aerial-wide"
   ],
-  "faq": [
-    [
-      "반려견은 몇 마리까지 함께 갈 수 있나요?",
-      "12kg 미만 소형견은 2마리까지 가능하며 1마리당 30,000원입니다. 대형견은 301호에서만 가능하며 50,000원, 사전 문의가 필요합니다."
-    ],
-    [
-      "숙박하지 않고 당일만 이용할 수 있나요?",
-      "네. 온수풀 대여, 대형수영장, 데크·파라솔존, 바베큐, 불멍존을 당일로 이용하실 수 있습니다. 놀다가 피곤하시면 빈 객실이 있을 때 숙박으로 바꾸실 수도 있습니다."
-    ],
-    [
-      "예약은 어떻게 확정되나요?",
-      "홈페이지에서 예약 신청 → 숙소가 날짜를 확인해 연락 → 안내받은 계좌로 입금하시면 확정됩니다. 입금 전에는 확정이 아닙니다."
-    ],
-    [
-      "아이 인원도 요금이 붙나요?",
-      "기준 인원을 넘으면 1인 20,000원이 추가되며, 36개월 미만은 무료입니다."
-    ],
-    [
-      "바베큐 장보기를 해 가야 하나요?",
-      "바베큐 세트(60,000원 / 98,000원)를 신청하시면 빈손으로 오셔도 됩니다."
-    ]
+  [
+   "입구",
+   "site/front"
   ],
-  "gallery": [
-    [
-      "전경",
-      "site/aerial"
-    ],
-    [
-      "전경",
-      "site/aerial-wide"
-    ],
-    [
-      "입구",
-      "site/front"
-    ],
-    [
-      "로비",
-      "site/lobby"
-    ],
-    [
-      "로비",
-      "site/lobby2"
-    ],
-    [
-      "2층 객실",
-      "rooms/2f-room-a"
-    ],
-    [
-      "2층 객실",
-      "rooms/2f-room-b"
-    ],
-    [
-      "2층 객실",
-      "rooms/2f-dog"
-    ],
-    [
-      "301호",
-      "rooms/301-room"
-    ],
-    [
-      "301호 단독 애견운동장",
-      "rooms/301-yard"
-    ],
-    [
-      "독채 1호",
-      "rooms/dokchae1-room"
-    ],
-    [
-      "독채 1호",
-      "rooms/dokchae1-bbq"
-    ],
-    [
-      "캠핑스테이",
-      "rooms/campstay1-room"
-    ],
-    [
-      "캠핑스테이",
-      "rooms/campstay2-terrace"
-    ],
-    [
-      "온수풀",
-      "day/warm-pool"
-    ],
-    [
-      "대형수영장",
-      "day/pool"
-    ],
-    [
-      "대형수영장",
-      "day/pool2"
-    ],
-    [
-      "데크존",
-      "day/deck-night"
-    ],
-    [
-      "데크존",
-      "day/deck"
-    ],
-    [
-      "파라솔존",
-      "day/parasol"
-    ],
-    [
-      "바베큐",
-      "day/bbq-set"
-    ],
-    [
-      "바베큐",
-      "day/bbq"
-    ],
-    [
-      "실내 바베큐장",
-      "day/bbq-indoor"
-    ],
-    [
-      "불멍존",
-      "day/fire"
-    ],
-    [
-      "불멍존",
-      "day/fire-marshmallow"
-    ],
-    [
-      "애견운동장",
-      "pet/yard"
-    ],
-    [
-      "반려견과 바베큐룸",
-      "pet/glass-room"
-    ],
-    [
-      "반려견 포토존",
-      "pet/studio"
-    ],
-    [
-      "애견운동장",
-      "pet/poodles"
-    ],
-    [
-      "301호 단독 애견운동장",
-      "pet/agility"
-    ],
-    [
-      "애견운동장",
-      "pet/lawn"
-    ],
-    [
-      "캠핑장",
-      "site/campsite"
-    ]
+  [
+   "로비",
+   "site/lobby"
   ],
-  "review_total": 300
+  [
+   "로비",
+   "site/lobby2"
+  ],
+  [
+   "2층 객실",
+   "rooms/2f-room-a"
+  ],
+  [
+   "2층 객실",
+   "rooms/2f-room-b"
+  ],
+  [
+   "2층 객실",
+   "rooms/2f-dog"
+  ],
+  [
+   "301호",
+   "rooms/301-room"
+  ],
+  [
+   "301호 단독 애견운동장",
+   "rooms/301-yard"
+  ],
+  [
+   "독채 1호",
+   "rooms/dokchae1-room"
+  ],
+  [
+   "독채 1호",
+   "rooms/dokchae1-bbq"
+  ],
+  [
+   "캠핑스테이",
+   "rooms/campstay1-room"
+  ],
+  [
+   "캠핑스테이",
+   "rooms/campstay2-terrace"
+  ],
+  [
+   "온수풀",
+   "day/warm-pool"
+  ],
+  [
+   "대형수영장",
+   "day/pool"
+  ],
+  [
+   "대형수영장",
+   "day/pool2"
+  ],
+  [
+   "데크존",
+   "day/deck-night"
+  ],
+  [
+   "데크존",
+   "day/deck"
+  ],
+  [
+   "파라솔존",
+   "day/parasol"
+  ],
+  [
+   "바베큐",
+   "day/bbq-set"
+  ],
+  [
+   "바베큐",
+   "day/bbq"
+  ],
+  [
+   "실내 바베큐장",
+   "day/bbq-indoor"
+  ],
+  [
+   "불멍존",
+   "day/fire"
+  ],
+  [
+   "불멍존",
+   "day/fire-marshmallow"
+  ],
+  [
+   "애견운동장",
+   "pet/yard"
+  ],
+  [
+   "반려견과 바베큐룸",
+   "pet/glass-room"
+  ],
+  [
+   "반려견 포토존",
+   "pet/studio"
+  ],
+  [
+   "애견운동장",
+   "pet/poodles"
+  ],
+  [
+   "301호 단독 애견운동장",
+   "pet/agility"
+  ],
+  [
+   "애견운동장",
+   "pet/lawn"
+  ],
+  [
+   "캠핑장",
+   "site/campsite"
+  ],
+  [
+   "키즈 놀이터",
+   "kids/overview"
+  ],
+  [
+   "짚라인",
+   "kids/zipline"
+  ],
+  [
+   "에어바운스",
+   "kids/air-slide"
+  ],
+  [
+   "모래놀이",
+   "kids/sand"
+  ],
+  [
+   "물감놀이",
+   "kids/paint"
+  ],
+  [
+   "슬라이드 풀",
+   "kids/slide-pool"
+  ],
+  [
+   "데크존",
+   "day/deck-a"
+  ],
+  [
+   "파라솔존",
+   "day/parasol2"
+  ],
+  [
+   "야외 바베큐",
+   "day/bbq-outdoor2"
+  ],
+  [
+   "바베큐",
+   "day/bbq-meat"
+  ],
+  [
+   "실내 벽난로",
+   "day/fire-indoor"
+  ],
+  [
+   "카페·편의점",
+   "cafe/store"
+  ],
+  [
+   "슬러시",
+   "cafe/slush"
+  ],
+  [
+   "보드게임",
+   "cafe/boardgame"
+  ],
+  [
+   "반려견 어메니티",
+   "pet/amenity"
+  ],
+  [
+   "반려견 수영장",
+   "pet/dog-pool"
+  ],
+  [
+   "반려견과 함께",
+   "pet/dog1"
+  ],
+  [
+   "반려견과 바베큐",
+   "pet/dog-bbq"
+  ],
+  [
+   "애견운동장 야경",
+   "pet/yard-night"
+  ],
+  [
+   "전경",
+   "pet/aerial"
+  ]
+ ],
+ "review_total": 300
 }
