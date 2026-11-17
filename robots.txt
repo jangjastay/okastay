@@ -1,0 +1,8 @@
+User-agent: *
+Allow: /
+Disallow: /tools/
+Disallow: /apps-script/
+Disallow: /docs/
+Disallow: /data/
+
+Sitemap: https://okastay.kr/sitemap.xml
