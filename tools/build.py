@@ -252,7 +252,7 @@ def build_index():
     reviews = ""
     mains = [r for r in D["reviews"] if r.get("main")]
     if mains:
-        items = "".join(f'<figure class="review"><blockquote>{e(r["text"])}</blockquote><figcaption>{e(r["who"])} · {e(r["when"])} · 네이버 리뷰</figcaption></figure>' for r in mains)
+        items = "".join(f'<figure class="review"><blockquote>{e(r["text"])}</blockquote><figcaption>{e(r["who"])} · 네이버 리뷰</figcaption></figure>' for r in mains)
         reviews = f'<section class="sec"><div class="wrap"><div class="sec-head"><h2>다녀간 가족들의 이야기</h2><a class="more" href="{BASE}/reviews.html">네이버 리뷰 {D.get("review_total", "")}건+ 보기</a></div></div><div class="marquee"><div class="marquee-track">{items}{items}</div></div></section>'
     faq = "".join(f"<details><summary>{e(q)}</summary><p>{e(a)}</p></details>" for q, a in D["faq"])
     faq_ld = {"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [
