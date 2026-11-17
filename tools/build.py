@@ -48,7 +48,7 @@ def people_text(r):
     return "인원 확인 후 안내"
 
 
-NAV = [("객실", "/rooms/"), ("당일 이용", "/day/"), ("사진", "/gallery.html"), ("이용안내", "/guide.html")]
+NAV = [("객실", "/rooms/"), ("당일 이용", "/day/"), ("후기", "/reviews.html"), ("사진", "/gallery.html"), ("이용안내", "/guide.html")]
 
 
 def contact_btns():
@@ -226,6 +226,19 @@ def gallery_strip(keys, label):
     return f'<div class="gallery-strip"><button class="g-main-btn" data-full="{BASE}/assets/img/{keys[0]}.jpg" aria-label="크게 보기">{main}</button><div class="g-rest">{rest}</div></div>'
 
 
+def review_cards(items, cls="rv-grid"):
+    if not items:
+        return ""
+    cards = "".join(f'<figure class="review"><blockquote>{e(r["text"])}</blockquote><figcaption>{e(r["who"])} · {"객실 " + e(", ".join(r["rooms"])) + "호 · " if r.get("rooms") and r["rooms"][0].isdigit() else ""}{e(r["when"])} · 네이버 리뷰</figcaption></figure>' for r in items)
+    return f'<div class="{cls}">{cards}</div>'
+
+
+def review_section(items, title):
+    if not items:
+        return ""
+    return f'<section class="sec"><div class="wrap"><div class="sec-head"><h2>{e(title)}</h2><a class="more" href="{BASE}/reviews.html">후기 전체 보기</a></div>{review_cards(items[:4])}</div></section>'
+
+
 def breadcrumb(items):
     return {"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [
         {"@type": "ListItem", "position": i + 1, "name": n, "item": S["url"] + u} for i, (n, u) in enumerate(items)]}
@@ -237,9 +250,10 @@ def build_index():
     days = "".join(day_card(p) for p in D["day_products"])
     nearby = "".join(f"<li><b>{e(n['name'])}</b><span>{e(n['desc'])}</span></li>" for n in D["nearby"])
     reviews = ""
-    if D["reviews"]:
-        items = "".join(f'<figure class="review"><blockquote>{e(r["text"])}</blockquote><figcaption>{e(r.get("who", ""))} · {e(r.get("source", ""))}</figcaption></figure>' for r in D["reviews"])
-        reviews = f'<section class="sec"><div class="wrap"><h2>다녀간 가족들의 이야기</h2></div><div class="marquee"><div class="marquee-track">{items}{items}</div></div></section>'
+    mains = [r for r in D["reviews"] if r.get("main")]
+    if mains:
+        items = "".join(f'<figure class="review"><blockquote>{e(r["text"])}</blockquote><figcaption>{e(r["who"])} · {e(r["when"])} · 네이버 리뷰</figcaption></figure>' for r in mains)
+        reviews = f'<section class="sec"><div class="wrap"><div class="sec-head"><h2>다녀간 가족들의 이야기</h2><a class="more" href="{BASE}/reviews.html">네이버 리뷰 {D.get("review_total", "")}건+ 보기</a></div></div><div class="marquee"><div class="marquee-track">{items}{items}</div></div></section>'
     faq = "".join(f"<details><summary>{e(q)}</summary><p>{e(a)}</p></details>" for q, a in D["faq"])
     faq_ld = {"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [
         {"@type": "Question", "name": q, "acceptedAnswer": {"@type": "Answer", "text": a}} for q, a in D["faq"]]}
@@ -403,6 +417,7 @@ def build_rooms():
 <li><a href="{BASE}/day/fire.html">불멍존</a> — 저녁엔 불멍 {won(30000)}</li>
 <li><a href="{BASE}/day/warm-pool.html">온수풀</a> — 2시간 프라이빗 대여</li></ul></div>
 </div></section>
+{review_section([x for x in D["reviews"] if r["slug"] in x.get("rooms", [])], r["name"] + " 다녀간 손님 후기")}
 <section class="sec"><div class="wrap"><h2>다른 객실</h2><div class="grid cards">{''.join(room_card(o) for o in same)}</div></div></section>"""
         ld = {"@context": "https://schema.org", "@type": "HotelRoom", "name": f"{S['name']} {r['name']}", "description": r["summary"],
               "url": f"{S['url']}/rooms/{r['slug']}.html", "petsAllowed": True}
@@ -442,6 +457,7 @@ def build_day():
   <a class="btn lg block" href="{BASE}/reserve.html?type=day&product={p['slug']}">{e(p['name'])} 예약 신청</a>
   <div class="btn-row">{contact_btns()}</div>
 </aside></div></section>
+{review_section([x for x in D["reviews"] if p["slug"] in x.get("topics", [])], p["name"] + " 이용 후기")}
 <section class="sec tint"><div class="wrap"><h2>함께 이용하면 좋은 것</h2><div class="grid cards">{''.join(day_card(o) for o in others)}</div>
 <p class="kw">{e(kw)}</p></div></section>"""
         ld = {"@context": "https://schema.org", "@type": "Service", "name": f"{S['name']} {p['name']}", "description": p["short"],
@@ -549,6 +565,25 @@ def build_reserve():
     layout("/reserve.html", f"예약 신청 | {S['name']}", "오카맨션 직접 예약 신청 — 숙박·당일 이용, 반려견·인원·옵션 요금 자동 계산.", body, scripts=("reserve.js",))
 
 
+def build_reviews():
+    groups = [("반려견과 함께", lambda r: any(k in r["text"] for k in ["강아지", "반려", "애견", "댕댕"])),
+              ("아이와 물놀이", lambda r: "pool" in r["topics"] or "warm-pool" in r["topics"]),
+              ("바비큐 · 데크", lambda r: "bbq" in r["topics"] or "deck" in r["topics"])]
+    used, secs = set(), ""
+    for title, f in groups:
+        items = [r for i, r in enumerate(D["reviews"]) if i not in used and f(r)]
+        used |= {i for i, r in enumerate(D["reviews"]) if r in items}
+        if items:
+            secs += f'<section class="sec pt0"><div class="wrap"><h2>{e(title)}</h2>{review_cards(items)}</div></section>'
+    rest = [r for i, r in enumerate(D["reviews"]) if i not in used]
+    if rest:
+        secs += f'<section class="sec pt0"><div class="wrap"><h2>객실 · 휴식</h2>{review_cards(rest)}</div></section>'
+    body = f"""<section class="page-head"><div class="wrap"><p class="eyebrow dark">REVIEWS</p><h1>다녀간 손님 후기</h1>
+<p>네이버에 남겨주신 후기 {D.get('review_total', '')}여 건 중 일부를 원문 그대로 옮겼습니다. 아이디는 일부 가렸어요.</p></div></section>{secs}
+<section class="sec tint"><div class="wrap narrow center"><h2>다음 후기의 주인공이 되어주세요</h2><a class="btn lg" href="{BASE}/reserve.html">예약 신청</a> {contact_btns()}</div></section>"""
+    layout("/reviews.html", f"후기 | {S['name']} 청주 애견동반 펜션 실제 이용 후기", "오카맨션 실제 네이버 이용 후기 — 반려견 동반 숙박, 아이 물놀이, 바비큐, 301호 단독 애견운동장 후기.", body)
+
+
 def build_misc():
     body = f"""<section class="page-head"><div class="wrap narrow center"><h1>페이지를 찾을 수 없어요</h1>
 <p>주소가 바뀌었거나 없는 페이지입니다.</p><div class="btn-row center"><a class="btn" href="{BASE}/">처음으로</a><a class="btn ghost" href="{BASE}/reserve.html">예약 신청</a></div></div></section>"""
@@ -573,5 +608,5 @@ def build_misc():
 
 if __name__ == "__main__":
     os.makedirs(os.path.join(ROOT, "assets/js"), exist_ok=True)
-    build_index(); build_rooms(); build_day(); build_gallery(); build_guide(); build_reserve(); build_misc()
+    build_index(); build_rooms(); build_day(); build_gallery(); build_guide(); build_reserve(); build_reviews(); build_misc()
     print(f"{len(PAGES)} pages built")
