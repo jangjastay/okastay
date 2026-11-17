@@ -17,9 +17,20 @@ var SHEET_ICAL_CACHE = 'iCal가져옴';
 var HEAD_REQ = ['접수시각', '상태', '구분', '객실/상품', 'ID', '체크인', '체크아웃', '시간', '동반', '성인', '어린이', '36개월미만',
   '소형견', '대형견', '옵션', '이름', '연락처', '요청사항', '예상금액', '관리메모'];
 
+/** 시트 찾기: 시트에서 연 스크립트면 그 시트, 따로 만든 스크립트면 '오카맨션 예약' 시트를 새로 만들어 기억 */
+function book_() {
+  var ss = SpreadsheetApp.getActive();
+  if (ss) return ss;
+  var props = PropertiesService.getScriptProperties(), id = props.getProperty('SHEET_ID');
+  if (id) return SpreadsheetApp.openById(id);
+  ss = SpreadsheetApp.create('오카맨션 예약');
+  props.setProperty('SHEET_ID', ss.getId());
+  return ss;
+}
+
 /** 처음 한 번 실행: 시트와 머리글, 30분마다 에어비앤비 동기화 예약을 만든다 */
 function setup() {
-  var ss = SpreadsheetApp.getActive();
+  var ss = book_();
   ensure_(ss, SHEET_REQ, HEAD_REQ);
   ensure_(ss, SHEET_BLOCK, ['ID(객실/상품)', '시작일', '종료일(체크아웃일, 비우면 하루)', '사유(야놀자·여기어때·네이버·전화 등)']);
   ensure_(ss, SHEET_ICAL, ['ID(객실)', '에어비앤비 iCal 주소']);
@@ -29,6 +40,9 @@ function setup() {
   req.getRange('B2:B').setDataValidation(rule);
   ScriptApp.getProjectTriggers().forEach(function (t) { if (t.getHandlerFunction() === 'syncIcal') ScriptApp.deleteTrigger(t); });
   ScriptApp.newTrigger('syncIcal').timeBased().everyMinutes(30).create();
+  var s1 = ss.getSheetByName('Sheet1') || ss.getSheetByName('시트1');
+  if (s1 && ss.getSheets().length > 1 && s1.getLastRow() === 0) ss.deleteSheet(s1);
+  Logger.log('예약 시트 주소: ' + ss.getUrl());
 }
 
 function ensure_(ss, name, head) {
@@ -51,7 +65,7 @@ function nights_(from, to) { // from 포함, to 미포함
 
 /** 날짜별 마감 목록 { rooms: {id:[날짜]}, day: {id:[날짜]} } */
 function blocked_() {
-  var ss = SpreadsheetApp.getActive(), rooms = {}, day = {};
+  var ss = book_(), rooms = {}, day = {};
   var add = function (bag, id, dates) { bag[id] = bag[id] || {}; dates.forEach(function (x) { bag[id][x] = 1; }); };
   var req = ss.getSheetByName(SHEET_REQ).getDataRange().getValues().slice(1);
   req.forEach(function (r) {
@@ -79,7 +93,7 @@ function doPost(e) {
   try {
     var d = JSON.parse(e.postData.contents);
     if (!d.name || !d.phone || !d.checkin) return json_({ ok: false, message: '필수 항목이 비었어요.' });
-    var sh = SpreadsheetApp.getActive().getSheetByName(SHEET_REQ);
+    var sh = book_().getSheetByName(SHEET_REQ);
     // 같은 사람이 10분 안에 같은 날짜로 다시 보낸 것은 한 번만 저장
     var rows = sh.getDataRange().getValues().slice(1), now = new Date();
     for (var i = rows.length - 1; i >= 0 && i >= rows.length - 30; i--) {
@@ -108,7 +122,7 @@ function doPost(e) {
 
 /** 에어비앤비 iCal → 'iCal가져옴' 시트 (30분마다 자동) */
 function syncIcal() {
-  var ss = SpreadsheetApp.getActive(), out = [], stamp = new Date();
+  var ss = book_(), out = [], stamp = new Date();
   ss.getSheetByName(SHEET_ICAL).getDataRange().getValues().slice(1).forEach(function (r) {
     var id = String(r[0] || '').trim(), url = String(r[1] || '').trim();
     if (!id || !url) return;
@@ -129,7 +143,7 @@ function syncIcal() {
 
 /** 홈페이지 확정 예약 → 에어비앤비 '캘린더 가져오기'에 넣을 주소: 웹앱주소?action=ical&room=객실ID */
 function icalOut_(room) {
-  var rows = SpreadsheetApp.getActive().getSheetByName(SHEET_REQ).getDataRange().getValues().slice(1);
+  var rows = book_().getSheetByName(SHEET_REQ).getDataRange().getValues().slice(1);
   var ev = rows.filter(function (r) { return r[2] === '숙박' && r[4] === room && r[1] !== '취소'; }).map(function (r, i) {
     var s = d_(r[5]).replace(/-/g, ''), en = d_(r[6] || nextDay_(d_(r[5]))).replace(/-/g, '');
     return ['BEGIN:VEVENT', 'UID:okastay-' + room + '-' + s + '-' + i + '@okastay.kr', 'DTSTAMP:' + s + 'T000000Z',
