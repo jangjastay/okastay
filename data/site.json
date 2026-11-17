@@ -111,6 +111,36 @@
   },
   "rooms": [
     {
+      "slug": "201",
+      "name": "201호",
+      "group": "standard",
+      "type": "객실",
+      "floor": "2층",
+      "summary": "반려견과 함께 머무는 2층 객실",
+      "tags": [
+        "소형견"
+      ],
+      "large_dog": false,
+      "pool": false,
+      "checkin": null,
+      "checkout": null,
+      "base": null,
+      "max": null,
+      "price": {
+        "weekday": null,
+        "weekend": null,
+        "peak": null
+      },
+      "features": [],
+      "photos": [
+        "rooms/2f-room-a",
+        "rooms/2f-room-b",
+        "rooms/2f-room-c",
+        "rooms/2f-dog",
+        "rooms/2f-hall"
+      ]
+    },
+    {
       "slug": "202",
       "name": "202호",
       "group": "standard",

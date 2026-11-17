@@ -361,7 +361,7 @@ def build_index():
 def build_rooms():
     cards = "".join(room_card(r) for r in D["rooms"])
     body = f"""<section class="page-head"><div class="wrap"><p class="eyebrow dark">ROOMS</p><h1>객실 안내</h1>
-<p>반려견과 함께 머무는 2층 객실부터 단독 애견운동장 301호, 독채, 장비 없이 자는 캠핑스테이까지.</p></div></section>
+<p>전 객실 반려견 동반. 2층 객실(201~207호)부터 단독 애견운동장 301호, 독채, 장비 없이 자는 캠핑스테이까지.</p></div></section>
 <section class="sec"><div class="wrap">
 <div class="filters" role="group" aria-label="객실 거르기">
 <button class="chip on" data-f="all">전체</button><button class="chip" data-f="small">소형견 동반</button><button class="chip" data-f="large">대형견 가능</button>
@@ -372,7 +372,7 @@ def build_rooms():
 <li>{e(POL['pet_rule'])} · {e(POL['large_dog_rule'])}</li>
 <li>기준 인원 초과 시 1인 {won(POL['extra_person_fee'])} · {e(POL['infant_rule'])}</li></ul></div>
 </div></section>"""
-    layout("/rooms/", f"객실 안내 | {S['name']} 청주 애견동반 펜션", "오카맨션 객실 11개 — 2층 애견동반 객실, 대형견 가능한 301호(단독 애견운동장), 독채, 개별 수영장 독채, 캠핑스테이.", body,
+    layout("/rooms/", f"객실 안내 | {S['name']} 청주 애견동반 펜션", "오카맨션 객실 12개 — 2층 애견동반 객실, 대형견 가능한 301호(단독 애견운동장), 독채, 개별 수영장 독채, 캠핑스테이.", body,
            jsonld=breadcrumb([("홈", "/"), ("객실", "/rooms/")]))
 
     for r in D["rooms"]:
@@ -386,7 +386,7 @@ def build_rooms():
 <nav class="crumb"><a href="{BASE}/">홈</a> › <a href="{BASE}/rooms/">객실</a> › {e(r['name'])}</nav>
 <p class="eyebrow dark">{e(r['type'])}</p><h1>{e(r['name'])}</h1><p>{e(r['summary'])}</p></div></section>
 <section class="sec pt0"><div class="wrap split detail">
-<div>{gallery_strip(r['photos'][STD.index(r['slug']) % len(r['photos']):] + r['photos'][:STD.index(r['slug']) % len(r['photos'])] if r['slug'] in STD else r['photos'], r['name'])}{'<p class="note">202~207호는 구조가 같아 2층 객실 사진을 함께 보여드립니다.</p>' if r['slug'] in STD else ''}</div>
+<div>{gallery_strip(r['photos'][STD.index(r['slug']) % len(r['photos']):] + r['photos'][:STD.index(r['slug']) % len(r['photos'])] if r['slug'] in STD else r['photos'], r['name'])}{'<p class="note">201~207호는 구조가 같아 2층 객실 사진을 함께 보여드립니다.</p>' if r['slug'] in STD else ''}</div>
 <aside class="side">
   <ul class="chips">{''.join(f'<li>{e(t)}</li>' for t in r['tags'])}</ul>
   <table class="kv"><tr><th>입실 / 퇴실</th><td>{ci} / {co}</td></tr><tr><th>인원</th><td>{e(people_text(r))}</td></tr>

@@ -73,7 +73,7 @@
 - **iCal**: 에어비앤비 숙소의 캘린더 내보내기 주소를 적으면 30분마다 자동으로 마감 반영.
 - 홈페이지 예약을 에어비앤비로 보내려면: 에어비앤비 캘린더 가져오기에 `웹앱주소?action=ical&room=객실ID` 입력.
 
-객실 ID: `202` `203` `204` `205` `206` `207` `301` `dokchae1` `dokchae2` `campstay1` `campstay2`
+객실 ID: `201` `202` `203` `204` `205` `206` `207` `301` `dokchae1` `dokchae2` `campstay1` `campstay2`
 당일 상품 ID: `warm-pool` `pool` `deck` `bbq` `fire`
 
 ### 손님 자동 카카오 알림톡 (솔라피)
