@@ -1,5 +1,6 @@
 name: IndexNow ping
 on:
+  workflow_dispatch:
   push:
     branches: [main]
 jobs:
@@ -16,7 +17,7 @@ jobs:
           KEY=$(python3 -c "import json;print(json.load(open('data/site.json'))['site'].get('indexnow_key',''))")
           [ -z "$KEY" ] && exit 0
           python3 - "$KEY" <<'PY'
-          import json, subprocess, sys, urllib.request
+          import json, subprocess, sys, urllib.request, urllib.error
           key = sys.argv[1]
           files = subprocess.run(["git", "diff", "--name-only", "HEAD~1", "HEAD"], capture_output=True, text=True).stdout.split()
           urls = []
@@ -34,6 +35,8 @@ jobs:
               try:
                   r = urllib.request.urlopen(urllib.request.Request(ep, data=body, headers={"Content-Type": "application/json; charset=utf-8"}), timeout=30)
                   print(ep, r.status, len(urls))
+              except urllib.error.HTTPError as ex:
+                  print(ep, "error", ex.code, ex.read()[:500])
               except Exception as ex:
                   print(ep, "error", ex)
           PY
