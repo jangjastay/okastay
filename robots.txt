@@ -6,3 +6,5 @@ Disallow: /docs/
 Disallow: /data/
 
 Sitemap: https://okastay.kr/sitemap.xml
+
+#DaumWebMasterTool:a59ecfec9d5382426efa9dad0e62db971103b1bc5c42a2e09ea22c83827afb94:LSr9wi71I6+MYd9iMzmuXg==
