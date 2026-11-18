@@ -203,10 +203,11 @@
       '\n예상 금액: ' + data.estimate + '\n' + data.name + ' ' + data.phone + (data.memo ? '\n요청: ' + data.memo : '');
 
     if (!C.appsScriptUrl) {
-      // 시트 연결 전: 문자·카카오톡으로 신청 내용 보내기
+      // 시트 연결 전: 카카오톡으로 신청 내용 보내기
       var links = '';
-      if (C.phone) links += '<a class="btn block" href="sms:' + C.phone + '?body=' + encodeURIComponent(text) + '">문자로 신청 보내기</a>';
-      if (C.kakao) links += '<a class="btn ghost block" style="margin-top:8px" href="' + C.kakao + '" target="_blank" rel="noopener">카카오톡으로 문의</a>';
+      try { navigator.clipboard.writeText(text); } catch (e) {}
+      if (C.kakao) links += '<a class="btn block" href="' + C.kakao + '" target="_blank" rel="noopener">카카오톡으로 신청 보내기 (내용 복사됨)</a>';
+      if (C.phone) links += '<a class="btn ghost block" style="margin-top:8px" href="tel:' + C.phone + '">☎ 전화 예약 ' + C.phone + '</a>';
       return show('<b>아래 내용을 숙소로 보내주세요.</b><pre style="white-space:pre-wrap;font:inherit;font-size:.9rem">' +
         text.replace(/</g, '&lt;') + '</pre>' + (links || '<p class="note">연락처 준비 중입니다.</p>'));
     }

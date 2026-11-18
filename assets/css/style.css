@@ -336,7 +336,7 @@ p{margin:0 0 1em}
 .sp-intro{font-size:1.08rem}
 .hs-block{padding:20px 0;border-top:1px solid var(--line)}
 .hs-block h2{font-size:1.25rem;display:flex;align-items:center;gap:10px}
-.num{display:inline-flex;width:26px;height:26px;border-radius:50%;background:#35c5f0;color:#fff;font-size:.85rem;align-items:center;justify-content:center}
+.hs-n{display:inline-flex;flex:0 0 26px;width:26px;height:26px;border-radius:50%;background:#35c5f0;color:#fff;font-size:.85rem;align-items:center;justify-content:center}
 .hs-block ol{padding-left:1.2em;color:var(--ink)}
 .chip-row{display:flex;flex-wrap:wrap;gap:8px}.chip-link{padding:6px 12px;border-radius:999px;background:var(--sky);text-decoration:none;font-size:.9rem;font-weight:600}
 .sp-cta{display:flex;flex-wrap:wrap;gap:10px;margin:22px 0}.sp-cta .btn{flex:1 1 140px}

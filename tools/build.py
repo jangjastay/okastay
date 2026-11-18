@@ -218,7 +218,7 @@ def price_note():
 def steps():
     return """<ol class="steps">
   <li><b>1. 예약 신청</b><span>날짜·인원·반려견·옵션을 골라 신청</span></li>
-  <li><b>2. 숙소 확인 연락</b><span>빈 객실을 확인해 문자로 안내</span></li>
+  <li><b>2. 숙소 확인 연락</b><span>빈 객실을 확인해 카카오톡으로 안내</span></li>
   <li><b>3. 입금하면 확정</b><span>안내받은 계좌로 입금하면 예약 완료</span></li>
 </ol>"""
 
@@ -425,7 +425,7 @@ def build_spaces():
         for j, s in enumerate(sp["spots"]):
             tips = "".join(f"<li>{e(t)}</li>" for t in s["tips"])
             lks = "".join(f'<a class="chip-link" href="{BASE}{u}">{e(t)}</a>' for u, t in s["links"])
-            blocks += (f'<article class="hs-block" id="hs-{j}"><h2><span class="num">{j + 1}</span>{e(s["name"])}</h2><p>{e(s["desc"])}</p>'
+            blocks += (f'<article class="hs-block" id="hs-{j}"><h2><span class="hs-n">{j + 1}</span>{e(s["name"])}</h2><p>{e(s["desc"])}</p>'
                        f'{f"<ol>{tips}</ol>" if tips else ""}{f"<div class=chip-row>{lks}</div>" if lks else ""}</article>')
         cms = space_comments(sp)
         cm_html = ""
@@ -963,7 +963,7 @@ def build_reserve():
   <p class="total"><span>합계</span><b id="total">-</b></p>
   <p class="note" id="sumNote"></p>
   <button class="btn lg block" id="submitBtn" form="rsv" type="submit">예약 신청하기</button>
-  <p class="note">신청만으로는 확정되지 않아요. 확인 후 문자로 연락드립니다.</p>
+  <p class="note">신청만으로는 확정되지 않아요. 확인 후 카카오톡으로 연락드립니다. 급하면 전화 주세요.</p>
   <div id="result" class="result" hidden></div>
   <p class="note"><a href="{BASE}/guide.html#refund">환불 규정 보기</a></p>
 </aside>
