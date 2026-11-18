@@ -104,6 +104,7 @@ def layout(path, title, desc, body, og_img=None, jsonld=None, scripts=(), noinde
 <title>{e(title)}</title>
 <meta name="description" content="{e(desc)}">
 <link rel="canonical" href="{e(canonical)}">
+<link rel="alternate" type="application/rss+xml" title="{e(S['name'])} 새 글" href="{S['url']}/feed.xml">
 {"<meta name=robots content=noindex>" if noindex else ""}
 {verify}
 <meta property="og:type" content="website">
@@ -270,14 +271,17 @@ def build_stories():
         faq = "".join(f"<details><summary>{e(q)}</summary><p>{e(a)}</p></details>" for q, a in s["faq"])
         tp = topic_map.get(s.get("topic"), s.get("topic"))
         rvs = [r for r in D["reviews"] if tp in r.get("topics", [])][:6]
-        links = "".join(f'<li><a href="{BASE}{u}">{e(LINK_NAMES.get(u, u))}</a></li>' for u in s.get("links", []))
+        names = dict(LINK_NAMES, **{f"/story/{o['slug']}.html": o["h1"] for o in STORIES}, **{f"/dog/{o['slug']}.html": o["name"] + " 여행 가이드" for o in BREEDS})
+        links = "".join(f'<li><a href="{BASE}{u}">{e(names.get(u, u))}</a></li>' for u in s.get("links", []))
+        srcs = "".join(f'<li><a href="{e(u)}" target="_blank" rel="noopener">{e(t)}</a></li>' for t, u in s.get("sources", []))
+        srcs = f'<h2>참고한 자료</h2><ul class="dots">{srcs}</ul><p class="note">운영 시간·요금은 바뀔 수 있으니 방문 전 공식 안내를 확인해 주세요.</p>' if srcs else ""
         others = [o for o in STORIES if o["slug"] != s["slug"]][:3]
         kw = "".join(f"<span>{e(k)}</span>" for k in s["keywords"])
         body = f"""<section class="page-head"><div class="wrap narrow"><p class="eyebrow dark">OKA STORY</p><h1>{e(s['h1'])}</h1><p>{e(s['desc'])}</p></div></section>
 <section class="sec pt0"><div class="wrap"><article class="story">{img(s['cover'], s['h1'], eager=True)}{secs}
 <h2>자주 묻는 질문</h2><div class="faq">{faq}</div>
 <h2>함께 보면 좋아요</h2><ul class="dots">{links}<li><a href="{BASE}/reserve.html">직접 예약 신청</a></li></ul>
-<div class="kw">{kw}</div></article></div></section>
+{srcs}<div class="kw">{kw}</div></article></div></section>
 {review_section(rvs, "실제 이용 후기")}
 <section class="sec tint"><div class="wrap"><h2>다른 이야기</h2>{story_cards(others)}</div></section>"""
         ld = [{"@context": "https://schema.org", "@type": "Article", "headline": s["title"], "description": s["desc"],
@@ -394,8 +398,12 @@ def build_index():
       </fieldset>
       <button class="btn lg" type="submit">날짜 고르기</button>
     </form>
+    <div class="hero-cta"><a class="btn lg" href="{BASE}/reserve.html">예약 문의</a><a class="btn lg ghost light" href="tel:{e(S['phone'])}">전화 {e(S['phone'])}</a></div>
   </div>
 </section>
+
+<section class="sec"><div class="wrap narrow center"><p class="eyebrow dark">VIDEO</p><h2>영상으로 먼저 둘러보기</h2>
+<div class="video" data-yt="{e(S['youtube_video'])}"><img src="https://i.ytimg.com/vi/{e(S['youtube_video'])}/hqdefault.jpg" alt="오카맨션 애견동반 펜션 소개 영상" loading="lazy"><button class="play" aria-label="오카맨션 소개 영상 재생">▶</button></div></div></section>
 
 <section class="sec why">
   <div class="wrap">
@@ -723,6 +731,19 @@ def build_misc():
         f'<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n{urls}</urlset>\n')
     open(os.path.join(ROOT, "robots.txt"), "w").write(f"User-agent: *\nAllow: /\nDisallow: /tools/\nDisallow: /apps-script/\nDisallow: /docs/\nDisallow: /data/\n\nSitemap: {S['url']}/sitemap.xml\n")
     open(os.path.join(ROOT, "CNAME"), "w").write(S["domain"] + "\n")
+    if S.get("indexnow_key"):
+        open(os.path.join(ROOT, S["indexnow_key"] + ".txt"), "w").write(S["indexnow_key"])
+    import email.utils
+    items = [(x["date"], x["h1"], f"/story/{x['slug']}.html", x["desc"]) for x in STORIES] + \
+            [(x["date"], x["name"] + " 여행 가이드 — 성격, 역사, 애견동반 펜션 팁", f"/dog/{x['slug']}.html", x["history"][:120]) for x in BREEDS]
+    items.sort(key=lambda t: t[0], reverse=True)
+
+    def rfc(dt):
+        y, m, d_ = map(int, dt.split("-"))
+        return email.utils.format_datetime(datetime.datetime(y, m, d_, 9, 0, tzinfo=datetime.timezone(datetime.timedelta(hours=9))))
+    rss = "".join(f"<item><title>{e(t)}</title><link>{S['url']}{u}</link><guid>{S['url']}{u}</guid><pubDate>{rfc(dt)}</pubDate><description>{e(ds)}</description></item>\n" for dt, t, u, ds in items[:50])
+    open(os.path.join(ROOT, "feed.xml"), "w", encoding="utf-8").write(
+        f'<?xml version="1.0" encoding="UTF-8"?>\n<rss version="2.0"><channel><title>{e(S["name"])} — 청주 애견동반 펜션 이야기</title><link>{S["url"]}/</link><description>{e(S["description"])}</description><language>ko</language>\n{rss}</channel></rss>\n')
     open(os.path.join(ROOT, ".nojekyll"), "w").write("")
 
 
