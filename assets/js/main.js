@@ -71,6 +71,24 @@
     });
   })();
 
+  // PC에서 전화 링크: 카톡 등으로 열리지 않게 번호를 크게 보여주고 복사
+  if (window.matchMedia('(hover:hover) and (pointer:fine)').matches) {
+    document.addEventListener('click', function (ev) {
+      var a = ev.target.closest('a[href^="tel:"]'); if (!a) return;
+      ev.preventDefault();
+      var num = a.getAttribute('href').slice(4);
+      var pop = document.createElement('div'); pop.className = 'tel-pop';
+      pop.innerHTML = '<div role="dialog" aria-label="전화 예약"><p>전화 예약 · 문의</p><strong>' + num + '</strong>' +
+        '<div class="row"><button class="btn" type="button" data-c>번호 복사</button><button class="btn ghost" type="button" data-x>닫기</button></div>' +
+        '<p style="margin-top:12px">휴대폰으로 위 번호에 전화 주세요.</p></div>';
+      pop.addEventListener('click', function (e2) {
+        if (e2.target === pop || e2.target.hasAttribute('data-x')) pop.remove();
+        if (e2.target.hasAttribute('data-c')) { try { navigator.clipboard.writeText(num); } catch (e3) {} e2.target.textContent = '복사됨 ✓'; }
+      });
+      document.body.appendChild(pop);
+    });
+  }
+
   // 유튜브 (클릭할 때만 불러옴)
   document.querySelectorAll('.video[data-yt]').forEach(function (v) {
     v.addEventListener('click', function () {

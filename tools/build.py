@@ -54,7 +54,7 @@ NAV = [("객실", "/rooms/"), ("당일 이용", "/day/"), ("후기", "/reviews.h
 def contact_btns():
     out = []
     if S["phone"]:
-        out.append(f'<a class="btn ghost" href="tel:{e(S["phone"])}">전화 문의</a>')
+        out.append(f'<a class="btn ghost" href="tel:{e(S["phone"])}">☎ 전화 예약 {e(S["phone"])}</a>')
     if S["kakao_channel"]:
         out.append(f'<a class="btn ghost" href="{e(S["kakao_channel"])}" target="_blank" rel="noopener">카카오톡 문의</a>')
     return "".join(out)
@@ -130,6 +130,7 @@ def layout(path, title, desc, body, og_img=None, jsonld=None, scripts=(), noinde
   <div class="wrap top-in">
     <a class="logo" href="{BASE}/" aria-label="{e(S['name'])} 홈"><b>OKA</b><span>오카맨션</span></a>
     <nav class="nav" aria-label="주요 메뉴">{nav}</nav>
+    <a class="top-call" href="tel:{e(S['phone'])}" aria-label="전화 예약 {e(S['phone'])}"><i>☎</i><span><small>전화 예약</small>{e(S['phone'])}</span></a>
     <a class="btn sm" href="{BASE}/reserve.html">예약 신청</a>
   </div>
 </header>
@@ -152,6 +153,7 @@ def layout(path, title, desc, body, og_img=None, jsonld=None, scripts=(), noinde
   </div>
 </footer>
 <a class="fab" href="{BASE}/reserve.html">예약 신청</a>
+<a class="call-fab" href="tel:{e(S['phone'])}" aria-label="전화 예약 {e(S['phone'])}">☎<span>전화</span></a>
 <script src="{BASE}/assets/js/config.js"></script>
 <script src="{BASE}/assets/js/main.js" defer></script>
 {"".join(f'<script src="{BASE}/assets/js/{s}" defer></script>' for s in scripts)}
@@ -524,7 +526,7 @@ def build_index():
       </fieldset>
       <button class="btn lg" type="submit">날짜 고르기</button>
     </form>
-    <div class="hero-cta"><a class="btn lg" href="{BASE}/reserve.html">예약 문의</a><a class="btn lg ghost light" href="tel:{e(S['phone'])}">전화 문의</a></div>
+    <div class="hero-cta"><a class="btn lg" href="{BASE}/reserve.html">온라인 예약 문의</a><a class="btn lg call" href="tel:{e(S['phone'])}">☎ 전화 예약 <b>{e(S['phone'])}</b></a>{f'<a class="btn lg kakao" href="{e(S["kakao_channel"])}" target="_blank" rel="noopener">카카오톡 문의</a>' if S.get("kakao_channel") else ''}</div>
   </div>
 </section>
 
