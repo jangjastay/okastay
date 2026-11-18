@@ -439,3 +439,13 @@ p{margin:0 0 1em}
 .h-head{margin-bottom:16px}
 .why .why-i{padding:20px 22px}
 .cat-grid{gap:12px}
+
+/* PC 옆으로 넘기기 화살표 (공통) */
+.xs{position:relative}
+.xs>.sw-nav{position:absolute;top:50%;transform:translateY(-50%);width:46px;height:46px;border-radius:50%;border:1px solid var(--line);background:rgba(255,253,249,.97);box-shadow:0 4px 14px rgba(0,0,0,.16);font-size:1.7rem;line-height:1;color:var(--ink,#222);cursor:pointer;z-index:4;display:flex;align-items:center;justify-content:center;transition:opacity .2s,transform .2s}
+.xs>.sw-nav:hover{transform:translateY(-50%) scale(1.08)}
+.xs>.sw-nav.prev{left:-14px}.xs>.sw-nav.next{right:-14px}
+@media(min-width:1380px){.xs>.sw-nav.prev{left:-62px}.xs>.sw-nav.next{right:-62px}}
+.xs.at-start>.sw-nav.prev,.xs.at-end>.sw-nav.next{opacity:0;pointer-events:none}
+.xs.no-x>.sw-nav{display:none}
+@media(max-width:760px){.xs>.sw-nav{display:none}}

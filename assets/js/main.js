@@ -44,12 +44,32 @@
   });
 
   // 옆으로 넘기기 화살표
-  document.querySelectorAll('.sw').forEach(function (sw) {
-    var tr = sw.querySelector('.sw-track');
-    sw.querySelectorAll('.sw-nav').forEach(function (b) {
-      b.addEventListener('click', function () { tr.scrollBy({ left: (b.classList.contains('prev') ? -1 : 1) * tr.clientWidth * 0.8 }); });
+
+  // PC: 옆으로 넘기는 모든 줄에 좌우 화살표
+  (function () {
+    var sel = '.h-scroll,.sp-row,.sw-track,.mosaic,.why .grid3,.insta,.reels,.vid-grid,.cat-grid,.breed-chips';
+    document.querySelectorAll(sel).forEach(function (tr) {
+      if (getComputedStyle(tr).overflowX !== 'auto' && getComputedStyle(tr).overflowX !== 'scroll') return;
+      var sw = tr.closest('.sw'), host;
+      if (sw) { host = sw; host.classList.add('xs'); }
+      else { host = document.createElement('div'); host.className = 'xs'; tr.parentNode.insertBefore(host, tr); host.appendChild(tr); }
+      var prev = host.querySelector(':scope>.sw-nav.prev'), next = host.querySelector(':scope>.sw-nav.next');
+      if (!prev) {
+        prev = document.createElement('button'); prev.className = 'sw-nav prev'; prev.type = 'button'; prev.setAttribute('aria-label', '왼쪽으로'); prev.textContent = '‹';
+        next = document.createElement('button'); next.className = 'sw-nav next'; next.type = 'button'; next.setAttribute('aria-label', '오른쪽으로'); next.textContent = '›';
+        host.appendChild(prev); host.appendChild(next);
+        [prev, next].forEach(function (b) { b.addEventListener('click', function () { tr.scrollBy({ left: (b === prev ? -1 : 1) * tr.clientWidth * 0.8, behavior: 'smooth' }); }); });
+      }
+      var upd = function () {
+        var max = tr.scrollWidth - tr.clientWidth - 4;
+        host.classList.toggle('at-start', tr.scrollLeft <= 4);
+        host.classList.toggle('at-end', tr.scrollLeft >= max);
+        host.classList.toggle('no-x', max <= 0);
+      };
+      tr.addEventListener('scroll', upd, { passive: true }); window.addEventListener('resize', upd); upd();
+      setTimeout(upd, 800);
     });
-  });
+  })();
 
   // 유튜브 (클릭할 때만 불러옴)
   document.querySelectorAll('.video[data-yt]').forEach(function (v) {
