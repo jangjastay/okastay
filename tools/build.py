@@ -398,7 +398,7 @@ def build_index():
       </fieldset>
       <button class="btn lg" type="submit">날짜 고르기</button>
     </form>
-    <div class="hero-cta"><a class="btn lg" href="{BASE}/reserve.html">예약 문의</a><a class="btn lg ghost light" href="tel:{e(S['phone'])}">전화 {e(S['phone'])}</a></div>
+    <div class="hero-cta"><a class="btn lg" href="{BASE}/reserve.html">예약 문의</a><a class="btn lg ghost light" href="tel:{e(S['phone'])}">전화 문의</a></div>
   </div>
 </section>
 
