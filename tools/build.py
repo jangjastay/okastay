@@ -91,6 +91,8 @@ def layout(path, title, desc, body, og_img=None, jsonld=None, scripts=(), noinde
     verify = ""
     if S["naver_site_verification"]:
         verify += f'<meta name="naver-site-verification" content="{e(S["naver_site_verification"])}">'
+    if S.get("bing_site_verification"):
+        verify += f'<meta name="msvalidate.01" content="{e(S["bing_site_verification"])}">'
     if S["google_site_verification"]:
         verify += f'<meta name="google-site-verification" content="{e(S["google_site_verification"])}">'
     foot_biz = " · ".join(x for x in [
