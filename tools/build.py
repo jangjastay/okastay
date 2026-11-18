@@ -812,9 +812,9 @@ def build_day():
 
 # ---------- 사진·이벤트 ----------
 
-def reel_grid(items):
+def reel_grid(items, kind="reel"):
     return '<div class="reels">' + "".join(
-        f'<figure><iframe src="https://www.instagram.com/reel/{e(c)}/embed/" title="오카맨션 인스타그램 영상 — {e(t)}" loading="lazy" allowtransparency="true" scrolling="no"></iframe><figcaption>{e(t)}</figcaption></figure>'
+        f'<figure><iframe src="https://www.instagram.com/{kind}/{e(c)}/embed/" title="오카맨션 인스타그램 영상 — {e(t)}" loading="lazy" allowtransparency="true" scrolling="no"></iframe><figcaption>{e(t)}</figcaption></figure>'
         for c, t in items) + '</div>'
 
 GALLERY_CATS = [("객실", ["2층 객실", "301호", "독채 1호", "캠핑스테이"]),
@@ -851,6 +851,7 @@ def build_gallery():
 <p>보정이나 합성 없이 실제 오카맨션 모습 그대로 담았습니다.</p></div></section>
 <section class="sec pt0"><div class="wrap">{tiles}</div></section>{ev_sec}
 <section class="sec"><div class="wrap"><h2>인스타그램 영상</h2>{reel_grid(S.get("instagram_reels", []))}</div></section>
+{f'<section class="sec tint"><div class="wrap"><h2>손님이 올린 오카맨션</h2><p>@stay_oka를 태그해 주신 손님 게시물이에요. 인스타그램 원본 그대로 보여드려요.</p>{reel_grid(S["guest_posts"], "p")}</div></section>' if S.get("guest_posts") else ""}
 <section class="sec"><div class="wrap narrow center"><h2>영상으로 보기</h2>
 <div class="video" data-yt="{e(S['youtube_video'])}"><img src="https://i.ytimg.com/vi/{e(S['youtube_video'])}/hqdefault.jpg" alt="오카맨션 소개 영상" loading="lazy"><button class="play" aria-label="영상 재생">▶</button></div>
 <div class="btn-row center">{f'<a class="btn ghost" href="{e(S["youtube_channel"])}" target="_blank" rel="noopener">유튜브 채널</a>' if S.get("youtube_channel") else ""}<a class="btn ghost" href="{e(S['instagram'])}" target="_blank" rel="noopener">인스타그램 @stay_oka</a></div></div></section>"""
