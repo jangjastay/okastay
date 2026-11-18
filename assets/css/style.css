@@ -373,3 +373,11 @@ p{margin:0 0 1em}
 .lightbox .lb-nav{position:absolute;top:50%;transform:translateY(-50%);width:48px;height:48px;border-radius:50%;border:0;background:rgba(255,255,255,.9);font-size:1.6rem;cursor:pointer}
 .lightbox .lb-nav.prev{left:12px}.lightbox .lb-nav.next{right:12px}
 .lightbox .lb-count{position:absolute;bottom:16px;left:0;right:0;text-align:center;color:#fff;font-size:.9rem}
+.nv-badge{background:var(--paper);border:1px solid var(--line);border-radius:var(--r);padding:16px 18px;margin:14px 0;max-width:560px}
+.nv-score{margin:0;font-size:1.05rem}.nv-score b{color:#03c75a;font-size:1.3rem;margin-right:6px}
+.nv-sub{margin:4px 0 10px;color:var(--sub);font-size:.88rem}
+.nv-bars{list-style:none;margin:0;padding:0;display:grid;gap:7px}
+.nv-bars li{display:grid;grid-template-columns:150px 1fr 40px;align-items:center;gap:10px;font-size:.92rem}
+.nv-bars i{display:block;height:10px;border-radius:999px;background:linear-gradient(90deg,#03c75a,#6fdc9a)}
+.nv-bars b{text-align:right;color:var(--sub);font-weight:700}
+@media(max-width:480px){.nv-bars li{grid-template-columns:120px 1fr 34px}}

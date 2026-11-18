@@ -238,6 +238,16 @@ def swipe(keys, label, captions=None):
             f'<span class="sw-count">{len(keys)}장 · 옆으로 넘겨 보세요</span></div>')
 
 
+
+def naver_badge():
+    kw = S.get("naver_keywords") or []
+    if not kw:
+        return ""
+    top = kw[0][1]
+    bars = "".join(f'<li><span>"{e(k)}"</span><i style="width:{round(n / top * 100)}%"></i><b>{n}</b></li>' for k, n in kw)
+    return (f'<div class="nv-badge"><p class="nv-score"><b>★ {S.get("naver_rating", "")}</b> 네이버 방문자 리뷰 {D.get("review_total", "")}건</p>'
+            f'<p class="nv-sub">손님들이 고른 "이런 점이 좋았어요"</p><ul class="nv-bars">{bars}</ul></div>')
+
 def review_cards(items, cls="rv-grid"):
     if not items:
         return ""
@@ -474,7 +484,7 @@ def build_index():
     mains = [r for r in D["reviews"] if r.get("main")]
     if mains:
         items = "".join(f'<figure class="review"><blockquote>{e(r["text"])}</blockquote><figcaption>{e(r["who"])} · 네이버 리뷰</figcaption></figure>' for r in mains)
-        reviews = f'<section class="sec"><div class="wrap"><div class="sec-head"><h2>다녀간 가족들의 이야기</h2><a class="more" href="{BASE}/reviews.html">네이버 리뷰 {D.get("review_total", "")}건+ 보기</a></div></div><div class="marquee"><div class="marquee-track">{items}{items}</div></div></section>'
+        reviews = f'<section class="sec"><div class="wrap"><div class="sec-head"><h2>다녀간 가족들의 이야기</h2><a class="more" href="{BASE}/reviews.html">네이버 리뷰 {D.get("review_total", "")}건+ 보기</a></div>{naver_badge()}</div><div class="marquee"><div class="marquee-track">{items}{items}</div></div></section>'
     faq = "".join(f"<details><summary>{e(q)}</summary><p>{e(a)}</p></details>" for q, a in D["faq"])
     faq_ld = {"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [
         {"@type": "Question", "name": q, "acceptedAnswer": {"@type": "Answer", "text": a}} for q, a in D["faq"]]}
@@ -737,6 +747,7 @@ def room_detail(r):
   <div class="room-sec"><h2>이 객실의 편의시설</h2><ul class="amen">{''.join(f'<li><i aria-hidden="true">{ic}</i>{e(t)}</li>' for ic, t in am)}</ul>
   <h3 class="small-h">오카맨션 공용 시설</h3><ul class="amen">{''.join(f'<li><i aria-hidden="true">{ic}</i>{e(t)}</li>' for ic, t in SITE_AMEN)}</ul></div>
   <div class="room-sec" id="reviews"><h2>다녀간 손님 후기 <small>네이버 실제 후기</small></h2>
+  {naver_badge()}
   {f'<ul class="rv-keys">{chips}</ul>' if chips else ''}
   {review_cards(rvs[:6])}{f'<details class="rv-more"><summary>후기 {len(rvs[6:24])}개 더 보기</summary>{review_cards(rvs[6:24])}</details>' if len(rvs) > 6 else ''}
   <p><a class="more" href="{BASE}/reviews.html">전체 후기 {D.get('review_total', '')}건+ 보기</a></p></div>
@@ -951,7 +962,7 @@ def build_reviews():
     if rest:
         secs += f'<section class="sec pt0"><div class="wrap"><h2>객실 · 휴식</h2>{review_cards(rest)}</div></section>'
     body = f"""<section class="page-head"><div class="wrap"><p class="eyebrow dark">REVIEWS</p><h1>다녀간 손님 후기</h1>
-<p>네이버에 남겨주신 후기 {D.get('review_total', '')}여 건 중 일부를 원문 그대로 옮겼습니다. 아이디는 일부 가렸어요.</p></div></section>{secs}
+<p>네이버에 남겨주신 후기 {D.get('review_total', '')}여 건 중 일부를 원문 그대로 옮겼습니다. 아이디는 일부 가렸어요.</p>{naver_badge()}</div></section>{secs}
 <section class="sec tint"><div class="wrap narrow center"><h2>다음 후기의 주인공이 되어주세요</h2><a class="btn lg" href="{BASE}/reserve.html">예약 신청</a> {contact_btns()}</div></section>"""
     layout("/reviews.html", f"후기 | {S['name']} 청주 애견동반 펜션 실제 이용 후기", "오카맨션 실제 네이버 이용 후기 — 반려견 동반 숙박, 아이 물놀이, 바비큐, 301호 단독 애견운동장 후기.", body)
 
