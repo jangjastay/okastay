@@ -471,7 +471,8 @@ def build_index():
 </section>
 
 <section class="sec tint"><div class="wrap"><div class="sec-head"><h2>인스타그램 @stay_oka</h2><a class="more" href="{e(S['instagram'])}" target="_blank" rel="noopener">팔로우하고 소식 받기</a></div>
-<div class="insta">{"".join(f'<a href="{e(u)}" target="_blank" rel="noopener" aria-label="인스타그램 게시물: {e(t)}">{img(k, "오카맨션 인스타그램 — " + t, sizes="(max-width:760px) 50vw, 25vw")}</a>' for u, k, t in S.get("instagram_posts", []))}</div></div></section>
+{reel_grid(S.get("instagram_reels", [])[:3])}
+<div class="insta" style="margin-top:14px">{"".join(f'<a href="{e(u)}" target="_blank" rel="noopener" aria-label="인스타그램 게시물: {e(t)}">{img(k, "오카맨션 인스타그램 — " + t, sizes="(max-width:760px) 50vw, 25vw")}</a>' for u, k, t in S.get("instagram_posts", []))}</div></div></section>
 
 <section class="sec">
   <div class="wrap"><div class="sec-head"><h2>오카맨션 이야기</h2><a class="more" href="{BASE}/story/">전체 보기</a></div>
@@ -705,6 +706,12 @@ def build_day():
 
 
 # ---------- 사진·이벤트 ----------
+
+def reel_grid(items):
+    return '<div class="reels">' + "".join(
+        f'<figure><iframe src="https://www.instagram.com/reel/{e(c)}/embed/" title="오카맨션 인스타그램 영상 — {e(t)}" loading="lazy" allowtransparency="true" scrolling="no"></iframe><figcaption>{e(t)}</figcaption></figure>'
+        for c, t in items) + '</div>'
+
 def build_gallery():
     tiles = "".join(f'<button class="tile" data-full="{BASE}/assets/img/{k}.jpg" aria-label="{e(label)} 크게 보기">{img(k, label, sizes="(max-width:720px) 50vw, 25vw")}<span>{e(label)}</span></button>' for label, k in D["gallery"])
     ev = ""
@@ -716,6 +723,7 @@ def build_gallery():
     body = f"""<section class="page-head"><div class="wrap"><p class="eyebrow dark">PHOTOS</p><h1>사진</h1>
 <p>보정이나 합성 없이 실제 오카맨션 모습 그대로 담았습니다.</p></div></section>
 <section class="sec pt0"><div class="wrap"><div class="masonry">{tiles}</div></div></section>{ev_sec}
+<section class="sec"><div class="wrap"><h2>인스타그램 영상</h2>{reel_grid(S.get("instagram_reels", []))}</div></section>
 <section class="sec"><div class="wrap narrow center"><h2>영상으로 보기</h2>
 <div class="video" data-yt="{e(S['youtube_video'])}"><img src="https://i.ytimg.com/vi/{e(S['youtube_video'])}/hqdefault.jpg" alt="오카맨션 소개 영상" loading="lazy"><button class="play" aria-label="영상 재생">▶</button></div>
 <div class="btn-row center">{f'<a class="btn ghost" href="{e(S["youtube_channel"])}" target="_blank" rel="noopener">유튜브 채널</a>' if S.get("youtube_channel") else ""}<a class="btn ghost" href="{e(S['instagram'])}" target="_blank" rel="noopener">인스타그램 @stay_oka</a></div></div></section>"""

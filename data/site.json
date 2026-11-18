@@ -37,22 +37,84 @@
    [
     "https://www.instagram.com/stay_oka/p/DasqyHRlLYx/",
     "pet/insta-dogpool-swim",
-    "반려견 수영장 오픈"
-   ],
-   [
-    "https://www.instagram.com/stay_oka/p/DasqyHRlLYx/",
-    "pet/insta-dogpool-a",
     "반려견 수영장"
    ],
    [
-    "https://www.instagram.com/stay_oka/p/DasqyHRlLYx/",
-    "pet/insta-dogpool-lift",
-    "첫 수영"
+    "https://www.instagram.com/stay_oka/p/C5YiRj0vZ4d/",
+    "pet/ig-agility-dog",
+    "애견운동장"
    ],
    [
-    "https://www.instagram.com/stay_oka/p/C3oQC1QvpQU/",
-    "site/insta-front",
+    "https://www.instagram.com/oka_mansion/p/DKlPTqUyAkl/",
+    "kids/ig-kidspool-1",
+    "키즈 물놀이장"
+   ],
+   [
+    "https://www.instagram.com/stay_oka/p/C27N_uWPtuV/",
+    "rooms/ig-room-1",
+    "2층 객실"
+   ],
+   [
+    "https://www.instagram.com/stay_oka/p/C4lFunnP5Ry/",
+    "pet/ig-photozone",
+    "반려견 포토존"
+   ],
+   [
+    "https://www.instagram.com/stay_oka/p/C27Xh5LP_2_/",
+    "site/ig-lobby",
+    "로비"
+   ],
+   [
+    "https://www.instagram.com/stay_oka/p/C61NihNvHH1/",
+    "day/ig-bigpool",
+    "대형수영장"
+   ],
+   [
+    "https://www.instagram.com/stay_oka/p/C2sQA3YPmuf/",
+    "site/ig-sunset",
+    "노을"
+   ]
+  ],
+  "instagram_reels": [
+   [
+    "DKlSHs8SOSK",
+    "키즈 물놀이장 슬라이드"
+   ],
+   [
+    "DJljRIOybMb",
     "오카맨션 전경"
+   ],
+   [
+    "DIZ_XRYTrVv",
+    "객실 둘러보기"
+   ],
+   [
+    "DG2SRTkzZVh",
+    "애견운동장"
+   ],
+   [
+    "C5qc8qxvmMR",
+    "강아지와 함께"
+   ],
+   [
+    "C5bKtbdPGsO",
+    "불멍 포토존"
+   ],
+   [
+    "C5Yg_I4vPS6",
+    "오카맨션 입구"
+   ],
+   [
+    "C32JALNP_RD",
+    "애견운동장 산책"
+   ],
+   [
+    "DJniqJpyCAF",
+    "키즈 슬라이드 풀"
+   ],
+   [
+    "C8l6SBSvuM2",
+    "복도 · 객실 가는 길"
    ]
   ]
  },
@@ -162,7 +224,12 @@
     "rooms/2f-room-b",
     "rooms/2f-room-c",
     "rooms/2f-dog",
-    "rooms/2f-hall"
+    "rooms/2f-hall",
+    "rooms/ig-room-1",
+    "rooms/ig-room-2",
+    "rooms/ig-room-3",
+    "rooms/ig-room-5",
+    "rooms/ig-amenity"
    ]
   },
   {
@@ -192,7 +259,12 @@
     "rooms/2f-room-b",
     "rooms/2f-room-c",
     "rooms/2f-dog",
-    "rooms/2f-hall"
+    "rooms/2f-hall",
+    "rooms/ig-room-1",
+    "rooms/ig-room-2",
+    "rooms/ig-room-3",
+    "rooms/ig-room-5",
+    "rooms/ig-amenity"
    ]
   },
   {
@@ -222,7 +294,12 @@
     "rooms/2f-room-b",
     "rooms/2f-room-c",
     "rooms/2f-dog",
-    "rooms/2f-hall"
+    "rooms/2f-hall",
+    "rooms/ig-room-1",
+    "rooms/ig-room-2",
+    "rooms/ig-room-3",
+    "rooms/ig-room-5",
+    "rooms/ig-amenity"
    ]
   },
   {
@@ -252,7 +329,12 @@
     "rooms/2f-room-b",
     "rooms/2f-room-c",
     "rooms/2f-dog",
-    "rooms/2f-hall"
+    "rooms/2f-hall",
+    "rooms/ig-room-1",
+    "rooms/ig-room-2",
+    "rooms/ig-room-3",
+    "rooms/ig-room-5",
+    "rooms/ig-amenity"
    ]
   },
   {
@@ -282,7 +364,12 @@
     "rooms/2f-room-b",
     "rooms/2f-room-c",
     "rooms/2f-dog",
-    "rooms/2f-hall"
+    "rooms/2f-hall",
+    "rooms/ig-room-1",
+    "rooms/ig-room-2",
+    "rooms/ig-room-3",
+    "rooms/ig-room-5",
+    "rooms/ig-amenity"
    ]
   },
   {
@@ -312,7 +399,12 @@
     "rooms/2f-room-b",
     "rooms/2f-room-c",
     "rooms/2f-dog",
-    "rooms/2f-hall"
+    "rooms/2f-hall",
+    "rooms/ig-room-1",
+    "rooms/ig-room-2",
+    "rooms/ig-room-3",
+    "rooms/ig-room-5",
+    "rooms/ig-amenity"
    ]
   },
   {
@@ -342,7 +434,12 @@
     "rooms/2f-room-b",
     "rooms/2f-room-c",
     "rooms/2f-dog",
-    "rooms/2f-hall"
+    "rooms/2f-hall",
+    "rooms/ig-room-1",
+    "rooms/ig-room-2",
+    "rooms/ig-room-3",
+    "rooms/ig-room-5",
+    "rooms/ig-amenity"
    ]
   },
   {
@@ -3359,6 +3456,158 @@
   [
    "전경",
    "pet/aerial"
+  ],
+  [
+   "로비",
+   "site/ig-lounge-art"
+  ],
+  [
+   "키즈 놀이터",
+   "kids/ig-kidspool-1"
+  ],
+  [
+   "키즈 놀이터",
+   "kids/ig-kidspool-2"
+  ],
+  [
+   "카페·편의점",
+   "cafe/ig-petshop"
+  ],
+  [
+   "파라솔존",
+   "kids/ig-pool-parasol"
+  ],
+  [
+   "키즈 놀이터",
+   "kids/ig-kidspool-3"
+  ],
+  [
+   "반려견과 함께",
+   "pet/ig-dog-lounger"
+  ],
+  [
+   "입구",
+   "site/ig-front-sign"
+  ],
+  [
+   "로비",
+   "site/ig-lobby-deco"
+  ],
+  [
+   "대형수영장",
+   "day/ig-bigpool"
+  ],
+  [
+   "반려견 어메니티",
+   "pet/ig-dog-wear"
+  ],
+  [
+   "2층 객실",
+   "rooms/ig-room-window"
+  ],
+  [
+   "로비",
+   "site/ig-lobby-arch"
+  ],
+  [
+   "애견운동장",
+   "pet/ig-yard-sky"
+  ],
+  [
+   "애견운동장",
+   "pet/ig-agility-dog"
+  ],
+  [
+   "반려견 포토존",
+   "pet/ig-photozone"
+  ],
+  [
+   "반려견과 함께",
+   "pet/ig-dogs-bed"
+  ],
+  [
+   "애견운동장",
+   "pet/ig-yard-dog"
+  ],
+  [
+   "애견운동장 야경",
+   "pet/ig-yard-night"
+  ],
+  [
+   "반려견 어메니티",
+   "pet/ig-amenity-shampoo"
+  ],
+  [
+   "야외 바베큐",
+   "day/ig-bbq-table"
+  ],
+  [
+   "애견운동장",
+   "pet/ig-agility"
+  ],
+  [
+   "입구",
+   "site/ig-front"
+  ],
+  [
+   "로비",
+   "site/ig-lobby"
+  ],
+  [
+   "2층 객실",
+   "rooms/ig-room-1"
+  ],
+  [
+   "2층 객실",
+   "rooms/ig-room-2"
+  ],
+  [
+   "2층 객실",
+   "rooms/ig-room-3"
+  ],
+  [
+   "2층 객실",
+   "rooms/ig-room-4"
+  ],
+  [
+   "2층 객실",
+   "rooms/ig-room-5"
+  ],
+  [
+   "2층 객실",
+   "rooms/ig-room-6"
+  ],
+  [
+   "2층 객실",
+   "rooms/ig-room-7"
+  ],
+  [
+   "반려견 어메니티",
+   "pet/ig-amenity-bed"
+  ],
+  [
+   "2층 객실",
+   "rooms/ig-amenity"
+  ],
+  [
+   "2층 객실",
+   "rooms/ig-kettle"
+  ],
+  [
+   "전경",
+   "site/ig-sunset"
+  ],
+  [
+   "2층 객실",
+   "rooms/ig-room-8"
+  ],
+  [
+   "로비",
+   "site/ig-frames"
+  ],
+  [
+   "2층 객실",
+   "rooms/ig-desk"
   ]
  ],
  "review_total": 300

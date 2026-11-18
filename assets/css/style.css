@@ -313,3 +313,8 @@ p{margin:0 0 1em}
 .insta a{display:block;aspect-ratio:1;overflow:hidden;border-radius:var(--r-sm)}
 .insta img{width:100%;height:100%;object-fit:cover;transition:transform .3s}.insta a:hover img{transform:scale(1.04)}
 @media(max-width:760px){.insta{grid-template-columns:repeat(2,1fr)}}
+.reels{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:14px}
+.reels figure{margin:0;background:var(--paper);border-radius:var(--r-sm);overflow:hidden;box-shadow:var(--shadow)}
+.reels iframe{width:100%;height:560px;border:0;display:block;background:#fff}
+.reels figcaption{padding:8px 12px;font-weight:600;font-size:.92rem}
+@media(max-width:760px){.reels{grid-template-columns:1fr}.reels iframe{height:600px}}
