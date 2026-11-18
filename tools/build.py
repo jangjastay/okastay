@@ -528,6 +528,14 @@ def build_index():
   </div>
 </section>
 
+<section class="sec dark-sec"><div class="wrap">
+  <div class="h-head row"><div><p class="eyebrow">VIDEO</p><h2>영상으로 먼저 보기</h2></div><a class="more light" href="{BASE}/gallery.html#videos">영상 {len(S.get('instagram_reels', [])) + 1}개 전체 ›</a></div>
+  <div class="vid-grid">
+    <div class="video" data-yt="{e(S['youtube_video'])}"><img src="https://i.ytimg.com/vi/{e(S['youtube_video'])}/hqdefault.jpg" alt="오카맨션 애견동반 펜션 소개 영상" loading="lazy"><button class="play" aria-label="오카맨션 소개 영상 재생">▶</button></div>
+    {reel_grid(S.get("instagram_reels", [])[:2])}
+  </div>
+</div></section>
+
 <section class="trust"><div class="wrap trust-in">
   <div class="t-score"><b>★ {S.get('naver_rating', '')}</b><span>네이버 방문자 리뷰 {D.get('review_total', '')}건</span></div>
   <ul class="t-kw">{"".join(f'<li>"{e(k)}" <b>{n}</b></li>' for k, n in (S.get('naver_keywords') or [])[:4])}</ul>
@@ -568,13 +576,6 @@ def build_index():
   <div class="sp-row">{"".join(f'<a class="sp-card" href="{BASE}/space/{o['slug']}.html">{img(o['photo'], o['h1'], sizes="240px")}<b>{e(o['h1'])}</b><span>+ {len(o['spots'])}곳</span></a>' for o in SPACES[::-1])}</div>
 </div></section>
 
-<section class="sec dark-sec"><div class="wrap">
-  <div class="h-head row"><div><p class="eyebrow">VIDEO</p><h2>영상으로 먼저 보기</h2></div><a class="more light" href="{BASE}/gallery.html#videos">영상 {len(S.get('instagram_reels', [])) + 1}개 전체 ›</a></div>
-  <div class="vid-grid">
-    <div class="video" data-yt="{e(S['youtube_video'])}"><img src="https://i.ytimg.com/vi/{e(S['youtube_video'])}/hqdefault.jpg" alt="오카맨션 애견동반 펜션 소개 영상" loading="lazy"><button class="play" aria-label="오카맨션 소개 영상 재생">▶</button></div>
-    {reel_grid(S.get("instagram_reels", [])[:2])}
-  </div>
-</div></section>
 
 {reviews}
 

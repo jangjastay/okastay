@@ -449,3 +449,6 @@ p{margin:0 0 1em}
 .xs.at-start>.sw-nav.prev,.xs.at-end>.sw-nav.next{opacity:0;pointer-events:none}
 .xs.no-x>.sw-nav{display:none}
 @media(max-width:760px){.xs>.sw-nav{display:none}}
+
+.vid-grid>*{min-width:0}.vid-grid .video{margin-top:0}
+@media(min-width:761px){.vid-grid .video{aspect-ratio:auto}}
