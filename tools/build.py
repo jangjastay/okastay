@@ -146,7 +146,7 @@ def layout(path, title, desc, body, og_img=None, jsonld=None, scripts=(), noinde
       {f'<p>대표전화 <a href="tel:{e(S["phone"])}">{e(S["phone"])}</a></p>' if S["phone"] else ""}
     </div>
     <div class="foot-links">
-      <a href="{BASE}/rooms/">객실</a><a href="{BASE}/day/">당일 이용</a><a href="{BASE}/guide.html#refund">환불규정</a>
+      <a href="{BASE}/rooms/">객실</a><a href="{BASE}/day/">당일 이용</a><a href="{BASE}/guide.html#refund">환불규정</a><a href="{BASE}/cheongju/">청주 펜션 찾기</a><a href="{BASE}/story/">여행 가이드</a>
       {f'<a href="{e(S["instagram"])}" target="_blank" rel="noopener">인스타그램</a>' if S["instagram"] else ""}
       {f'<a href="{e(S["youtube_channel"])}" target="_blank" rel="noopener">유튜브</a>' if S.get("youtube_channel") else ""}
     </div>
@@ -478,6 +478,47 @@ def build_spaces():
 
 
 # ---------- 메인 ----------
+
+# ---------- 검색어 랜딩 페이지 ----------
+LANDINGS = json.load(open(os.path.join(ROOT, "data", "landings.json"), encoding="utf-8"))
+
+
+def build_landings():
+    dmap = {x["slug"]: x for x in D["day_products"]}
+    for L in LANDINGS:
+        f = L["rooms"]
+        rooms = [] if f == "none" else [r for r in D["rooms"] if f == "all" or (f == "large" and r["large_dog"]) or (f == "pool" and r["pool"]) or (f == "camp" and r["group"] == "camp") or (f == "private" and r["group"] == "private")]
+        days = [dmap[k] for k in L["day"] if k in dmap]
+        pts = "".join(f'<div class="lp-pt"><h3>{e(h)}</h3><p>{e(t)}</p></div>' for h, t in L["points"])
+        rvs = [r for r in D["reviews"] if L["topic"] in r.get("topics", [])]
+        rvs = sorted(rvs, key=lambda r: -len(r["text"]))[:9]
+        faq = "".join(f"<details><summary>{e(q)}</summary><p>{e(a)}</p></details>" for q, a in L["faq"])
+        others = "".join(f'<a href="{BASE}/cheongju/{o["slug"]}.html">{e(o["kw"])}</a>' for o in LANDINGS if o["slug"] != L["slug"])
+        rel = [o for o in STORIES if L["topic"] in (o.get("topic"),) or any(w in o["title"] for w in L["kw"].split()[-1:])][:3]
+        body = f"""<section class="page-head"><div class="wrap"><p class="eyebrow dark">{e(L['kw'])}</p><h1>{e(L['h1'])}</h1><p class="lp-intro">{e(L['intro'])}</p>
+<div class="hero-cta"><a class="btn lg" href="{BASE}/reserve.html">예약 문의</a><a class="btn lg ghost" href="tel:{e(S['phone'])}">☎ 전화 예약 {e(S['phone'])}</a></div></div></section>
+<section class="sec pt0"><div class="wrap">{swipe(L['photos'], L['kw'])}
+<h2>{e(L['kw'])}, 오카맨션은 이래요</h2><div class="lp-pts">{pts}</div></div></section>
+{f'<section class="sec tint"><div class="wrap"><h2>{e(L["kw"])} 객실</h2><div class="h-scroll">{"".join(room_card(r) for r in rooms)}</div><p class="note">{e(POL["pet_rule"])}. {e(POL["large_dog_rule"])}. 입실 {POL["checkin"]} · 퇴실 {POL["checkout"]}.</p></div></section>' if rooms else ''}
+{f'<section class="sec"><div class="wrap"><h2>함께 이용하기 좋은 것</h2><div class="h-scroll">{"".join(day_card(p) for p in days)}</div></div></section>' if days else ''}
+{review_section(rvs, f"{L['kw']} 실제 이용 후기") if rvs else ''}
+<section class="sec"><div class="wrap narrow"><h2>자주 묻는 질문</h2><div class="faq">{faq}</div>
+<h2>위치</h2><p>{e(S['address'])} · <a href="https://map.naver.com/p/search/{e(S['name'])}" target="_blank" rel="noopener">네이버 지도</a> · <a href="https://www.google.com/maps/search/?api=1&query={S['lat']},{S['lng']}" target="_blank" rel="noopener">구글 지도</a></p>
+{f'<h2>함께 읽어보세요</h2>{story_cards(rel)}' if rel else ''}
+<h2>다른 검색어로 보기</h2><div class="breed-chips">{others}</div></div></section>"""
+        ld = [{"@context": "https://schema.org", "@type": "WebPage", "name": L["title"], "description": L["desc"], "url": f"{S['url']}/cheongju/{L['slug']}.html",
+               "about": {"@type": "LodgingBusiness", "name": S["name"], "url": S["url"]}, "keywords": L["kw"], "dateModified": TODAY},
+              {"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [
+                  {"@type": "Question", "name": q, "acceptedAnswer": {"@type": "Answer", "text": a}} for q, a in L["faq"]]},
+              breadcrumb([("홈", "/"), ("청주 여행 키워드", "/cheongju/"), (L["kw"], f"/cheongju/{L['slug']}.html")])]
+        layout(f"/cheongju/{L['slug']}.html", L["title"], L["desc"], body, og_img=L["photos"][0], jsonld=ld)
+    cards = "".join(f'<a class="sp-card" href="{BASE}/cheongju/{o["slug"]}.html">{img(o["photos"][0], o["h1"], sizes="240px")}<b>{e(o["kw"])}</b><span>{e(o["h1"])}</span></a>' for o in LANDINGS)
+    body = f"""<section class="page-head"><div class="wrap"><p class="eyebrow dark">SEARCH GUIDE</p><h1>청주 애견펜션 · 키즈펜션 · 수영장 펜션 한눈에</h1>
+<p>찾는 조건별로 오카맨션을 정리했어요.</p></div></section>
+<section class="sec pt0"><div class="wrap"><div class="lp-grid">{cards}</div></div></section>"""
+    layout("/cheongju/", f"청주 애견펜션·키즈펜션·수영장 펜션 찾기 | {S['name']}", "청주 애견펜션, 충북 애견펜션, 청주 키즈펜션, 청주 수영장 펜션, 청주 대형견 펜션, 청주 독채 펜션, 청주 캠핑 — 조건별 오카맨션 안내.", body)
+
+
 def build_index():
     cats = [("반려견과 함께", "pet/insta-dogpool-swim", "반려견", "/rooms/301.html", "애견운동장 · 반려견 수영장 · 포토존", "pet"),
             ("아이와 물놀이", "kids/overview", "아이 · 키즈", "/day/kids.html", "물놀이장 · 정글짐 · 에어바운스", "kids"),
@@ -509,8 +550,8 @@ def build_index():
   {img(S['hero_photo'], '오카맨션 전경 — 수영장과 숲에 둘러싸인 숙소', 'hero-bg', eager=True, sizes='100vw')}
   <div class="hero-shade"></div>
   <div class="wrap hero-in">
-    <p class="eyebrow">청주 미원 · 애견동반 · 키즈</p>
-    <h1>{e(S['slogan'])},<br>오카맨션</h1>
+    <h1 class="eyebrow">청주 애견펜션 · 키즈 수영장 펜션 오카맨션</h1>
+    <p class="hero-t">{e(S['slogan'])},<br>오카맨션</p>
     <p class="lead">빈손으로 와서 놀고, 먹고, 쉬고.<br>집에 가기 싫으면 자고 가세요.</p>
     <form class="quick" action="{BASE}/reserve.html" method="get" aria-label="빠른 예약">
       <fieldset>
@@ -609,6 +650,7 @@ def build_index():
 <section class="sec"><div class="wrap">
   <div class="h-head row"><div><p class="eyebrow dark">GUIDE · {len(STORIES) + len(BREEDS)}</p><h2>여행 전에 읽어보세요</h2></div><a class="more" href="{BASE}/story/">이야기 전체 ›</a></div>
   {story_cards(STORIES[:6])}
+  <div class="breed-chips"><span>조건별로 찾기</span>{"".join(f'<a class="chip-link" href="{BASE}/cheongju/{x["slug"]}.html">{e(x["kw"])}</a>' for x in LANDINGS)}</div>
   <div class="breed-chips"><span>견종별 여행 가이드</span>{"".join(f'<a class="chip-link" href="{BASE}/dog/{x["slug"]}.html">{e(x["name"])}</a>' for x in BREEDS[:12])}<a class="chip-link more-chip" href="{BASE}/dog/">+{max(len(BREEDS) - 12, 0)}종 더보기</a></div>
 </div></section>
 
@@ -644,7 +686,7 @@ def build_index():
 # ---------- 객실 ----------
 def build_rooms():
     cards = "".join(room_card(r) for r in D["rooms"])
-    body = f"""<section class="page-head"><div class="wrap"><p class="eyebrow dark">ROOMS</p><h1>객실 안내</h1>
+    body = f"""<section class="page-head"><div class="wrap"><p class="eyebrow dark">ROOMS</p><h1>청주 애견동반 펜션 객실 안내</h1>
 <p>전 객실 반려견 동반. 2층 객실(201~207호)부터 단독 애견운동장 301호, 독채, 장비 없이 자는 캠핑스테이까지.</p></div></section>
 <section class="sec"><div class="wrap">
 <div class="filters" role="group" aria-label="객실 거르기">
@@ -808,7 +850,7 @@ def room_detail(r):
 # ---------- 당일 ----------
 def build_day():
     cards = "".join(day_card(p) for p in D["day_products"])
-    body = f"""<section class="page-head"><div class="wrap"><p class="eyebrow dark">DAY</p><h1>당일 이용</h1>
+    body = f"""<section class="page-head"><div class="wrap"><p class="eyebrow dark">DAY</p><h1>청주 당일 수영장 · 바베큐 · 키즈 이용</h1>
 <p>숙박하지 않아도 괜찮아요. 수영장, 데크존, 바베큐, 불멍까지 하루만 즐기고 가세요.</p></div></section>
 <section class="sec"><div class="wrap"><div class="grid cards">{cards}</div>{price_note()}
 <div class="box"><h3>하루 추천 코스</h3><ol class="timeline">
@@ -881,7 +923,7 @@ def build_gallery():
             continue
         ev += f'<article class="event"><div class="ev-imgs">{"".join(img(k, v["name"]) for k in v["photos"][:3])}</div><h3>{e(v["name"])}</h3><p class="meta">{e(v["when"])}</p><p>{e(v["desc"])}</p></article>'
     ev_sec = f'<section class="sec tint"><div class="wrap"><h2>지난 이벤트</h2><div class="grid">{ev}</div></div></section>' if ev else ""
-    body = f"""<section class="page-head"><div class="wrap"><p class="eyebrow dark">PHOTOS</p><h1>사진</h1>
+    body = f"""<section class="page-head"><div class="wrap"><p class="eyebrow dark">PHOTOS</p><h1>오카맨션 실제 사진 · 영상</h1>
 <p>보정이나 합성 없이 실제 오카맨션 모습 그대로 담았습니다.</p></div></section>
 <section class="sec pt0"><div class="wrap">{tiles}</div></section>{ev_sec}
 <section class="sec" id="videos"><div class="wrap"><h2>인스타그램 영상</h2>{reel_grid(S.get("instagram_reels", []))}</div></section>
@@ -984,7 +1026,7 @@ def build_reviews():
     rest = [r for i, r in enumerate(D["reviews"]) if i not in used]
     if rest:
         secs += f'<section class="sec pt0"><div class="wrap"><h2>객실 · 휴식</h2>{review_cards(rest)}</div></section>'
-    body = f"""<section class="page-head"><div class="wrap"><p class="eyebrow dark">REVIEWS</p><h1>다녀간 손님 후기</h1>
+    body = f"""<section class="page-head"><div class="wrap"><p class="eyebrow dark">REVIEWS</p><h1>청주 애견펜션 오카맨션 실제 후기</h1>
 <p>네이버에 남겨주신 후기 {D.get('review_total', '')}여 건 중 일부를 원문 그대로 옮겼습니다. 아이디는 일부 가렸어요.</p>{naver_badge()}</div></section>{secs}
 <section class="sec tint"><div class="wrap narrow center"><h2>다음 후기의 주인공이 되어주세요</h2><a class="btn lg" href="{BASE}/reserve.html">예약 신청</a> {contact_btns()}</div></section>"""
     layout("/reviews.html", f"후기 | {S['name']} 청주 애견동반 펜션 실제 이용 후기", "오카맨션 실제 네이버 이용 후기 — 반려견 동반 숙박, 아이 물놀이, 바비큐, 301호 단독 애견운동장 후기.", body)
@@ -1027,5 +1069,5 @@ def build_misc():
 
 if __name__ == "__main__":
     os.makedirs(os.path.join(ROOT, "assets/js"), exist_ok=True)
-    build_index(); build_rooms(); build_day(); build_gallery(); build_guide(); build_reserve(); build_reviews(); build_stories(); build_breeds(); build_spaces(); build_misc()
+    build_index(); build_rooms(); build_day(); build_gallery(); build_guide(); build_reserve(); build_reviews(); build_stories(); build_breeds(); build_spaces(); build_landings(); build_misc()
     print(f"{len(PAGES)} pages built")
