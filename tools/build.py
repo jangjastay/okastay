@@ -48,7 +48,7 @@ def people_text(r):
     return "인원 확인 후 안내"
 
 
-NAV = [("객실", "/rooms/"), ("당일 이용", "/day/"), ("후기", "/reviews.html"), ("사진", "/gallery.html"), ("이용안내", "/guide.html")]
+NAV = [("객실", "/rooms/"), ("당일 이용", "/day/"), ("후기", "/reviews.html"), ("둘러보기", "/space/"), ("이용안내", "/guide.html")]
 
 
 def contact_btns():
@@ -224,9 +224,18 @@ def steps():
 def gallery_strip(keys, label):
     if not keys:
         return f'<div class="ph wide"><span>{e(label)} 실제 사진 준비 중</span></div>'
-    main = img(keys[0], label + " 대표 사진", "g-main", eager=True, sizes="(max-width:720px) 100vw, 60vw")
-    rest = "".join(f'<button class="g-thumb" data-full="{BASE}/assets/img/{k}.jpg" aria-label="{e(label)} 사진 {i + 2} 크게 보기">{img(k, f"{label} 사진 {i + 2}", sizes="160px")}</button>' for i, k in enumerate(keys[1:]))
-    return f'<div class="gallery-strip"><button class="g-main-btn" data-full="{BASE}/assets/img/{keys[0]}.jpg" aria-label="크게 보기">{main}</button><div class="g-rest">{rest}</div></div>'
+    return swipe(keys, label)
+
+
+def swipe(keys, label, captions=None):
+    slides = "".join(
+        f'<button class="sw-item" data-full="{BASE}/assets/img/{k}.jpg" aria-label="{e(label)} 사진 {i + 1} 크게 보기">'
+        f'{img(k, (captions[i] if captions else label) + f" 실제 사진 {i + 1}", eager=(i == 0), sizes="(max-width:760px) 85vw, 420px")}'
+        f'{f"<span>{e(captions[i])}</span>" if captions else ""}</button>'
+        for i, k in enumerate(keys))
+    return (f'<div class="sw" data-group><div class="sw-track">{slides}</div>'
+            f'<button class="sw-nav prev" aria-label="이전 사진">‹</button><button class="sw-nav next" aria-label="다음 사진">›</button>'
+            f'<span class="sw-count">{len(keys)}장 · 옆으로 넘겨 보세요</span></div>')
 
 
 def review_cards(items, cls="rv-grid"):
@@ -268,8 +277,8 @@ def build_stories():
     for s in STORIES:
         secs = ""
         for h, t, ph in s["sections"]:
-            pics = "".join(img(k, h) for k in ph if k != s["cover"])
-            secs += f'<h2>{e(h)}</h2><p>{e(t)}</p>' + (f'<div class="ph">{pics}</div>' if pics else "")
+            ks = [k for k in ph if k != s["cover"]]
+            secs += f'<h2>{e(h)}</h2><p>{e(t)}</p>' + (swipe(ks, h) if ks else "")
         faq = "".join(f"<details><summary>{e(q)}</summary><p>{e(a)}</p></details>" for q, a in s["faq"])
         tp = topic_map.get(s.get("topic"), s.get("topic"))
         rvs = [r for r in D["reviews"] if tp in r.get("topics", [])][:6]
@@ -334,7 +343,7 @@ def build_breeds():
 <section class="sec pt0"><div class="wrap"><article class="story">
 <h2>{e(name)} 기본 정보</h2><table class="kv">{facts}</table>
 <h2>{e(name)}의 역사</h2><p>{e(b['history'])}</p>
-<div class="ph">{"".join(img(k, name + "와 함께하는 애견동반 여행") for k in ph)}</div>
+{swipe(ph, name + "와 함께하는 애견동반 여행")}
 <h2>{e(name)} 성격과 특징</h2><ul class="dots">{"".join(f"<li>{e(t)}</li>" for t in b['traits'])}</ul>
 <h2>{e(name)}와 여행할 때 팁</h2><ul class="dots">{"".join(f"<li>{e(t)}</li>" for t in b['tips'])}</ul>
 <h2>{e(name)} 물놀이 · 수영</h2><p>{e(b['swim'])} 오카맨션 반려견 전용 수영장은 수심이 얕고, 구명조끼를 빌려 드려요.</p>
@@ -363,6 +372,97 @@ def build_breeds():
 <p>우리 아이 견종에 맞는 여행 팁, 수영 가능 여부, 함께 묵을 수 있는 객실을 견종별로 정리했어요. 12kg 미만 소형견은 전 객실, 대형견은 301호에서 함께할 수 있어요.</p></div></section>
 <section class="sec pt0"><div class="wrap">{groups}</div></section>"""
     layout("/dog/", f"견종별 여행 가이드 | 애견동반 펜션 {S['name']}", "말티즈, 푸들, 포메라니안, 웰시코기, 진돗개, 골든 리트리버 등 견종별 성격·역사·여행 팁과 애견동반 펜션 이용 안내.", body)
+
+
+# ---------- 공간 둘러보기 (사진 위 파란 점 + 인스타식 후기 댓글) ----------
+SPACES = json.load(open(os.path.join(ROOT, "data", "spaces.json"), encoding="utf-8"))
+SPACE_RV = {"301-rooftop-dog-yard": r"301|단독|개별운동장|운동장", "2f-room-with-dog": r"방|침구|침대|객실|깨끗|아늑", "dog-photozone": r"사진|포토|인테리어|감성",
+            "dog-agility-yard": r"운동장|뛰어|뛰놀|잔디", "indoor-bbq-room": r"바베큐|고기", "kids-jungle-gym-pool": r"아이|애기|키즈|정글짐|에어바운|물놀이",
+            "dog-swimming-pool": r"강아지 수영|애견 ?수영|강아지 풀|구명조끼|멍뭉이 풀", "lobby-lounge": r"카페|공용|라운지|넓", "pet-goods-store": r"매점|편의점|간식",
+            "dog-bath-amenity": r"샴푸|수건|배변|용품|어메니티", "room-amenity": r"침구|수건|깨끗|청결", "fire-pit-night": r"불멍|불|저녁|밤|야경"}
+
+
+def space_comments(sp):
+    import re as _re
+    pat = _re.compile(SPACE_RV.get(sp["slug"], r"좋"))
+    if sp["slug"] == "301-rooftop-dog-yard":
+        rv = [r for r in D["reviews"] if "301" in r.get("rooms", [])]
+    else:
+        rv = [r for r in D["reviews"] if pat.search(r["text"])]
+    k = sum(map(ord, sp["slug"])) % max(len(rv), 1)
+    return rv[k:] + rv[:k]
+
+
+def comment_html(r):
+    who = r["who"]
+    ini = who[0]
+    return (f'<li class="cm"><span class="av" aria-hidden="true">{e(ini)}</span><div><p><b>{e(who)}</b> {e(r["text"])}</p>'
+            f'<small>{e(r["when"])} · 네이버 리뷰</small></div></li>')
+
+
+def build_spaces():
+    n = len(SPACES)
+    for i, sp in enumerate(SPACES):
+        prev_, next_ = SPACES[i - 1], SPACES[(i + 1) % n]
+        dots = "".join(
+            f'<button class="hs" style="left:{s["x"]}%;top:{s["y"]}%" data-hs="{j}" aria-label="{e(s["name"])} 자세히 보기" aria-controls="hs-{j}"><span>{j + 1}</span></button>'
+            for j, s in enumerate(sp["spots"]))
+        pops = "".join(
+            f'<div class="hs-pop" id="hs-pop-{j}" hidden><b>{e(s["name"])}</b><p>{e(s["desc"])}</p><a href="#hs-{j}">자세히</a></div>' for j, s in enumerate(sp["spots"]))
+        blocks = ""
+        for j, s in enumerate(sp["spots"]):
+            tips = "".join(f"<li>{e(t)}</li>" for t in s["tips"])
+            lks = "".join(f'<a class="chip-link" href="{BASE}{u}">{e(t)}</a>' for u, t in s["links"])
+            blocks += (f'<article class="hs-block" id="hs-{j}"><h2><span class="num">{j + 1}</span>{e(s["name"])}</h2><p>{e(s["desc"])}</p>'
+                       f'{f"<ol>{tips}</ol>" if tips else ""}{f"<div class=chip-row>{lks}</div>" if lks else ""}</article>')
+        cms = space_comments(sp)
+        cm_html = ""
+        if cms:
+            first = "".join(comment_html(r) for r in cms[:3])
+            more = "".join(comment_html(r) for r in cms[3:15])
+            cm_html = (f'<section class="cm-box" aria-label="실제 손님 후기"><p class="cm-head"><b>후기 {len(cms)}개</b> · 네이버에 남겨주신 실제 후기예요</p><ul class="cm-list">{first}</ul>'
+                       + (f'<details class="cm-more"><summary>후기 {len(cms[3:15])}개 더 보기</summary><ul class="cm-list">{more}</ul></details>' if more else "")
+                       + f'<a class="cm-all" href="{BASE}/reviews.html">전체 후기 {D.get("review_total", "")}건+ 보기</a></section>')
+        same = [o for o in SPACES if o["cat"] == sp["cat"] and o["slug"] != sp["slug"]]
+        others = [o for o in SPACES if o["slug"] != sp["slug"] and o not in same]
+        card = lambda o: f'<a class="sp-card" href="{BASE}/space/{o["slug"]}.html">{img(o["photo"], o["h1"], sizes="240px")}<b>{e(o["h1"])}</b><span>+ {len(o["spots"])}곳</span></a>'
+        url = f'{S["url"]}/space/{sp["slug"]}.html'
+        from urllib.parse import quote
+        rel = "".join(f'<li><a href="{BASE}{u}">{e(u)}</a></li>' for u in sp["links"])
+        body = f"""<section class="sec pt0 sp-wrap"><div class="wrap narrow">
+<nav class="crumb"><a href="{BASE}/">홈</a> › <a href="{BASE}/space/">공간 둘러보기</a> › {e(sp['cat'])}</nav>
+<h1 class="sp-h1">{e(sp['h1'])}</h1>
+<div class="hs-photo">{img(sp['photo'], sp['h1'] + ' 실제 사진', eager=True, sizes='(max-width:760px) 100vw, 760px')}{dots}{pops}</div>
+<p class="sp-tip">파란 점을 누르면 무엇인지 보여드려요</p>
+<div class="sp-pager"><a href="{BASE}/space/{prev_['slug']}.html" rel="prev">‹ 이전</a><span>{i + 1} / {n}</span><a href="{BASE}/space/{next_['slug']}.html" rel="next">다음 ›</a></div>
+<p class="sp-intro">{e(sp['intro'])}</p>
+{cm_html}
+{blocks}
+<div class="sp-cta"><a class="btn lg" href="{BASE}/reserve.html">예약 문의</a><a class="btn ghost lg" href="tel:{e(S['phone'])}">전화</a>{f'<a class="btn ghost lg" href="{e(S["kakao_channel"])}" target="_blank" rel="noopener">카카오톡</a>' if S.get("kakao_channel") else ''}</div>
+<div class="share"><span>공유</span><button class="btn ghost sm" data-copy="{e(url)}">링크 복사</button>
+<a class="btn ghost sm" href="https://band.us/plugin/share?body={quote(sp['h1'] + ' ' + url)}&route={quote(S['url'])}" target="_blank" rel="noopener">밴드</a>
+<a class="btn ghost sm" href="https://www.facebook.com/sharer/sharer.php?u={quote(url)}" target="_blank" rel="noopener">페이스북</a>
+<a class="btn ghost sm" href="{e(S['instagram'])}" target="_blank" rel="noopener">인스타그램</a></div>
+</div></section>
+{f'<section class="sec tint"><div class="wrap"><h2>같은 {e(sp["cat"])} 공간</h2><div class="sp-row">{"".join(card(o) for o in same)}</div></div></section>' if same else ''}
+<section class="sec"><div class="wrap"><h2>다른 공간 둘러보기</h2><div class="sp-row">{"".join(card(o) for o in others)}</div></div></section>"""
+        ld = [{"@context": "https://schema.org", "@type": "ImageObject", "name": sp["h1"], "caption": sp["intro"],
+               "contentUrl": f"{S['url']}/assets/img/{sp['photo']}.jpg", "url": url, "keywords": ", ".join(sp["keywords"]),
+               "creator": {"@type": "Organization", "name": S["name"]}, "copyrightHolder": {"@type": "Organization", "name": S["name"]},
+               "hasPart": [{"@type": "CreativeWork", "name": s["name"], "text": s["desc"]} for s in sp["spots"]]},
+              breadcrumb([("홈", "/"), ("공간 둘러보기", "/space/"), (sp["h1"], f"/space/{sp['slug']}.html")])]
+        layout(f"/space/{sp['slug']}.html", sp["title"], (sp["intro"] + " " + " · ".join(s["name"] for s in sp["spots"]))[:155], body, og_img=sp["photo"], jsonld=ld)
+    cats = []
+    for sp in SPACES:
+        if sp["cat"] not in cats:
+            cats.append(sp["cat"])
+    secs = "".join(f'<h2>{e(c)}</h2><div class="sp-grid">' + "".join(
+        f'<a class="sp-card" href="{BASE}/space/{o["slug"]}.html">{img(o["photo"], o["h1"], sizes="(max-width:760px) 50vw, 25vw")}<b>{e(o["h1"])}</b><span>+ {len(o["spots"])}곳</span></a>'
+        for o in SPACES if o["cat"] == c) + "</div>" for c in cats)
+    body = f"""<section class="page-head"><div class="wrap"><p class="eyebrow dark">SPACES</p><h1>공간 둘러보기</h1>
+<p>사진 속 파란 점을 누르면 무엇이 있는지, 어떻게 쓰는지 알려드려요. 모두 실제 오카맨션 사진이에요. <a href="{BASE}/gallery.html">사진 {len(D['gallery'])}장 전체 보기 ›</a></p></div></section>
+<section class="sec pt0"><div class="wrap">{secs}</div></section>"""
+    layout("/space/", f"공간 둘러보기 | {S['name']} 청주 애견동반 펜션 사진 투어", "오카맨션 객실, 애견운동장, 반려견 수영장, 키즈 놀이터, 바베큐장을 사진으로 둘러보기. 사진 속 점을 누르면 시설 안내가 나와요.", body)
 
 
 # ---------- 메인 ----------
@@ -469,6 +569,9 @@ def build_index():
     <div class="center"><a class="btn lg" href="{BASE}/reserve.html">예약 신청하기</a> {contact_btns()}</div>
   </div>
 </section>
+
+<section class="sec"><div class="wrap"><div class="sec-head"><h2>공간 둘러보기</h2><a class="more" href="{BASE}/space/">전체 {len(SPACES)}곳</a></div>
+<div class="sp-row">{"".join(f'<a class="sp-card" href="{BASE}/space/{o['slug']}.html">{img(o['photo'], o['h1'], sizes="240px")}<b>{e(o['h1'])}</b><span>+ {len(o['spots'])}곳</span></a>' for o in SPACES)}</div></div></section>
 
 <section class="sec tint"><div class="wrap"><div class="sec-head"><h2>인스타그램 @stay_oka</h2><a class="more" href="{e(S['instagram'])}" target="_blank" rel="noopener">팔로우하고 소식 받기</a></div>
 {reel_grid(S.get("instagram_reels", [])[:3])}
@@ -579,7 +682,8 @@ def mosaic(keys, label):
         f'<button class="m{i}" data-full="{BASE}/assets/img/{k}.jpg" aria-label="{e(label)} 사진 {i + 1} 크게 보기">'
         f'{img(k, f"{label} 실제 사진 {i + 1}", eager=(i == 0), sizes="(max-width:760px) 88vw, " + ("50vw" if i == 0 else "25vw"))}</button>'
         for i, k in enumerate(keys[:5]))
-    return f'<div class="mosaic n{min(len(keys), 5)}">{items}<span class="m-count">사진 {len(keys)}장 · 눌러서 크게 보기</span></div>'
+    extra = "".join(f'<span hidden data-full="{BASE}/assets/img/{k}.jpg"></span>' for k in keys[5:])
+    return f'<div class="mosaic n{min(len(keys), 5)}" data-group>{items}{extra}<span class="m-count">사진 {len(keys)}장 · 눌러서 넘겨 보기</span></div>'
 
 
 def room_detail(r):
@@ -629,6 +733,7 @@ def room_detail(r):
 <div class="room-main">
   <ul class="hl">{''.join(f'<li><i aria-hidden="true">{ic}</i><div><b>{e(t)}</b>{f"<span>{e(d)}</span>" if d else ""}</div></li>' for ic, t, d in hi)}</ul>
   <div class="room-sec"><h2>{e(nm)} 소개</h2><p>{intro}</p></div>
+  {(lambda sl: f'<div class="room-sec"><h2>사진으로 둘러보기</h2><div class="sp-row">' + "".join(f'<a class="sp-card" href="{BASE}/space/{o["slug"]}.html">{img(o["photo"], o["h1"], sizes="240px")}<b>{e(o["h1"])}</b><span>+ {len(o["spots"])}곳</span></a>' for o in SPACES if o["slug"] in sl) + '</div></div>')(["301-rooftop-dog-yard", "dog-swimming-pool", "fire-pit-night"] if r["group"] == "dog" else ["2f-room-with-dog", "room-amenity", "dog-bath-amenity", "dog-swimming-pool"])}
   <div class="room-sec"><h2>이 객실의 편의시설</h2><ul class="amen">{''.join(f'<li><i aria-hidden="true">{ic}</i>{e(t)}</li>' for ic, t in am)}</ul>
   <h3 class="small-h">오카맨션 공용 시설</h3><ul class="amen">{''.join(f'<li><i aria-hidden="true">{ic}</i>{e(t)}</li>' for ic, t in SITE_AMEN)}</ul></div>
   <div class="room-sec" id="reviews"><h2>다녀간 손님 후기 <small>네이버 실제 후기</small></h2>
@@ -712,8 +817,30 @@ def reel_grid(items):
         f'<figure><iframe src="https://www.instagram.com/reel/{e(c)}/embed/" title="오카맨션 인스타그램 영상 — {e(t)}" loading="lazy" allowtransparency="true" scrolling="no"></iframe><figcaption>{e(t)}</figcaption></figure>'
         for c, t in items) + '</div>'
 
+GALLERY_CATS = [("객실", ["2층 객실", "301호", "독채 1호", "캠핑스테이"]),
+                ("반려견", ["애견운동장", "애견운동장 야경", "301호 단독 애견운동장", "반려견 수영장", "반려견 포토존", "반려견 어메니티", "반려견과 함께", "반려견과 바베큐", "반려견과 바베큐룸"]),
+                ("아이 · 키즈", ["키즈 놀이터", "짚라인", "에어바운스", "슬라이드 풀", "모래놀이", "물감놀이"]),
+                ("수영장 · 데크", ["대형수영장", "온수풀", "파라솔존", "데크존"]),
+                ("바베큐 · 불멍", ["바베큐", "야외 바베큐", "실내 바베큐장", "불멍존", "실내 벽난로"]),
+                ("카페 · 공용 공간", ["로비", "카페·편의점", "슬러시", "보드게임"]),
+                ("전경 · 입구", ["전경", "입구", "캠핑장"])]
+
+
 def build_gallery():
-    tiles = "".join(f'<button class="tile" data-full="{BASE}/assets/img/{k}.jpg" aria-label="{e(label)} 크게 보기">{img(k, label, sizes="(max-width:720px) 50vw, 25vw")}<span>{e(label)}</span></button>' for label, k in D["gallery"])
+    used = set()
+    tabs, rows = "", ""
+    for i, (cat, labels) in enumerate(GALLERY_CATS):
+        items = [(l, k) for l, k in D["gallery"] if l in labels]
+        used |= {k for _, k in items}
+        if not items:
+            continue
+        tabs += f'<a class="chip" href="#g{i}">{e(cat)} <small>{len(items)}</small></a>'
+        rows += f'<section class="g-sec" id="g{i}"><h2>{e(cat)} <small>{len(items)}장</small></h2>{swipe([k for _, k in items], cat, [l for l, _ in items])}</section>'
+    rest = [(l, k) for l, k in D["gallery"] if k not in used]
+    if rest:
+        tabs += f'<a class="chip" href="#gx">기타 <small>{len(rest)}</small></a>'
+        rows += f'<section class="g-sec" id="gx"><h2>기타</h2>{swipe([k for _, k in rest], "오카맨션", [l for l, _ in rest])}</section>'
+    tiles = f'<nav class="g-tabs" aria-label="사진 분류">{tabs}</nav>{rows}'
     ev = ""
     for v in D["events"]:
         if not (v["photos"] or v["desc"]):
@@ -722,7 +849,7 @@ def build_gallery():
     ev_sec = f'<section class="sec tint"><div class="wrap"><h2>지난 이벤트</h2><div class="grid">{ev}</div></div></section>' if ev else ""
     body = f"""<section class="page-head"><div class="wrap"><p class="eyebrow dark">PHOTOS</p><h1>사진</h1>
 <p>보정이나 합성 없이 실제 오카맨션 모습 그대로 담았습니다.</p></div></section>
-<section class="sec pt0"><div class="wrap"><div class="masonry">{tiles}</div></div></section>{ev_sec}
+<section class="sec pt0"><div class="wrap">{tiles}</div></section>{ev_sec}
 <section class="sec"><div class="wrap"><h2>인스타그램 영상</h2>{reel_grid(S.get("instagram_reels", []))}</div></section>
 <section class="sec"><div class="wrap narrow center"><h2>영상으로 보기</h2>
 <div class="video" data-yt="{e(S['youtube_video'])}"><img src="https://i.ytimg.com/vi/{e(S['youtube_video'])}/hqdefault.jpg" alt="오카맨션 소개 영상" loading="lazy"><button class="play" aria-label="영상 재생">▶</button></div>
@@ -865,5 +992,5 @@ def build_misc():
 
 if __name__ == "__main__":
     os.makedirs(os.path.join(ROOT, "assets/js"), exist_ok=True)
-    build_index(); build_rooms(); build_day(); build_gallery(); build_guide(); build_reserve(); build_reviews(); build_stories(); build_breeds(); build_misc()
+    build_index(); build_rooms(); build_day(); build_gallery(); build_guide(); build_reserve(); build_reviews(); build_stories(); build_breeds(); build_spaces(); build_misc()
     print(f"{len(PAGES)} pages built")
