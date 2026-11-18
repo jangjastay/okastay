@@ -520,43 +520,145 @@ def build_rooms():
            jsonld=breadcrumb([("홈", "/"), ("객실", "/rooms/")]))
 
     for r in D["rooms"]:
-        ci, co = room_checkin(r)
-        p = r["price"]
-        price_rows = "".join(f"<tr><th>{k}</th><td>{won(p.get(v))}</td></tr>" for k, v in [("평일", "weekday"), ("주말·공휴일 전날", "weekend"), ("성수기", "peak")])
-        feats = "".join(f"<li>{e(f)}</li>" for f in r["features"]) or "<li>상세 구성은 문의 주시면 안내드립니다.</li>"
-        pet = POL["large_dog_rule"] if r["large_dog"] else POL["pet_rule"]
-        same = [o for o in D["rooms"] if o["slug"] != r["slug"]][:3]
-        body = f"""<section class="page-head"><div class="wrap">
-<nav class="crumb"><a href="{BASE}/">홈</a> › <a href="{BASE}/rooms/">객실</a> › {e(r['name'])}</nav>
-<p class="eyebrow dark">{e(r['type'])}</p><h1>{e(r['name'])}</h1><p>{e(r['summary'])}</p></div></section>
-<section class="sec pt0"><div class="wrap split detail">
-<div>{gallery_strip(r['photos'][STD.index(r['slug']) % len(r['photos']):] + r['photos'][:STD.index(r['slug']) % len(r['photos'])] if r['slug'] in STD else r['photos'], r['name'])}{'<p class="note">201~207호는 구조가 같아 2층 객실 사진을 함께 보여드립니다.</p>' if r['slug'] in STD else ''}</div>
-<aside class="side">
-  <ul class="chips">{''.join(f'<li>{e(t)}</li>' for t in r['tags'])}</ul>
-  <table class="kv"><tr><th>입실 / 퇴실</th><td>{ci} / {co}</td></tr><tr><th>인원</th><td>{e(people_text(r))}</td></tr>
-  <tr><th>반려견</th><td>{e(pet)}</td></tr></table>
-  <h3 class="small-h">1박 요금</h3><table class="kv">{price_rows}</table>
-  <p class="note">요금이 비어 있으면 날짜별로 확인 후 안내드립니다. 추가 인원 1인 {won(POL['extra_person_fee'])} · {e(POL['infant_rule'])}</p>
-  <a class="btn lg block" href="{BASE}/reserve.html?type=stay&room={r['slug']}">{e(r['name'])} 예약 신청</a>
-  <div class="btn-row">{contact_btns()}</div>
-</aside></div></section>
-<section class="sec tint"><div class="wrap split">
-<div><h2>이 객실의 특징</h2><ul class="dots">{feats}</ul></div>
-<div><h2>함께 즐기면 좋아요</h2><ul class="dots">
-<li><a href="{BASE}/day/bbq.html">바베큐</a> — 간편 고기세트 신청 시 장보기 없이</li>
-<li><a href="{BASE}/day/fire.html">불멍존</a> — 불멍세트 {won(15000)}</li>
-<li><a href="{BASE}/day/warm-pool.html">온수풀</a> — 2시간 프라이빗 대여</li></ul></div>
+        room_detail(r)
+
+
+
+# ---------- 객실 상세 (사진 모자이크 + 고정 예약 카드) ----------
+def josa(word, a, b_):
+    c = word[-1]
+    if "가" <= c <= "힣":
+        return a if (ord(c) - 0xAC00) % 28 else b_
+    return b_
+
+
+SITE_AMEN = [("🌿", "인조잔디 애견운동장 · 어질리티"), ("🐕", "반려견 전용 수영장 (구명조끼 대여)"), ("🍖", "실내 · 야외 바베큐장"),
+             ("🏪", "24시 무인 편의점 · 카페"), ("🎲", "보드게임 대여"), ("🅿️", "넓은 주차장"), ("🧒", "애견존과 분리된 키즈 놀이터"),
+             ("🏊", "대형 야외수영장 (여름 · 반려견 입수 불가)")]
+RV_KEYS = [("청결", r"깨끗|깔끔|청결|쾌적"), ("친절", r"친절"), ("반려견 만족", r"강아지|반려견|댕|애견"), ("편한 잠자리", r"침구|침대|꿀잠|포근|푹"),
+           ("분위기 · 사진", r"사진|인테리어|감성|분위기|예쁘|이쁘"), ("조용 · 힐링", r"조용|힐링|아늑"), ("방음", r"방음")]
+
+
+def room_bits(r):
+    g = r["group"]
+    if g == "standard":
+        hi = [("🐶", "소형견 2마리까지", "12kg 미만 소형견과 함께 묵을 수 있어요. 1마리 " + won(POL["pet_fee"]) + "."),
+              ("🧺", "반려견 용품 준비", "반려견 식기, 배변패드, 침대 계단이 객실에 있어요."),
+              ("📺", "넷플릭스", "객실에서 넷플릭스로 영화 보며 쉴 수 있어요.")]
+        am = [("🍽️", "반려견 식기"), ("🧻", "배변패드"), ("🪜", "반려견 침대 계단"), ("📺", "넷플릭스"), ("❄️", "냉난방")]
+    elif g == "dog":
+        hi = [("🌿", "객실 전용 루프탑 애견운동장", "다른 손님과 나눠 쓰지 않는 우리 강아지만의 운동장이에요."),
+              ("🐕", "대형견 가능", "대형견도 사전 문의 후 함께할 수 있어요. " + won(POL["large_dog_fee"]) + "."),
+              ("🔥", "운동장 위 불멍 · 캠핑 체어", "펫 어질리티, 미니 볼풀장, 불멍존이 운동장에 함께 있어요.")]
+        am = [("🌿", "전용 루프탑 운동장"), ("🏃", "펫 어질리티"), ("🎾", "미니 볼풀장"), ("🔥", "불멍존"), ("🪑", "캠핑 체어"), ("❄️", "냉난방")]
+    else:
+        hi = [("🏡", f, "") for f in r["features"]][:3] or [("🏡", r["type"], r["summary"])]
+        am = [("✔️", f) for f in r["features"]]
+    return hi, am
+
+
+def room_reviews(r):
+    own = [x for x in D["reviews"] if r["slug"] in x.get("rooms", [])]
+    if r["group"] == "standard":
+        std = [x for x in D["reviews"] if x.get("rooms") == ["std"]]
+        k = (int(r["slug"]) - 201) * 3
+        return own + std[k:] + std[:k]
+    if r["group"] == "dog":
+        return own
+    return [x for x in D["reviews"] if "pet" in x.get("topics", [])][:12]
+
+
+def mosaic(keys, label):
+    if not keys:
+        return f'<div class="mosaic none"><div class="ph wide"><span>{e(label)} 실제 사진 준비 중 — 공용 시설 사진은 아래에서 볼 수 있어요</span></div></div>'
+    items = "".join(
+        f'<button class="m{i}" data-full="{BASE}/assets/img/{k}.jpg" aria-label="{e(label)} 사진 {i + 1} 크게 보기">'
+        f'{img(k, f"{label} 실제 사진 {i + 1}", eager=(i == 0), sizes="(max-width:760px) 88vw, " + ("50vw" if i == 0 else "25vw"))}</button>'
+        for i, k in enumerate(keys[:5]))
+    return f'<div class="mosaic n{min(len(keys), 5)}">{items}<span class="m-count">사진 {len(keys)}장 · 눌러서 크게 보기</span></div>'
+
+
+def room_detail(r):
+    import re as _re
+    ci, co = room_checkin(r)
+    pet = POL["large_dog_rule"] if r["large_dog"] else POL["pet_rule"]
+    photos = (r['photos'][STD.index(r['slug']) % len(r['photos']):] + r['photos'][:STD.index(r['slug']) % len(r['photos'])]) if r['slug'] in STD else r['photos']
+    hi, am = room_bits(r)
+    rvs = room_reviews(r)
+    counts = [(k, sum(1 for x in rvs if _re.search(pat, x["text"]))) for k, pat in RV_KEYS]
+    counts = [c for c in counts if c[1] >= 2]
+    counts.sort(key=lambda c: -c[1])
+    chips = "".join(f'<li><b>{e(k)}</b><span>후기 {n}개</span></li>' for k, n in counts[:6])
+    nm = r["name"]
+    title_kw = "대형견 가능 애견펜션" if r["large_dog"] else ("개별 수영장 독채" if r["pool"] else "애견동반 펜션 객실")
+    intro = (f"{nm}{josa(nm, '은', '는')} 청주 미원 애견동반 펜션 오카맨션의 {e(r['floor'])} {e(r['type'])}이에요. {e(r['summary'])}. "
+             f"객실에서 쉬다가 인조잔디 애견운동장과 반려견 전용 수영장에서 놀고, 저녁엔 바베큐와 불멍까지 숙소 안에서 해결할 수 있어요. "
+             f"옥화자연휴양림과 같은 운암옥화길에 있어 숲 산책을 함께 즐기기 좋아요.")
+    p = r["price"]
+    has_price = any(p.get(k) for k in ("weekday", "weekend", "peak"))
+    price_line = (f'<p class="bk-price"><b>{won(p.get("weekday"))}</b> / 1박 (평일)</p>' if p.get("weekday")
+                  else '<p class="bk-price"><b>요금 문의</b><span>날짜를 알려주시면 바로 안내드려요</span></p>')
+    price_rows = "".join(f"<tr><th>{k}</th><td>{won(p.get(v))}</td></tr>" for k, v in [("평일", "weekday"), ("주말·공휴일 전날", "weekend"), ("성수기", "peak")]) if has_price else ""
+    refund = "".join(f"<tr><th>{e(a)}</th><td>{e(b_)}</td></tr>" for a, b_ in POL["refund"])
+    others = [o for o in D["rooms"] if o["slug"] != r["slug"]]
+    others = [o for o in others if o["group"] != r["group"]][:2] + [o for o in others if o["group"] == r["group"]][:1]
+    faq = [(f"{nm}에 반려견 몇 마리까지 함께 묵을 수 있나요?", pet + "."),
+           (f"{nm} 입실·퇴실 시간은요?", f"입실 {ci}, 퇴실 {co}이에요."),
+           (f"{nm} 요금은 얼마인가요?", "날짜별로 달라요. 예약 문의를 남겨 주시면 확인 후 안내드려요." if not has_price else "평일·주말·성수기 요금은 페이지의 요금표를 확인해 주세요."),
+           ("반려견 수영장은 숙박하면 쓸 수 있나요?", "네, 반려견 전용 수영장을 이용할 수 있고 구명조끼도 빌려 드려요. 대형 야외수영장은 반려견 입수가 안 돼요.")]
+    faq_html = "".join(f"<details><summary>{e(q)}</summary><p>{e(a)}</p></details>" for q, a in faq)
+    book = f"""<div class="bk-card">
+  {price_line}
+  <ul class="bk-facts"><li><span>입실</span><b>{ci}</b></li><li><span>퇴실</span><b>{co}</b></li><li><span>인원</span><b>{e(people_text(r))}</b></li><li><span>반려견</span><b>{"대형견 가능" if r["large_dog"] else "소형견 2마리"}</b></li></ul>
+  <a class="btn lg block" href="{BASE}/reserve.html?type=stay&room={r['slug']}">날짜 고르고 예약 문의</a>
+  <a class="btn ghost block" href="tel:{e(S['phone'])}">전화 {e(S['phone'])}</a>
+  <p class="note center">문의 → 확인 → 확정 후 계좌이체. 아직 결제되지 않아요.</p>
+</div>"""
+    body = f"""<section class="room-head"><div class="wrap">
+<nav class="crumb"><a href="{BASE}/">홈</a> › <a href="{BASE}/rooms/">객실</a> › {e(nm)}</nav>
+<h1>{e(nm)} <small>{e(r['summary'])}</small></h1>
+<p class="room-sub">청주 미원 · 반려견 동반 · <a href="#reviews">후기 {len(rvs)}개</a>{" · 대형견 가능" if r["large_dog"] else ""}</p>
+{mosaic(photos, nm)}{'<p class="note">201~207호는 구조가 같아 2층 객실 실제 사진을 함께 보여드려요.</p>' if r['slug'] in STD else ''}
 </div></section>
-{review_section([x for x in D["reviews"] if r["slug"] in x.get("rooms", [])] + ([x for x in D["reviews"] if x.get("rooms") == ["std"]][(int(r["slug"]) - 201) * 3:] if r["group"] == "standard" else []), r["name"] + " · 2층 객실 다녀간 손님 후기" if r["group"] == "standard" else r["name"] + " 다녀간 손님 후기")}
-<section class="sec"><div class="wrap"><h2>다른 객실</h2><div class="grid cards">{''.join(room_card(o) for o in same)}</div></div></section>"""
-        ld = {"@context": "https://schema.org", "@type": "HotelRoom", "name": f"{S['name']} {r['name']}", "description": r["summary"],
-              "url": f"{S['url']}/rooms/{r['slug']}.html", "petsAllowed": True}
-        if r["photos"]:
-            ld["image"] = [f"{S['url']}/assets/img/{k}.jpg" for k in r["photos"]]
-        layout(f"/rooms/{r['slug']}.html", f"{r['name']} — {r['summary']} | {S['name']} 청주 애견펜션",
-               f"오카맨션 {r['name']}: {r['summary']}. 입실 {ci}, 퇴실 {co}. {pet}.", body,
-               og_img=r["photos"][0] if r["photos"] else None,
-               jsonld=[ld, breadcrumb([("홈", "/"), ("객실", "/rooms/"), (r["name"], f"/rooms/{r['slug']}.html")])])
+<section class="sec pt0"><div class="wrap room-grid">
+<div class="room-main">
+  <ul class="hl">{''.join(f'<li><i aria-hidden="true">{ic}</i><div><b>{e(t)}</b>{f"<span>{e(d)}</span>" if d else ""}</div></li>' for ic, t, d in hi)}</ul>
+  <div class="room-sec"><h2>{e(nm)} 소개</h2><p>{intro}</p></div>
+  <div class="room-sec"><h2>이 객실의 편의시설</h2><ul class="amen">{''.join(f'<li><i aria-hidden="true">{ic}</i>{e(t)}</li>' for ic, t in am)}</ul>
+  <h3 class="small-h">오카맨션 공용 시설</h3><ul class="amen">{''.join(f'<li><i aria-hidden="true">{ic}</i>{e(t)}</li>' for ic, t in SITE_AMEN)}</ul></div>
+  <div class="room-sec" id="reviews"><h2>다녀간 손님 후기 <small>네이버 실제 후기</small></h2>
+  {f'<ul class="rv-keys">{chips}</ul>' if chips else ''}
+  {review_cards(rvs[:6])}{f'<details class="rv-more"><summary>후기 {len(rvs[6:24])}개 더 보기</summary>{review_cards(rvs[6:24])}</details>' if len(rvs) > 6 else ''}
+  <p><a class="more" href="{BASE}/reviews.html">전체 후기 {D.get('review_total', '')}건+ 보기</a></p></div>
+  <div class="room-sec"><h2>위치</h2><p>충청북도 청주시 상당구 미원면 운암옥화길 186-16 · 옥화자연휴양림과 같은 길이에요.</p>
+  <div class="btn-row"><a class="btn ghost sm" href="https://map.naver.com/p/search/%EC%98%A4%EC%B9%B4%EB%A7%A8%EC%85%98" target="_blank" rel="noopener">네이버 지도</a><a class="btn ghost sm" href="https://map.kakao.com/?q=%EC%98%A4%EC%B9%B4%EB%A7%A8%EC%85%98" target="_blank" rel="noopener">카카오맵</a><a class="btn ghost sm" href="{BASE}/guide.html">오시는 길</a></div></div>
+  <div class="room-sec"><h2>알아두실 사항</h2>
+  <div class="rules"><div><h3>입실 · 퇴실</h3><p>입실 {ci} · 퇴실 {co}</p><h3>반려견</h3><p>{e(pet)}</p><h3>인원</h3><p>{e(people_text(r))} · 추가 1인 {won(POL['extra_person_fee'])} · {e(POL['infant_rule'])}</p></div>
+  <div><h3>환불 규정</h3><table class="kv">{refund}</table>{f'<h3>1박 요금</h3><table class="kv">{price_rows}</table>' if has_price else ''}</div></div></div>
+  <div class="room-sec"><h2>자주 묻는 질문</h2><div class="faq">{faq_html}</div></div>
+  <div class="room-sec"><h2>함께 즐기면 좋아요</h2><ul class="dots">
+  <li><a href="{BASE}/day/bbq.html">바베큐</a> — 간편 고기세트 {won(65000)}, 장보기 없이</li>
+  <li><a href="{BASE}/day/fire.html">불멍</a> — 불멍세트 {won(15000)}</li>
+  <li><a href="{BASE}/story/dog-pool-first-time.html">강아지 수영장 처음 갈 때</a> · <a href="{BASE}/story/dog-travel-checklist.html">강아지 여행 준비물</a></li></ul></div>
+</div>
+<aside class="room-side">{book}</aside>
+</div></section>
+<section class="sec tint"><div class="wrap"><h2>다른 객실도 보세요</h2><div class="grid cards">{''.join(room_card(o) for o in others)}</div></div></section>
+<div class="bk-bar"><div><b>{e(nm)}</b><span>{"요금 문의" if not p.get("weekday") else won(p.get("weekday")) + " / 1박"}</span></div><a class="btn" href="{BASE}/reserve.html?type=stay&room={r['slug']}">예약 문의</a></div>"""
+    ld = {"@context": "https://schema.org", "@type": "HotelRoom", "name": f"{S['name']} {nm}", "description": r["summary"],
+          "url": f"{S['url']}/rooms/{r['slug']}.html", "petsAllowed": True,
+          "amenityFeature": [{"@type": "LocationFeatureSpecification", "name": t, "value": True} for _, t in am],
+          "containedInPlace": {"@type": "LodgingBusiness", "name": S["name"], "url": S["url"]}}
+    if r.get("max"):
+        ld["occupancy"] = {"@type": "QuantitativeValue", "maxValue": r["max"]}
+    if r["photos"]:
+        ld["image"] = [f"{S['url']}/assets/img/{k}.jpg" for k in r["photos"]]
+    faq_ld = {"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [
+        {"@type": "Question", "name": q, "acceptedAnswer": {"@type": "Answer", "text": a}} for q, a in faq]}
+    layout(f"/rooms/{r['slug']}.html", f"청주 {title_kw} {nm} — {r['summary']} | {S['name']}",
+           f"청주 미원 {title_kw} 오카맨션 {nm}: {r['summary']}. 입실 {ci} · 퇴실 {co}. {pet}. 실제 후기 {len(rvs)}개.", body,
+           og_img=photos[0] if photos else None,
+           jsonld=[ld, faq_ld, breadcrumb([("홈", "/"), ("객실", "/rooms/"), (nm, f"/rooms/{r['slug']}.html")])])
 
 
 # ---------- 당일 ----------
