@@ -16,7 +16,7 @@
   "lat": null,
   "lng": null,
   "phone": "010-7369-1855",
-  "kakao_channel": "",
+  "kakao_channel": "https://open.kakao.com/o/sWO8po5f",
   "instagram": "https://www.instagram.com/stay_oka/",
   "instagram_kids": "https://www.instagram.com/oka__kids/",
   "youtube_video": "uMn8_S4UUx0",
@@ -32,7 +32,29 @@
   "youtube_channel": "https://www.youtube.com/@%EC%98%A4%EC%B9%B4%EB%A9%98%EC%85%98",
   "indexnow_key": "da45ddf867bd110eb2c657042c4b4697",
   "daum_webmaster": "#DaumWebMasterTool:a59ecfec9d5382426efa9dad0e62db971103b1bc5c42a2e09ea22c83827afb94:LSr9wi71I6+MYd9iMzmuXg==",
-  "bing_site_verification": "D4CB73FEF29B26A222E1170A4653C6A1"
+  "bing_site_verification": "D4CB73FEF29B26A222E1170A4653C6A1",
+  "instagram_posts": [
+   [
+    "https://www.instagram.com/stay_oka/p/DasqyHRlLYx/",
+    "pet/insta-dogpool-swim",
+    "반려견 수영장 오픈"
+   ],
+   [
+    "https://www.instagram.com/stay_oka/p/DasqyHRlLYx/",
+    "pet/insta-dogpool-a",
+    "반려견 수영장"
+   ],
+   [
+    "https://www.instagram.com/stay_oka/p/DasqyHRlLYx/",
+    "pet/insta-dogpool-lift",
+    "첫 수영"
+   ],
+   [
+    "https://www.instagram.com/stay_oka/p/C3oQC1QvpQU/",
+    "site/insta-front",
+    "오카맨션 전경"
+   ]
+  ]
  },
  "policy": {
   "checkin": "15:00",
@@ -3110,6 +3132,26 @@
   ]
  ],
  "gallery": [
+  [
+   "반려견 수영장",
+   "pet/insta-dogpool-swim"
+  ],
+  [
+   "반려견 수영장",
+   "pet/insta-dogpool-lift"
+  ],
+  [
+   "반려견 수영장",
+   "pet/insta-dogpool-a"
+  ],
+  [
+   "반려견 수영장",
+   "pet/insta-dogpool-b"
+  ],
+  [
+   "전경",
+   "site/insta-front"
+  ],
   [
    "전경",
    "site/aerial"

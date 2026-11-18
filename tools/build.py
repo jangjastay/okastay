@@ -470,6 +470,9 @@ def build_index():
   </div>
 </section>
 
+<section class="sec tint"><div class="wrap"><div class="sec-head"><h2>인스타그램 @stay_oka</h2><a class="more" href="{e(S['instagram'])}" target="_blank" rel="noopener">팔로우하고 소식 받기</a></div>
+<div class="insta">{"".join(f'<a href="{e(u)}" target="_blank" rel="noopener" aria-label="인스타그램 게시물: {e(t)}">{img(k, "오카맨션 인스타그램 — " + t, sizes="(max-width:760px) 50vw, 25vw")}</a>' for u, k, t in S.get("instagram_posts", []))}</div></div></section>
+
 <section class="sec">
   <div class="wrap"><div class="sec-head"><h2>오카맨션 이야기</h2><a class="more" href="{BASE}/story/">전체 보기</a></div>
   {story_cards(STORIES)}<p class="center" style="margin-top:20px"><a class="btn ghost" href="{BASE}/dog/">견종별 여행 가이드 30종 보기</a></p></div>
@@ -612,6 +615,7 @@ def room_detail(r):
   <ul class="bk-facts"><li><span>입실</span><b>{ci}</b></li><li><span>퇴실</span><b>{co}</b></li><li><span>인원</span><b>{e(people_text(r))}</b></li><li><span>반려견</span><b>{"대형견 가능" if r["large_dog"] else "소형견 2마리"}</b></li></ul>
   <a class="btn lg block" href="{BASE}/reserve.html?type=stay&room={r['slug']}">날짜 고르고 예약 문의</a>
   <a class="btn ghost block" href="tel:{e(S['phone'])}">전화 {e(S['phone'])}</a>
+  {f'<a class="btn ghost block" href="{e(S["kakao_channel"])}" target="_blank" rel="noopener">카카오톡 문의</a>' if S.get("kakao_channel") else ""}
   <p class="note center">문의 → 확인 → 확정 후 계좌이체. 아직 결제되지 않아요.</p>
 </div>"""
     body = f"""<section class="room-head"><div class="wrap">

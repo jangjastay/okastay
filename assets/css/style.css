@@ -309,3 +309,7 @@ p{margin:0 0 1em}
   .bk-bar b{display:block}.bk-bar span{font-size:.85rem;color:var(--sub)}
   body:has(.bk-bar){padding-bottom:130px}
 }
+.insta{display:grid;grid-template-columns:repeat(4,1fr);gap:8px}
+.insta a{display:block;aspect-ratio:1;overflow:hidden;border-radius:var(--r-sm)}
+.insta img{width:100%;height:100%;object-fit:cover;transition:transform .3s}.insta a:hover img{transform:scale(1.04)}
+@media(max-width:760px){.insta{grid-template-columns:repeat(2,1fr)}}
