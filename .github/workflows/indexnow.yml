@@ -28,6 +28,9 @@ jobs:
               if path.endswith("/index.html"):
                   path = path[:-10]
               urls.append("https://okastay.kr" + path)
+          import os, re
+          if os.environ.get("GITHUB_EVENT_NAME") == "workflow_dispatch":
+              urls = re.findall(r"<loc>([^<]+)</loc>", open("sitemap.xml", encoding="utf-8").read())
           if not urls:
               print("no html changes"); sys.exit(0)
           body = json.dumps({"host": "okastay.kr", "key": key, "keyLocation": f"https://okastay.kr/{key}.txt", "urlList": urls[:10000]}).encode()
