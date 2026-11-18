@@ -477,6 +477,20 @@ def build_spaces():
 
 # ---------- 메인 ----------
 def build_index():
+    cats = [("반려견과 함께", "pet/insta-dogpool-swim", "반려견", "/rooms/301.html", "애견운동장 · 반려견 수영장 · 포토존", "pet"),
+            ("아이와 물놀이", "kids/overview", "아이 · 키즈", "/day/kids.html", "물놀이장 · 정글짐 · 에어바운스", "kids"),
+            ("객실 · 숙박", "rooms/ig-room-1", "객실", "/rooms/", "2층 객실 · 301호 · 독채 · 캠핑스테이", None),
+            ("바베큐 · 불멍", "day/bbq-set", "바베큐 · 불멍", "/day/bbq.html", "간편 고기세트 · 실내·야외 바베큐장", "bbq"),
+            ("수영장 · 데크", "day/ig-bigpool", "수영장 · 데크", "/day/pool.html", "대형 야외수영장 · 온수풀 · 데크존", "pool"),
+            ("카페 · 공용 공간", "site/ig-lobby", "카페 · 공용 공간", "/day/cafe.html", "로비 라운지 · 무인 편의점 · 보드게임", "cafe")]
+    gcount = {c: sum(1 for l, k in D["gallery"] if l in labels) for c, labels in GALLERY_CATS}
+    gidx = {c: i for i, (c, _) in enumerate(GALLERY_CATS)}
+    cat_tiles = "".join(
+        f'<a class="cat" href="{BASE}{link}">{img(ph, t, sizes="(max-width:760px) 50vw, 33vw")}<div class="cat-t"><b>{e(t)}</b><span>{e(sub)}</span>'
+        f'<em>사진 {gcount.get(gc, 0)}장{(" · 후기 " + str(sum(1 for r in D["reviews"] if tp in r.get("topics", []))) + "개") if tp else ""}</em></div></a>'
+        for t, ph, gc, link, sub, tp in cats)
+    picks = [k for _, k in D["gallery"]][::max(len(D["gallery"]) // 10, 1)][:10]
+    photo_tiles = "".join(f'<button class="mh-{i}" data-full="{BASE}/assets/img/{k}.jpg" aria-label="사진 크게 보기">{img(k, "오카맨션 실제 사진", sizes="(max-width:760px) 50vw, 20vw")}</button>' for i, k in enumerate(picks))
     rooms = "".join(room_card(r) for r in D["rooms"])
     days = "".join(day_card(p) for p in D["day_products"])
     nearby = "".join(f"<li><b>{e(n['name'])}</b><span>{e(n['desc'])}</span></li>" for n in D["nearby"])
@@ -484,7 +498,7 @@ def build_index():
     mains = [r for r in D["reviews"] if r.get("main")]
     if mains:
         items = "".join(f'<figure class="review"><blockquote>{e(r["text"])}</blockquote><figcaption>{e(r["who"])} · 네이버 리뷰</figcaption></figure>' for r in mains)
-        reviews = f'<section class="sec"><div class="wrap"><div class="sec-head"><h2>다녀간 가족들의 이야기</h2><a class="more" href="{BASE}/reviews.html">네이버 리뷰 {D.get("review_total", "")}건+ 보기</a></div>{naver_badge()}</div><div class="marquee"><div class="marquee-track">{items}{items}</div></div></section>'
+        reviews = f'<section class="sec"><div class="wrap"><div class="h-head row"><div><p class="eyebrow dark">REVIEWS · {D.get("review_total", "")}</p><h2>다녀간 가족들의 이야기</h2></div><a class="more" href="{BASE}/reviews.html">후기 전체 보기 ›</a></div><div class="rv-top">{naver_badge()}<div class="rv-pick">{review_cards([r for r in D["reviews"] if len(r["text"]) > 60][:2])}</div></div></div><div class="marquee"><div class="marquee-track">{items}{items}</div></div></section>'
     faq = "".join(f"<details><summary>{e(q)}</summary><p>{e(a)}</p></details>" for q, a in D["faq"])
     faq_ld = {"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [
         {"@type": "Question", "name": q, "acceptedAnswer": {"@type": "Answer", "text": a}} for q, a in D["faq"]]}
@@ -514,105 +528,110 @@ def build_index():
   </div>
 </section>
 
-<section class="sec"><div class="wrap narrow center"><p class="eyebrow dark">VIDEO</p><h2>영상으로 먼저 둘러보기</h2>
-<div class="video" data-yt="{e(S['youtube_video'])}"><img src="https://i.ytimg.com/vi/{e(S['youtube_video'])}/hqdefault.jpg" alt="오카맨션 애견동반 펜션 소개 영상" loading="lazy"><button class="play" aria-label="오카맨션 소개 영상 재생">▶</button></div></div></section>
+<section class="trust"><div class="wrap trust-in">
+  <div class="t-score"><b>★ {S.get('naver_rating', '')}</b><span>네이버 방문자 리뷰 {D.get('review_total', '')}건</span></div>
+  <ul class="t-kw">{"".join(f'<li>"{e(k)}" <b>{n}</b></li>' for k, n in (S.get('naver_keywords') or [])[:4])}</ul>
+  <ul class="t-num"><li><b>{len(D['rooms'])}</b>객실</li><li><b>{len(D['gallery'])}</b>실제 사진</li><li><b>{len(S.get('instagram_reels', []))}</b>영상</li><li><b>{len(SPACES)}</b>공간</li></ul>
+</div></section>
 
-<section class="sec why">
-  <div class="wrap">
-    <h2>준비하지 마세요. 저희가 해둘게요.</h2>
-    <div class="grid3">
-      <div class="why-i"><b>ZERO PREP</b><h3>짐 싸지 않아도 돼요</h3><p>바베큐 세트를 신청하면 장보기 없이 바로 구울 수 있어요. 캠핑스테이는 텐트도 장비도 필요 없습니다.</p></div>
-      <div class="why-i"><b>NO 눈치</b><h3>아이도 강아지도 마음껏</h3><p>애견운동장과 아이 물놀이 공간이 따로 있어요. 서로 눈치 보지 않고 각자 신나게 놀아요.</p></div>
-      <div class="why-i"><b>SLEEP OPTIONAL</b><h3>자고 갈지는 나중에</h3><p>하루 놀다 아이가 잠들면, 빈 객실이 있을 때 숙박으로 바꿀 수 있어요.</p></div>
-    </div>
-  </div>
-</section>
+<section class="sec"><div class="wrap">
+  <div class="h-head"><p class="eyebrow dark">WHAT TO DO</p><h2>오늘은 무엇을 하러 오세요?</h2><p class="h-sub">사진을 누르면 분류별 실제 사진과 후기를 볼 수 있어요.</p></div>
+  <div class="cat-grid">{cat_tiles}</div>
+</div></section>
 
-<section class="sec" id="rooms">
-  <div class="wrap">
-    <div class="sec-head"><h2>객실</h2><a class="more" href="{BASE}/rooms/">전체 보기</a></div>
-    <div class="filters" role="group" aria-label="객실 거르기">
-      <button class="chip on" data-f="all">전체</button>
-      <button class="chip" data-f="small">소형견 동반</button>
-      <button class="chip" data-f="large">대형견 가능</button>
-      <button class="chip" data-f="private">독채</button>
-      <button class="chip" data-f="pool">개별 수영장</button>
-      <button class="chip" data-f="camp">캠핑스테이</button>
-    </div>
-    <div class="grid cards" data-filter-grid>{rooms}</div>
+<section class="sec tint" id="rooms"><div class="wrap">
+  <div class="h-head row"><div><p class="eyebrow dark">ROOMS · {len(D['rooms'])}</p><h2>반려견과 함께 자는 방</h2></div><a class="more" href="{BASE}/rooms/">객실 전체 보기 ›</a></div>
+  <div class="filters" role="group" aria-label="객실 거르기">
+    <button class="chip on" data-f="all">전체</button><button class="chip" data-f="small">소형견 동반</button><button class="chip" data-f="large">대형견 가능</button>
+    <button class="chip" data-f="private">독채</button><button class="chip" data-f="pool">개별 수영장</button><button class="chip" data-f="camp">캠핑스테이</button>
   </div>
-</section>
+  <div class="h-scroll" data-filter-grid>{rooms}</div>
+</div></section>
 
-<section class="sec tint" id="day">
-  <div class="wrap">
-    <div class="sec-head"><h2>숙박 없이, 하루만</h2><a class="more" href="{BASE}/day/">당일 이용 안내</a></div>
-    <div class="grid cards">{days}</div>
-    {price_note()}
+<section class="sec why"><div class="wrap">
+  <div class="h-head center"><p class="eyebrow dark">WHY OKA</p><h2>준비하지 마세요. 저희가 해둘게요.</h2></div>
+  <div class="grid3">
+    <div class="why-i"><b>ZERO PREP</b><h3>짐 싸지 않아도 돼요</h3><p>간편 고기세트를 신청하면 장보기 없이 바로 구워요. 반려견 식기·배변패드·샴푸도 준비돼 있어요.</p></div>
+    <div class="why-i"><b>NO 눈치</b><h3>아이도 강아지도 마음껏</h3><p>애견운동장·반려견 수영장과 아이 물놀이장이 따로 있어 서로 눈치 보지 않아요.</p></div>
+    <div class="why-i"><b>ALL DAY</b><h3>낮엔 물놀이, 밤엔 불멍</h3><p>수영장, 어질리티, 바베큐, 불멍까지 숙소 안에서 하루를 다 채워요.</p></div>
   </div>
-</section>
+</div></section>
 
-<section class="sec route">
-  <div class="wrap split">
-    <div>
-      <p class="eyebrow dark">옥화·미원 가족여행 베이스캠프</p>
-      <h2>옥화에서 놀고, 오카에서 쉬세요</h2>
-      <ol class="timeline">
-        <li><b>오전</b>옥화구곡 · 청석굴 · 미동산수목원 산책</li>
-        <li><b>오후</b>오카 도착 — 수영장 · 애견운동장 · 데크존</li>
-        <li><b>저녁</b>바베큐 · 노을 · 불멍</li>
-        <li><b>밤</b>자고 가거나, 가볍게 귀가</li>
-      </ol>
-    </div>
-    <div>
-      <h3 class="small-h">근처 가볼 만한 곳</h3>
-      <ul class="nearby">{nearby}</ul>
-    </div>
+<section class="sec tint" id="day"><div class="wrap">
+  <div class="h-head row"><div><p class="eyebrow dark">DAY TRIP · {len(D['day_products'])}</p><h2>숙박 없이, 하루만</h2></div><a class="more" href="{BASE}/day/">당일 이용 안내 ›</a></div>
+  <div class="h-scroll">{days}</div>
+  {price_note()}
+</div></section>
+
+<section class="sec"><div class="wrap">
+  <div class="h-head row"><div><p class="eyebrow dark">SPACE TOUR · {len(SPACES)}</p><h2>사진으로 둘러보기</h2><p class="h-sub">사진 속 파란 점을 누르면 무엇이 있는지 알려드려요.</p></div><a class="more" href="{BASE}/space/">전체 {len(SPACES)}곳 ›</a></div>
+  <div class="sp-row">{"".join(f'<a class="sp-card" href="{BASE}/space/{o['slug']}.html">{img(o['photo'], o['h1'], sizes="240px")}<b>{e(o['h1'])}</b><span>+ {len(o['spots'])}곳</span></a>' for o in SPACES)}</div>
+</div></section>
+
+<section class="sec dark-sec"><div class="wrap">
+  <div class="h-head row"><div><p class="eyebrow">VIDEO</p><h2>영상으로 먼저 보기</h2></div><a class="more light" href="{BASE}/gallery.html#videos">영상 {len(S.get('instagram_reels', [])) + 1}개 전체 ›</a></div>
+  <div class="vid-grid">
+    <div class="video" data-yt="{e(S['youtube_video'])}"><img src="https://i.ytimg.com/vi/{e(S['youtube_video'])}/hqdefault.jpg" alt="오카맨션 애견동반 펜션 소개 영상" loading="lazy"><button class="play" aria-label="오카맨션 소개 영상 재생">▶</button></div>
+    {reel_grid(S.get("instagram_reels", [])[:2])}
   </div>
-</section>
+</div></section>
 
 {reviews}
 
-<section class="sec tint">
-  <div class="wrap">
-    <h2>홈페이지 직접 예약은 이렇게</h2>
-    {steps()}
-    <div class="center"><a class="btn lg" href="{BASE}/reserve.html">예약 신청하기</a> {contact_btns()}</div>
+<section class="sec tint"><div class="wrap">
+  <div class="h-head row"><div><p class="eyebrow dark">PHOTOS · {len(D['gallery'])}</p><h2>보정 없는 실제 사진</h2></div><a class="more" href="{BASE}/gallery.html">사진 {len(D['gallery'])}장 전체 ›</a></div>
+  <div class="mosaic-home" data-group>{photo_tiles}</div>
+</div></section>
+
+<section class="sec"><div class="wrap">
+  <div class="h-head row"><div><p class="eyebrow dark">INSTAGRAM</p><h2>@stay_oka</h2></div><a class="more" href="{e(S['instagram'])}" target="_blank" rel="noopener">팔로우하고 소식 받기 ›</a></div>
+  <div class="insta">{"".join(f'<a href="{e(u)}" target="_blank" rel="noopener" aria-label="인스타그램 게시물: {e(t)}">{img(k, "오카맨션 인스타그램 — " + t, sizes="(max-width:760px) 50vw, 25vw")}</a>' for u, k, t in S.get("instagram_posts", []))}</div>
+</div></section>
+
+<section class="sec route tint"><div class="wrap split">
+  <div>
+    <p class="eyebrow dark">LOCAL</p>
+    <h2>옥화에서 놀고, 오카에서 쉬세요</h2>
+    <ol class="timeline">
+      <li><b>오전</b>옥화구곡 · 청석굴 · 옥화자연휴양림 산책</li>
+      <li><b>오후</b>오카 도착 — 수영장 · 애견운동장 · 데크존</li>
+      <li><b>저녁</b>바베큐 · 노을 · 불멍</li>
+      <li><b>밤</b>자고 가거나, 가볍게 귀가</li>
+    </ol>
   </div>
-</section>
+  <div><h3 class="small-h">근처 가볼 만한 곳</h3><ul class="nearby">{nearby}</ul></div>
+</div></section>
 
-<section class="sec"><div class="wrap"><div class="sec-head"><h2>공간 둘러보기</h2><a class="more" href="{BASE}/space/">전체 {len(SPACES)}곳</a></div>
-<div class="sp-row">{"".join(f'<a class="sp-card" href="{BASE}/space/{o['slug']}.html">{img(o['photo'], o['h1'], sizes="240px")}<b>{e(o['h1'])}</b><span>+ {len(o['spots'])}곳</span></a>' for o in SPACES)}</div></div></section>
+<section class="sec"><div class="wrap">
+  <div class="h-head row"><div><p class="eyebrow dark">GUIDE · {len(STORIES) + len(BREEDS)}</p><h2>여행 전에 읽어보세요</h2></div><a class="more" href="{BASE}/story/">이야기 전체 ›</a></div>
+  {story_cards(STORIES[:6])}
+  <div class="breed-chips"><span>견종별 여행 가이드</span>{"".join(f'<a class="chip-link" href="{BASE}/dog/{x["slug"]}.html">{e(x["name"])}</a>' for x in BREEDS[:12])}<a class="chip-link more-chip" href="{BASE}/dog/">+{max(len(BREEDS) - 12, 0)}종 더보기</a></div>
+</div></section>
 
-<section class="sec tint"><div class="wrap"><div class="sec-head"><h2>인스타그램 @stay_oka</h2><a class="more" href="{e(S['instagram'])}" target="_blank" rel="noopener">팔로우하고 소식 받기</a></div>
-{reel_grid(S.get("instagram_reels", [])[:3])}
-<div class="insta" style="margin-top:14px">{"".join(f'<a href="{e(u)}" target="_blank" rel="noopener" aria-label="인스타그램 게시물: {e(t)}">{img(k, "오카맨션 인스타그램 — " + t, sizes="(max-width:760px) 50vw, 25vw")}</a>' for u, k, t in S.get("instagram_posts", []))}</div></div></section>
+<section class="sec tint"><div class="wrap">
+  <div class="h-head center"><p class="eyebrow dark">HOW TO BOOK</p><h2>홈페이지 직접 예약은 이렇게</h2></div>
+  {steps()}
+  <div class="center"><a class="btn lg" href="{BASE}/reserve.html">예약 신청하기</a> {contact_btns()}</div>
+</div></section>
 
-<section class="sec">
-  <div class="wrap"><div class="sec-head"><h2>오카맨션 이야기</h2><a class="more" href="{BASE}/story/">전체 보기</a></div>
-  {story_cards(STORIES)}<p class="center" style="margin-top:20px"><a class="btn ghost" href="{BASE}/dog/">견종별 여행 가이드 30종 보기</a></p></div>
-</section>
+<section class="sec"><div class="wrap narrow">
+  <div class="h-head center"><p class="eyebrow dark">FAQ</p><h2>자주 묻는 질문</h2></div>
+  <div class="faq">{faq}</div>
+</div></section>
 
-<section class="sec">
-  <div class="wrap narrow">
-    <h2>자주 묻는 질문</h2>
-    <div class="faq">{faq}</div>
-  </div>
-</section>
-
-<section class="sec tint" id="map">
-  <div class="wrap split">
-    <div>
-      <h2>오시는 길</h2>
-      <p class="addr">{e(S['address'])}</p>
-      <p>옥화구곡 · 청석굴 · 옥화자연휴양림 인근</p>
-      <div class="btn-row">
-        <a class="btn ghost" href="https://map.naver.com/p/search/{e(S['address'])}" target="_blank" rel="noopener">네이버 지도</a>
-        <a class="btn ghost" href="https://map.kakao.com/?q={e(S['address'])}" target="_blank" rel="noopener">카카오맵</a>
-      </div>
+<section class="sec tint" id="map"><div class="wrap split">
+  <div>
+    <p class="eyebrow dark">LOCATION</p><h2>오시는 길</h2>
+    <p class="addr">{e(S['address'])}</p>
+    <p>옥화자연휴양림과 같은 운암옥화길 · 옥화구곡 · 청석굴 인근</p>
+    <div class="btn-row">
+      <a class="btn ghost" href="https://map.naver.com/p/search/{e(S['address'])}" target="_blank" rel="noopener">네이버 지도</a>
+      <a class="btn ghost" href="https://map.kakao.com/?q={e(S['address'])}" target="_blank" rel="noopener">카카오맵</a>
+      <a class="btn" href="tel:{e(S['phone'])}">전화 문의</a>
     </div>
-    <div>{img('site/front', '오카맨션 입구', 'rounded')}</div>
   </div>
-</section>
+  <div>{img('site/front', '오카맨션 입구', 'rounded')}</div>
+</div></section>
 """
     layout("/", f"{S['name']} | 청주 애견동반 펜션 · 키즈 수영장 · 당일 바베큐 — {S['slogan']}", S["description"], body,
            jsonld=faq_ld)
@@ -861,7 +880,7 @@ def build_gallery():
     body = f"""<section class="page-head"><div class="wrap"><p class="eyebrow dark">PHOTOS</p><h1>사진</h1>
 <p>보정이나 합성 없이 실제 오카맨션 모습 그대로 담았습니다.</p></div></section>
 <section class="sec pt0"><div class="wrap">{tiles}</div></section>{ev_sec}
-<section class="sec"><div class="wrap"><h2>인스타그램 영상</h2>{reel_grid(S.get("instagram_reels", []))}</div></section>
+<section class="sec" id="videos"><div class="wrap"><h2>인스타그램 영상</h2>{reel_grid(S.get("instagram_reels", []))}</div></section>
 {f'<section class="sec tint"><div class="wrap"><h2>손님이 올린 오카맨션</h2><p>@stay_oka를 태그해 주신 손님 게시물이에요. 인스타그램 원본 그대로 보여드려요.</p>{reel_grid(S["guest_posts"], "p")}</div></section>' if S.get("guest_posts") else ""}
 <section class="sec"><div class="wrap narrow center"><h2>영상으로 보기</h2>
 <div class="video" data-yt="{e(S['youtube_video'])}"><img src="https://i.ytimg.com/vi/{e(S['youtube_video'])}/hqdefault.jpg" alt="오카맨션 소개 영상" loading="lazy"><button class="play" aria-label="영상 재생">▶</button></div>
