@@ -489,7 +489,7 @@ def build_index():
         f'<a class="cat" href="{BASE}{link}">{img(ph, t, sizes="(max-width:760px) 50vw, 33vw")}<div class="cat-t"><b>{e(t)}</b><span>{e(sub)}</span>'
         f'<em>사진 {gcount.get(gc, 0)}장{(" · 후기 " + str(sum(1 for r in D["reviews"] if tp in r.get("topics", []))) + "개") if tp else ""}</em></div></a>'
         for t, ph, gc, link, sub, tp in cats)
-    picks = [k for _, k in D["gallery"]][::-1][:10]
+    picks = [k for _, k in D["gallery"]][::-1][:11]
     photo_tiles = "".join(f'<button class="mh-{i}" data-full="{BASE}/assets/img/{k}.jpg" aria-label="사진 크게 보기">{img(k, "오카맨션 실제 사진", sizes="(max-width:760px) 50vw, 20vw")}</button>' for i, k in enumerate(picks))
     rooms = "".join(room_card(r) for r in D["rooms"])
     days = "".join(day_card(p) for p in D["day_products"])
@@ -539,7 +539,8 @@ def build_index():
 <section class="trust"><div class="wrap trust-in">
   <div class="t-score"><b>★ {S.get('naver_rating', '')}</b><span>네이버 방문자 리뷰 {D.get('review_total', '')}건</span></div>
   <ul class="t-kw">{"".join(f'<li>"{e(k)}" <b>{n}</b></li>' for k, n in (S.get('naver_keywords') or [])[:4])}</ul>
-  <ul class="t-num"><li><b>{len(D['rooms'])}</b>객실</li><li><b>{len(D['gallery'])}</b>실제 사진</li><li><b>{len(S.get('instagram_reels', []))}</b>영상</li><li><b>{len(SPACES)}</b>공간</li></ul>
+  <ul class="t-num"><li><b>{len(D['rooms'])}</b>객실</li><li><b>{len(D['gallery'])}</b>실제 사진</li><li><b>{len(S.get('instagram_reels', [])) + 1}</b>영상</li><li><b>{len(SPACES)}</b>공간</li><li><b>{len(STORIES) + len(BREEDS)}</b>글</li></ul>
+  <p class="t-upd">{datetime.datetime.now(datetime.timezone(datetime.timedelta(hours=9))).strftime("%Y.%m.%d")} 업데이트</p>
 </div></section>
 
 <section class="sec"><div class="wrap">
