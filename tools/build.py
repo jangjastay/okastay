@@ -489,7 +489,7 @@ def build_index():
         f'<a class="cat" href="{BASE}{link}">{img(ph, t, sizes="(max-width:760px) 50vw, 33vw")}<div class="cat-t"><b>{e(t)}</b><span>{e(sub)}</span>'
         f'<em>사진 {gcount.get(gc, 0)}장{(" · 후기 " + str(sum(1 for r in D["reviews"] if tp in r.get("topics", []))) + "개") if tp else ""}</em></div></a>'
         for t, ph, gc, link, sub, tp in cats)
-    picks = [k for _, k in D["gallery"]][::max(len(D["gallery"]) // 10, 1)][:10]
+    picks = [k for _, k in D["gallery"]][::-1][:10]
     photo_tiles = "".join(f'<button class="mh-{i}" data-full="{BASE}/assets/img/{k}.jpg" aria-label="사진 크게 보기">{img(k, "오카맨션 실제 사진", sizes="(max-width:760px) 50vw, 20vw")}</button>' for i, k in enumerate(picks))
     rooms = "".join(room_card(r) for r in D["rooms"])
     days = "".join(day_card(p) for p in D["day_products"])
@@ -565,7 +565,7 @@ def build_index():
 
 <section class="sec"><div class="wrap">
   <div class="h-head row"><div><p class="eyebrow dark">SPACE TOUR · {len(SPACES)}</p><h2>사진으로 둘러보기</h2><p class="h-sub">사진 속 파란 점을 누르면 무엇이 있는지 알려드려요.</p></div><a class="more" href="{BASE}/space/">전체 {len(SPACES)}곳 ›</a></div>
-  <div class="sp-row">{"".join(f'<a class="sp-card" href="{BASE}/space/{o['slug']}.html">{img(o['photo'], o['h1'], sizes="240px")}<b>{e(o['h1'])}</b><span>+ {len(o['spots'])}곳</span></a>' for o in SPACES)}</div>
+  <div class="sp-row">{"".join(f'<a class="sp-card" href="{BASE}/space/{o['slug']}.html">{img(o['photo'], o['h1'], sizes="240px")}<b>{e(o['h1'])}</b><span>+ {len(o['spots'])}곳</span></a>' for o in SPACES[::-1])}</div>
 </div></section>
 
 <section class="sec dark-sec"><div class="wrap">
@@ -579,7 +579,7 @@ def build_index():
 {reviews}
 
 <section class="sec tint"><div class="wrap">
-  <div class="h-head row"><div><p class="eyebrow dark">PHOTOS · {len(D['gallery'])}</p><h2>보정 없는 실제 사진</h2></div><a class="more" href="{BASE}/gallery.html">사진 {len(D['gallery'])}장 전체 ›</a></div>
+  <div class="h-head row"><div><p class="eyebrow dark">PHOTOS · {len(D['gallery'])}</p><h2>새로 올라온 실제 사진</h2></div><a class="more" href="{BASE}/gallery.html">사진 {len(D['gallery'])}장 전체 ›</a></div>
   <div class="mosaic-home" data-group>{photo_tiles}</div>
 </div></section>
 
