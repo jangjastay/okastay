@@ -487,3 +487,5 @@ p{margin:0 0 1em}
 .lp-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:14px}
 .lp-grid .sp-card{width:auto}
 .breed-chips a:not(.chip-link){padding:6px 12px;border-radius:999px;background:var(--sky);text-decoration:none;font-size:.9rem;font-weight:600}
+
+.about-oka p{font-size:1.02rem;line-height:1.85;margin:0 0 1em}.about-oka a{color:var(--forest,#2f5d46);font-weight:600}
