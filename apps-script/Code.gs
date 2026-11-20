@@ -123,6 +123,7 @@ function doPost(e) {
     sh.appendRow([now, '신청', d.type, d.item, d.itemId, d.checkin, d.checkout || '', d.time || '', withMap[d.with] || d.with,
       +d.adults || 0, +d.kids || 0, +d.infants || 0, +d.dogs || 0, +d.bigdogs || 0, d.addons || '', d.name, "'" + d.phone, d.memo || '', d.estimate || '', '']);
     try { notifyGuest_(sh, sh.getLastRow(), '신청'); } catch (e2) { }
+    try { notifyOwner_(d); } catch (e3) { }
     var to = NOTIFY_EMAIL || Session.getEffectiveUser().getEmail();
     if (to) MailApp.sendEmail(to, '[오카맨션] 새 예약 신청 — ' + d.name + ' ' + d.checkin + ' ' + d.item,
       [d.type + ' · ' + d.item, d.checkin + (d.checkout ? ' ~ ' + d.checkout : '') + ' ' + (d.time || ''),
@@ -185,7 +186,9 @@ var SETTINGS_ = [
   ['템플릿ID_신청', '', '카카오 심사 통과 후 솔라피에 나오는 템플릿 ID (KA01TP…)'],
   ['템플릿ID_입금대기', '', ''],
   ['템플릿ID_확정', '', ''],
-  ['템플릿ID_취소', '', '']
+  ['템플릿ID_취소', '', ''],
+  ['템플릿ID_사장님알림', '', '새 예약이 들어오면 아래 번호로 카톡 (관리자 새 예약 알림 템플릿 ID)'],
+  ['새 예약 알림 받을 번호', '010-7369-1855', '사장님·직원 휴대폰. 여러 명이면 쉼표로 구분 (예: 010-1111-2222, 010-3333-4444)']
 ];
 
 function settings_() {
@@ -326,4 +329,18 @@ function admin_(d) {
     }
     return { ok: false, message: '알 수 없는 요청' };
   }
+}
+
+/** 새 예약이 들어오면 사장님·직원 휴대폰으로 카톡 알림 */
+function notifyOwner_(d) {
+  var S = settings_();
+  if (String(S['자동알림 사용']).toUpperCase() !== 'Y') return;
+  var tid = String(S['템플릿ID_사장님알림'] || '').trim(); if (!tid) return;
+  var nums = String(S['새 예약 알림 받을 번호'] || '').split(/[,\s]+/).map(function (x) { return x.replace(/[^0-9]/g, ''); })
+    .filter(function (x) { return /^01\d{8,9}$/.test(x); });
+  var ppl = ['성인 ' + (d.adults || 0), +d.kids ? '어린이 ' + d.kids : '', +d.infants ? '36개월 미만 ' + d.infants : '',
+    +d.dogs ? '소형견 ' + d.dogs : '', +d.bigdogs ? '대형견 ' + d.bigdogs : ''].filter(String).join(', ');
+  var vars = { '#{상품}': (d.type || '') + ' ' + (d.item || ''), '#{날짜}': d.checkin + (d.checkout ? ' ~ ' + d.checkout : '') + (d.time ? ' ' + d.time : ''),
+    '#{이름}': d.name, '#{연락처}': d.phone, '#{인원}': ppl };
+  nums.forEach(function (n) { solapiSend_(S, n, tid, vars); });
 }
