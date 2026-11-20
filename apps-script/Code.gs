@@ -17,6 +17,7 @@ var SHEET_ICAL_CACHE = 'iCal가져옴';
 var HEAD_REQ = ['접수시각', '상태', '구분', '객실/상품', 'ID', '체크인', '체크아웃', '시간', '동반', '성인', '어린이', '36개월미만',
   '소형견', '대형견', '옵션', '이름', '연락처', '요청사항', '예상금액', '관리메모', '문자발송'];
 var SHEET_SET = '설정';
+var SHEET_STAFF = '직원';
 var STATUS = ['신청', '입금대기', '확정', '취소'];
 
 /** 시트 찾기: 시트에서 연 스크립트면 그 시트, 따로 만든 스크립트면 '오카맨션 예약' 시트를 새로 만들어 기억 */
@@ -37,6 +38,7 @@ function setup() {
   ensure_(ss, SHEET_BLOCK, ['ID(객실/상품)', '시작일', '종료일(체크아웃일, 비우면 하루)', '사유(야놀자·여기어때·네이버·전화 등)']);
   ensure_(ss, SHEET_ICAL, ['ID(객실)', '에어비앤비 iCal 주소']);
   ensure_(ss, SHEET_ICAL_CACHE, ['ID', '날짜', '가져온 시각']);
+  ensure_(ss, SHEET_STAFF, ['이름', '비밀번호(8자 이상)', '권한(전체/보기)', '사용(Y/N)']);
   var set = ensure_(ss, SHEET_SET, ['항목', '값', '설명']);
   var old = set.getDataRange().getValues();
   for (var i = old.length - 1; i >= 1; i--) if (/^문자_|^자동문자 사용$/.test(String(old[i][0]))) set.deleteRow(i + 1); // 예전 문자용 항목 정리
@@ -261,16 +263,28 @@ function testKakao() {
 
 function adminAuth_(key) {
   var cache = CacheService.getScriptCache(), fails = Number(cache.get('admin_fail') || 0);
-  if (fails >= 10) return '잠시 잠겼어요. 10분 뒤 다시 시도하세요.';
+  if (fails >= 10) return { err: '잠시 잠겼어요. 10분 뒤 다시 시도하세요.' };
+  key = String(key || '');
   var pw = String(settings_()['관리자 비밀번호'] || '').trim();
-  if (pw.length < 8) return '시트 설정 탭에 관리자 비밀번호(8자 이상)를 먼저 넣어주세요.';
-  if (String(key || '') !== pw) { cache.put('admin_fail', String(fails + 1), 600); return '비밀번호가 맞지 않아요.'; }
-  return '';
+  if (pw.length >= 8 && key === pw) return { who: '사장님', role: '전체' };
+  var st = book_().getSheetByName(SHEET_STAFF);
+  if (st && key.length >= 8) {
+    var rows = st.getDataRange().getValues().slice(1);
+    for (var i = 0; i < rows.length; i++) {
+      var r = rows[i], p = String(r[1] || '').trim();
+      if (p.length >= 8 && key === p && String(r[3] || 'Y').toUpperCase() !== 'N')
+        return { who: String(r[0] || '직원'), role: String(r[2]).indexOf('보기') >= 0 ? '보기' : '전체' };
+    }
+  }
+  if (pw.length < 8 && !(st && st.getLastRow() > 1)) return { err: '시트 설정 탭에 관리자 비밀번호(8자 이상)를 먼저 넣어주세요.' };
+  cache.put('admin_fail', String(fails + 1), 600);
+  return { err: '비밀번호가 맞지 않아요.' };
 }
 
 function admin_(d) {
-  var err = adminAuth_(d.key); if (err) return { ok: false, message: err };
+  var au = adminAuth_(d.key); if (au.err) return { ok: false, message: au.err };
   var ss = book_(), sh = ss.getSheetByName(SHEET_REQ);
+  if (d.admin !== 'list' && au.role !== '전체') return { ok: false, message: '보기 전용 계정이에요.' };
   if (d.admin === 'list') {
     var vals = sh.getDataRange().getValues(), out = [];
     for (var i = vals.length - 1; i >= 1 && out.length < 300; i--) {
@@ -282,7 +296,7 @@ function admin_(d) {
     }
     var blocks = ss.getSheetByName(SHEET_BLOCK).getDataRange().getValues().slice(1).map(function (r, i) {
       return { row: i + 2, id: r[0], from: r[1] ? d_(r[1]) : '', to: r[2] ? d_(r[2]) : '', why: r[3] }; }).filter(function (b) { return b.id; });
-    return { ok: true, items: out, blocks: blocks, now: Utilities.formatDate(new Date(), 'Asia/Seoul', 'yyyy-MM-dd HH:mm') };
+    return { ok: true, items: out, blocks: blocks, who: au.who, role: au.role, now: Utilities.formatDate(new Date(), 'Asia/Seoul', 'yyyy-MM-dd HH:mm') };
   }
   { // doPost가 이미 잠금을 잡고 있음
     if (d.admin === 'status') {
@@ -291,7 +305,9 @@ function admin_(d) {
       if (d.amount) sh.getRange(row, 19).setValue(String(d.amount));
       sh.getRange(row, 2).setValue(d.status);
       if (d.status !== '신청') notifyGuest_(sh, row, d.status);
-      return { ok: true, log: String(sh.getRange(row, 21).getValue()) };
+      var lg = String(sh.getRange(row, 21).getValue());
+      sh.getRange(row, 21).setValue((lg ? lg + ' / ' : '') + '[' + au.who + ' → ' + d.status + ' ' + Utilities.formatDate(new Date(), 'Asia/Seoul', 'M/d HH:mm') + ']');
+      return { ok: true };
     }
     if (d.admin === 'note') {
       var rw = Number(d.row); if (rw < 2) return { ok: false };
@@ -300,7 +316,7 @@ function admin_(d) {
     }
     if (d.admin === 'block') {
       if (!d.id || !/^\d{4}-\d{2}-\d{2}$/.test(d.from)) return { ok: false, message: '객실과 날짜를 확인하세요.' };
-      ss.getSheetByName(SHEET_BLOCK).appendRow([d.id, d.from, d.to || '', String(d.why || '관리자 화면').slice(0, 100)]);
+      ss.getSheetByName(SHEET_BLOCK).appendRow([d.id, d.from, d.to || '', (String(d.why || '관리자 화면') + ' (' + au.who + ')').slice(0, 120)]);
       return { ok: true };
     }
     if (d.admin === 'unblock') {

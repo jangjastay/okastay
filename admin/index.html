@@ -59,7 +59,7 @@ function api(body){body.key=key;return fetch(URL_,{method:'POST',headers:{'Conte
 function login(msg){
   $('#app').innerHTML='<div class="login"><h1>오카맨션 예약 관리</h1><p style="color:#66706a">사장님 전용 화면이에요.</p>'+
   '<input id="pw" type="password" placeholder="관리자 비밀번호" autocomplete="current-password"><button class="btn" id="go">들어가기</button><p class="msg">'+esc(msg||'')+'</p>'+
-  '<p style="color:#66706a;font-size:.82rem">비밀번호는 예약 구글시트 &gt; 설정 탭 &gt; 관리자 비밀번호 칸에 정한 값이에요.</p></div>';
+  '<p style="color:#66706a;font-size:.82rem">사장님은 시트 설정 탭의 관리자 비밀번호, 직원은 사장님이 직원 탭에 정해 준 비밀번호로 들어와요.</p></div>';
   var go=function(){key=$('#pw').value.trim();load(true)};
   $('#go').onclick=go;$('#pw').onkeydown=function(e){if(e.key==='Enter')go()};
 }
@@ -82,7 +82,7 @@ function today(){var d=new Date(Date.now()+9*3600e3);return d.toISOString().slic
 function render(){
   var cnt={}; data.items.forEach(function(x){cnt[x.status]=(cnt[x.status]||0)+1});
   document.title=(cnt['신청']?'('+cnt['신청']+') ':'')+'오카맨션 예약 관리';
-  var tabs=TABS.map(function(t){var n=(t[0]==='신청'||t[0]==='입금대기')&&cnt[t[0]]?'<i>'+cnt[t[0]]+'</i>':'';return '<button data-t="'+t[0]+'" class="'+(tab===t[0]?'on':'')+'">'+t[1]+n+'</button>'}).join('');
+  var tabs=TABS.filter(function(t){return !(data.role==='보기'&&t[0]==='block')}).map(function(t){var n=(t[0]==='신청'||t[0]==='입금대기')&&cnt[t[0]]?'<i>'+cnt[t[0]]+'</i>':'';return '<button data-t="'+t[0]+'" class="'+(tab===t[0]?'on':'')+'">'+t[1]+n+'</button>'}).join('');
   var body='';
   if(tab==='block') body=blockView();
   else{
@@ -93,7 +93,7 @@ function render(){
     if(tab==='soon') list.sort(function(a,b){return a.checkin<b.checkin?-1:1});
     body=list.length?list.map(card).join(''):'<p class="empty">없어요</p>';
   }
-  $('#app').innerHTML='<header><b>오카맨션 예약</b><span class="sp"></span><button id="rf">새로고침</button><button id="lo">나가기</button></header>'+
+  $('#app').innerHTML='<header><b>오카맨션 예약</b><small style="opacity:.7">'+esc(data.who||'')+(data.role==='보기'?' · 보기 전용':'')+'</small><span class="sp"></span><button id="rf">새로고침</button><button id="lo">나가기</button></header>'+
    '<nav class="tabs">'+tabs+'</nav><main>'+body+'<p class="upd">'+esc(data.now||'')+' 기준 · 1분마다 자동 새로고침</p></main>';
   document.querySelectorAll('.tabs button').forEach(function(b){b.onclick=function(){tab=b.dataset.t;render();scrollTo(0,0)}});
   $('#rf').onclick=function(){load()};
@@ -114,8 +114,8 @@ function card(x){
    '<div class="meta">'+esc(ppl)+(x.addons?'<br>옵션: '+esc(x.addons):'')+(x.estimate?'<br>금액: '+esc(x.estimate):'')+'</div>'+
    (x.memo?'<div class="memo">요청: '+esc(x.memo)+'</div>':'')+(x.note?'<div class="memo">메모: '+esc(x.note)+'</div>':'')+
    (x.log?'<div class="log">카톡: '+esc(x.log)+'</div>':'')+
-   '<div class="acts"><a class="call" href="tel:'+esc(x.phone)+'">☎ '+esc(x.phone)+'</a><button class="ghost" data-note="'+x.row+'">메모</button>'+
-   next.map(function(s){return '<button class="go-'+s+'" data-go="'+s+'" data-row="'+x.row+'">'+label[s]+'</button>'}).join('')+'</div></div>';
+   '<div class="acts"><a class="call" href="tel:'+esc(x.phone)+'">☎ '+esc(x.phone)+'</a>'+(data.role==='보기'?'':'<button class="ghost" data-note="'+x.row+'">메모</button>')+
+   (data.role==='보기'?[]:next).map(function(s){return '<button class="go-'+s+'" data-go="'+s+'" data-row="'+x.row+'">'+label[s]+'</button>'}).join('')+'</div></div>';
 }
 
 function find(row){return data.items.filter(function(x){return x.row===row})[0]}
