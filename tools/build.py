@@ -56,7 +56,7 @@ def contact_btns():
     if S["phone"]:
         out.append(f'<a class="btn ghost" href="tel:{e(S["phone"])}">☎ 전화 예약 {e(S["phone"])}</a>')
     if S["kakao_channel"]:
-        out.append(f'<a class="btn ghost" href="{e(S["kakao_channel"])}" target="_blank" rel="noopener">카카오톡 문의</a>')
+        out.append(f'<a class="btn ghost" href="{e(S["kakao_channel"])}" target="_blank" rel="noopener">카카오톡 상담</a>')
     return "".join(out)
 
 
@@ -77,7 +77,7 @@ def jsonld_business():
         j["telephone"] = S["phone"]
     if S["lat"] and S["lng"]:
         j["geo"] = {"@type": "GeoCoordinates", "latitude": S["lat"], "longitude": S["lng"]}
-    same = [x for x in [S["instagram"], S["instagram_kids"], S.get("youtube_channel")] if x]
+    same = [x for x in [S["instagram"], S["instagram_kids"], S.get("youtube_channel"), S.get("kakao_channel_home")] if x]
     if same:
         j["sameAs"] = same
     return j
@@ -567,7 +567,7 @@ def build_index():
       </fieldset>
       <button class="btn lg" type="submit">날짜 고르기</button>
     </form>
-    <div class="hero-cta"><a class="btn lg" href="{BASE}/reserve.html">온라인 예약 문의</a><a class="btn lg call" href="tel:{e(S['phone'])}">☎ 전화 예약 <b>{e(S['phone'])}</b></a>{f'<a class="btn lg kakao" href="{e(S["kakao_channel"])}" target="_blank" rel="noopener">카카오톡 문의</a>' if S.get("kakao_channel") else ''}</div>
+    <div class="hero-cta"><a class="btn lg" href="{BASE}/reserve.html">온라인 예약 문의</a><a class="btn lg call" href="tel:{e(S['phone'])}">☎ 전화 예약 <b>{e(S['phone'])}</b></a>{f'<a class="btn lg kakao" href="{e(S["kakao_channel"])}" target="_blank" rel="noopener">카카오톡 상담</a>' if S.get("kakao_channel") else ''}</div>
   </div>
 </section>
 
@@ -795,7 +795,7 @@ def room_detail(r):
   <ul class="bk-facts"><li><span>입실</span><b>{ci}</b></li><li><span>퇴실</span><b>{co}</b></li><li><span>인원</span><b>{e(people_text(r))}</b></li><li><span>반려견</span><b>{"대형견 가능" if r["large_dog"] else "소형견 2마리"}</b></li></ul>
   <a class="btn lg block" href="{BASE}/reserve.html?type=stay&room={r['slug']}">날짜 고르고 예약 문의</a>
   <a class="btn ghost block" href="tel:{e(S['phone'])}">전화 {e(S['phone'])}</a>
-  {f'<a class="btn ghost block" href="{e(S["kakao_channel"])}" target="_blank" rel="noopener">카카오톡 문의</a>' if S.get("kakao_channel") else ""}
+  {f'<a class="btn ghost block" href="{e(S["kakao_channel"])}" target="_blank" rel="noopener">카카오톡 상담</a>' if S.get("kakao_channel") else ""}
   <p class="note center">문의 → 확인 → 확정 후 계좌이체. 아직 결제되지 않아요.</p>
 </div>"""
     body = f"""<section class="room-head"><div class="wrap">

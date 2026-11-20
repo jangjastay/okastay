@@ -16,7 +16,7 @@
   "lat": null,
   "lng": null,
   "phone": "010-7369-1855",
-  "kakao_channel": "https://open.kakao.com/o/sWO8po5f",
+  "kakao_channel": "https://pf.kakao.com/_AJYNX/chat",
   "instagram": "https://www.instagram.com/stay_oka/",
   "instagram_kids": "https://www.instagram.com/oka__kids/",
   "youtube_video": "uMn8_S4UUx0",
@@ -165,7 +165,8 @@
     "냉난방이 잘돼요",
     90
    ]
-  ]
+  ],
+  "kakao_channel_home": "https://pf.kakao.com/_AJYNX"
  },
  "policy": {
   "checkin": "15:00",
