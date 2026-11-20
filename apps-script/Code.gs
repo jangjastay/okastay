@@ -284,8 +284,7 @@ function admin_(d) {
       return { row: i + 2, id: r[0], from: r[1] ? d_(r[1]) : '', to: r[2] ? d_(r[2]) : '', why: r[3] }; }).filter(function (b) { return b.id; });
     return { ok: true, items: out, blocks: blocks, now: Utilities.formatDate(new Date(), 'Asia/Seoul', 'yyyy-MM-dd HH:mm') };
   }
-  var lock = LockService.getScriptLock(); lock.waitLock(20000);
-  try {
+  { // doPost가 이미 잠금을 잡고 있음
     if (d.admin === 'status') {
       var row = Number(d.row); if (row < 2 || STATUS.indexOf(d.status) < 0) return { ok: false, message: '잘못된 요청' };
       if (String(sh.getRange(row, 16).getValue()) !== String(d.name)) return { ok: false, message: '시트가 바뀌었어요. 새로고침하세요.' };
@@ -310,5 +309,5 @@ function admin_(d) {
       return { ok: true };
     }
     return { ok: false, message: '알 수 없는 요청' };
-  } finally { lock.releaseLock(); }
+  }
 }
