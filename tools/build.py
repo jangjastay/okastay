@@ -63,7 +63,8 @@ def contact_btns():
 def jsonld_business():
     j = {
         "@context": "https://schema.org", "@type": "LodgingBusiness",
-        "name": S["name"], "alternateName": [S["brand"], "오카키즈"],
+        "name": S["name"], "alternateName": [S["brand"], "오카키즈", "오카멘션", "청주 오카맨션", "Okamansion", "OKA MANSION"],
+        "hasMap": "https://www.google.com/maps/place/?q=place_id:ChIJD7jkQwDhZDURpOjygwI-M_M",
         "url": S["url"], "description": S["description"],
         "image": f'{S["url"]}/assets/img/{S["hero_photo"]}.jpg',
         "address": {"@type": "PostalAddress", "streetAddress": "미원면 운암옥화길 186-16",
@@ -140,7 +141,7 @@ def layout(path, title, desc, body, og_img=None, jsonld=None, scripts=(), noinde
 <footer class="foot">
   <div class="wrap foot-in">
     <div>
-      <p class="foot-brand"><b>{e(S['name'])}</b> · {e(S['brand'])}</p>
+      <p class="foot-brand"><b>{e(S['name'])}</b> · {e(S['brand'])} <span style="opacity:.6">(오카멘션 · OKA MANSION)</span></p>
       <p>{e(S['address'])}</p>
       <p>{e(foot_biz)}</p>
       {f'<p>대표전화 <a href="tel:{e(S["phone"])}">{e(S["phone"])}</a></p>' if S["phone"] else ""}
