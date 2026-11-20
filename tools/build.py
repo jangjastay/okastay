@@ -1049,7 +1049,7 @@ def build_misc():
         for p in PAGES)
     open(os.path.join(ROOT, "sitemap.xml"), "w", encoding="utf-8").write(
         f'<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n{urls}</urlset>\n')
-    open(os.path.join(ROOT, "robots.txt"), "w").write(f"User-agent: *\nAllow: /\nDisallow: /tools/\nDisallow: /apps-script/\nDisallow: /docs/\nDisallow: /data/\n\nSitemap: {S['url']}/sitemap.xml\n" + (f"\n{S['daum_webmaster']}\n" if S.get("daum_webmaster") else ""))
+    open(os.path.join(ROOT, "robots.txt"), "w").write(f"User-agent: *\nAllow: /\nDisallow: /tools/\nDisallow: /apps-script/\nDisallow: /docs/\nDisallow: /data/\nDisallow: /admin/\n\nSitemap: {S['url']}/sitemap.xml\n" + (f"\n{S['daum_webmaster']}\n" if S.get("daum_webmaster") else ""))
     open(os.path.join(ROOT, "CNAME"), "w").write(S["domain"] + "\n")
     if S.get("indexnow_key"):
         open(os.path.join(ROOT, S["indexnow_key"] + ".txt"), "w").write(S["indexnow_key"])

@@ -103,6 +103,7 @@ function doPost(e) {
   var lock = LockService.getScriptLock(); lock.waitLock(20000);
   try {
     var d = JSON.parse(e.postData.contents);
+    if (d.admin) return json_(admin_(d));
     if (!d.name || !d.phone || !d.checkin) return json_({ ok: false, message: '필수 항목이 비었어요.' });
     var sh = book_().getSheetByName(SHEET_REQ);
     // 같은 사람이 10분 안에 같은 날짜로 다시 보낸 것은 한 번만 저장
@@ -125,7 +126,7 @@ function doPost(e) {
       [d.type + ' · ' + d.item, d.checkin + (d.checkout ? ' ~ ' + d.checkout : '') + ' ' + (d.time || ''),
         '성인 ' + d.adults + ' / 어린이 ' + d.kids + ' / 36개월 미만 ' + d.infants + ' / 소형견 ' + d.dogs + ' / 대형견 ' + d.bigdogs,
         '옵션: ' + (d.addons || '-'), '예상 금액: ' + d.estimate, d.name + ' ' + d.phone, '요청: ' + (d.memo || '-'),
-        '', '→ 시트에서 날짜 확인 → 상태를 "입금대기"로 바꾸면 계좌 안내 문자 자동 발송 → 입금 확인 후 "확정"으로 바꾸면 확정 문자 자동 발송'].join('\n'));
+        '', '관리자 화면: https://okastay.kr/admin/', '→ 날짜 확인 후 "입금대기" → 입금 확인 후 "확정"을 누르면 손님에게 카톡이 자동 발송돼요.'].join('\n'));
     return json_({ ok: true });
   } catch (err) {
     return json_({ ok: false, message: '접수 중 오류가 났어요. 전화로 문의해주세요.' });
@@ -178,6 +179,7 @@ var SETTINGS_ = [
   ['주소', '충청북도 청주시 상당구 미원면 운암옥화길 186-16', '확정 알림에 들어감'],
   ['문의전화', '', '알림 끝에 들어감'],
   ['자동알림 사용', 'N', 'Y로 바꾸면 카카오 알림톡 발송 시작'],
+  ['관리자 비밀번호', '', '휴대폰 관리자 화면(okastay.kr/admin) 로그인용. 8자 이상, 남에게 알려주지 마세요'],
   ['템플릿ID_신청', '', '카카오 심사 통과 후 솔라피에 나오는 템플릿 ID (KA01TP…)'],
   ['템플릿ID_입금대기', '', ''],
   ['템플릿ID_확정', '', ''],
@@ -252,4 +254,61 @@ function testKakao() {
   var r = sh.getRange(row, 1, 1, 21).getValues()[0];
   Logger.log(r[15] + ' ' + r[16] + ' 에게 시험 발송: ' + JSON.stringify(solapiSend_(S, String(r[16]).replace(/[^0-9]/g, ''), String(S['템플릿ID_확정']).trim(),
     { '#{이름}': r[15], '#{상품}': r[3], '#{날짜}': d_(r[5]), '#{입실}': '15:00', '#{주소}': S['주소'], '#{문의전화}': S['문의전화'] })));
+}
+
+
+/* ===================== 휴대폰 관리자 화면 (okastay.kr/admin) ===================== */
+
+function adminAuth_(key) {
+  var cache = CacheService.getScriptCache(), fails = Number(cache.get('admin_fail') || 0);
+  if (fails >= 10) return '잠시 잠겼어요. 10분 뒤 다시 시도하세요.';
+  var pw = String(settings_()['관리자 비밀번호'] || '').trim();
+  if (pw.length < 8) return '시트 설정 탭에 관리자 비밀번호(8자 이상)를 먼저 넣어주세요.';
+  if (String(key || '') !== pw) { cache.put('admin_fail', String(fails + 1), 600); return '비밀번호가 맞지 않아요.'; }
+  return '';
+}
+
+function admin_(d) {
+  var err = adminAuth_(d.key); if (err) return { ok: false, message: err };
+  var ss = book_(), sh = ss.getSheetByName(SHEET_REQ);
+  if (d.admin === 'list') {
+    var vals = sh.getDataRange().getValues(), out = [];
+    for (var i = vals.length - 1; i >= 1 && out.length < 300; i--) {
+      var r = vals[i]; if (!r[0] && !r[15]) continue;
+      out.push({ row: i + 1, at: r[0] instanceof Date ? Utilities.formatDate(r[0], 'Asia/Seoul', 'M/d HH:mm') : String(r[0]),
+        status: r[1], type: r[2], item: r[3], id: r[4], checkin: d_(r[5]), checkout: r[6] ? d_(r[6]) : '', time: r[7], with_: r[8],
+        adults: r[9], kids: r[10], infants: r[11], dogs: r[12], bigdogs: r[13], addons: r[14], name: r[15], phone: String(r[16]).replace(/^'/, ''),
+        memo: r[17], estimate: r[18], note: r[19], log: r[20] });
+    }
+    var blocks = ss.getSheetByName(SHEET_BLOCK).getDataRange().getValues().slice(1).map(function (r, i) {
+      return { row: i + 2, id: r[0], from: r[1] ? d_(r[1]) : '', to: r[2] ? d_(r[2]) : '', why: r[3] }; }).filter(function (b) { return b.id; });
+    return { ok: true, items: out, blocks: blocks, now: Utilities.formatDate(new Date(), 'Asia/Seoul', 'yyyy-MM-dd HH:mm') };
+  }
+  var lock = LockService.getScriptLock(); lock.waitLock(20000);
+  try {
+    if (d.admin === 'status') {
+      var row = Number(d.row); if (row < 2 || STATUS.indexOf(d.status) < 0) return { ok: false, message: '잘못된 요청' };
+      if (String(sh.getRange(row, 16).getValue()) !== String(d.name)) return { ok: false, message: '시트가 바뀌었어요. 새로고침하세요.' };
+      if (d.amount) sh.getRange(row, 19).setValue(String(d.amount));
+      sh.getRange(row, 2).setValue(d.status);
+      if (d.status !== '신청') notifyGuest_(sh, row, d.status);
+      return { ok: true, log: String(sh.getRange(row, 21).getValue()) };
+    }
+    if (d.admin === 'note') {
+      var rw = Number(d.row); if (rw < 2) return { ok: false };
+      sh.getRange(rw, 20).setValue(String(d.note || '').slice(0, 500));
+      return { ok: true };
+    }
+    if (d.admin === 'block') {
+      if (!d.id || !/^\d{4}-\d{2}-\d{2}$/.test(d.from)) return { ok: false, message: '객실과 날짜를 확인하세요.' };
+      ss.getSheetByName(SHEET_BLOCK).appendRow([d.id, d.from, d.to || '', String(d.why || '관리자 화면').slice(0, 100)]);
+      return { ok: true };
+    }
+    if (d.admin === 'unblock') {
+      var b = ss.getSheetByName(SHEET_BLOCK), br = Number(d.row);
+      if (br >= 2 && String(b.getRange(br, 1).getValue()) === String(d.id)) b.deleteRow(br);
+      return { ok: true };
+    }
+    return { ok: false, message: '알 수 없는 요청' };
+  } finally { lock.releaseLock(); }
 }

@@ -4,6 +4,7 @@ Disallow: /tools/
 Disallow: /apps-script/
 Disallow: /docs/
 Disallow: /data/
+Disallow: /admin/
 
 Sitemap: https://okastay.kr/sitemap.xml
 

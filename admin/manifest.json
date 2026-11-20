@@ -1,0 +1,1 @@
+{"name": "오카맨션 예약 관리", "short_name": "오카 관리", "start_url": "/admin/", "scope": "/admin/", "display": "standalone", "background_color": "#1d2620", "theme_color": "#1d2620", "icons": [{"src": "/admin/icon-192.png", "sizes": "192x192", "type": "image/png"}, {"src": "/admin/icon-512.png", "sizes": "512x512", "type": "image/png"}]}
