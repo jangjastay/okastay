@@ -5,6 +5,7 @@ data/site.json 을 읽어 모든 HTML·sitemap·config.js 를 다시 만든다.
 사용법:  python3 tools/build.py
 """
 import json, os, html, datetime, re
+import urllib.parse
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 D = json.load(open(os.path.join(ROOT, "data/site.json"), encoding="utf-8"))
@@ -505,7 +506,7 @@ def build_landings():
 {review_section(rvs, f"{L['kw']} 실제 이용 후기") if rvs else ''}
 <section class="sec pt0"><div class="wrap center"><a class="btn ghost" href="{BASE}/reviews/{L['topic']}.html">{e(L['kw'])} 실제 후기 전체 보기 ›</a></div></section>
 <section class="sec"><div class="wrap narrow"><h2>자주 묻는 질문</h2><div class="faq">{faq}</div>
-<h2>위치</h2><p>{e(S['address'])} · <a href="https://map.naver.com/p/search/{e(S['name'])}" target="_blank" rel="noopener">네이버 지도</a> · <a href="https://www.google.com/maps/search/?api=1&query={S['lat']},{S['lng']}" target="_blank" rel="noopener">구글 지도</a></p>
+<h2>위치</h2><p>{e(S['address'])} · <a href="https://map.naver.com/p/search/{e(S['name'])}" target="_blank" rel="noopener">네이버 지도</a> · <a href="https://www.google.com/maps/search/?api=1&query={(str(S['lat'])+','+str(S['lng'])) if S.get('lat') and S.get('lng') else urllib.parse.quote(S['address'])}" target="_blank" rel="noopener">구글 지도</a></p>
 {f'<h2>함께 읽어보세요</h2>{story_cards(rel)}' if rel else ''}
 <h2>다른 검색어로 보기</h2><div class="breed-chips">{others}</div></div></section>"""
         ld = [{"@context": "https://schema.org", "@type": "WebPage", "name": L["title"], "description": L["desc"], "url": f"{S['url']}/cheongju/{L['slug']}.html",
