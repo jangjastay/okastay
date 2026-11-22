@@ -358,12 +358,18 @@
    [
     "겨울에 수영장은 운영하나요?",
     "대형 야외수영장은 여름 시즌에 운영해요. 겨울 운영 여부는 문의 주세요."
+   ],
+   [
+    "청주 겨울 펜션에서 바베큐 준비는 어떻게 하나요?",
+    "실내 바베큐장은 10,000원이라 추운 날에도 편하게 구워 드실 수 있어요. 고기를 따로 챙기기 어렵다면 간편 고기세트(65,000원)를, 장비가 없다면 바베큐 장비 대여(10,000원)를 이용해 주세요. 식사 후에는 불멍세트(15,000원)로 마무리하기 좋고, 빠진 물건은 24시 무인 편의점에서 채울 수 있어요."
    ]
   ],
   "links": [
    "/day/bbq.html",
    "/day/fire.html",
-   "/rooms/"
+   "/rooms/",
+   "/story/dog-winter-travel.html",
+   "/story/dog-bbq-food-safety.html"
   ],
   "date": "2026-11-17"
  },
@@ -467,12 +473,18 @@
    [
     "반려견과 휴양림에 들어갈 수 있나요?",
     "휴양림의 반려견 출입 규정은 휴양림에 직접 확인해 주세요. 오카맨션은 반려견과 함께 묵을 수 있어요."
+   ],
+   [
+    "휴양림 산책 뒤 반려견이 숙소에서 더 뛰어놀 곳이 있나요?",
+    "오카맨션에는 어질리티 기구를 둔 인조잔디 애견운동장이 있어 목줄 산책과는 다른 방식으로 에너지를 풀 수 있어요. 반려견 전용 수영장에서는 구명조끼를 빌려 쓸 수 있고, 301호에 묵으면 객실에 딸린 단독 루프탑 애견운동장도 이용할 수 있어요."
    ]
   ],
   "links": [
    "/rooms/301.html",
    "/day/bbq.html",
-   "/guide.html"
+   "/guide.html",
+   "/story/dog-car-travel-tips.html",
+   "/story/dog-travel-checklist.html"
   ],
   "sources": [
    [
@@ -609,12 +621,18 @@
    [
     "대형견도 되나요?",
     "301호에서 사전 문의 후 가능해요."
+   ],
+   [
+    "미원 애견펜션 오카맨션의 입실·퇴실 시간과 반려견 요금이 궁금해요",
+    "입실은 15:00, 퇴실은 11:00예요. 반려견은 1마리 20,000원이고 12kg 미만 소형견은 2마리까지 함께 묵을 수 있어요. 대형견은 301호에서만 50,000원으로 가능하니 예약 전에 010-7369-1855로 먼저 문의해 주세요."
    ]
   ],
   "links": [
    "/rooms/",
    "/rooms/301.html",
-   "/reviews.html"
+   "/reviews.html",
+   "/story/dog-barking-new-place.html",
+   "/story/senior-dog-travel.html"
   ],
   "sources": [],
   "date": "2026-11-18"
@@ -747,7 +765,8 @@
   "links": [
    "/story/dog-pool-first-time.html",
    "/story/pet-pension-manners.html",
-   "/rooms/"
+   "/rooms/",
+   "/story/okhwa-forest-pet-stay.html"
   ],
   "sources": [],
   "date": "2026-11-18"
@@ -1094,7 +1113,8 @@
   "links": [
    "/story/dog-car-travel-tips.html",
    "/story/pet-pension-manners.html",
-   "/rooms/301.html"
+   "/rooms/301.html",
+   "/story/miwon-pet-pension.html"
   ],
   "sources": [],
   "date": "2026-11-20"
@@ -1273,7 +1293,8 @@
   "links": [
    "/day/kids.html",
    "/story/cheongju-kids-day-trip.html",
-   "/story/dog-travel-checklist.html"
+   "/story/dog-travel-checklist.html",
+   "/story/cheongju-winter-pension.html"
   ],
   "sources": [],
   "date": "2026-11-21"
@@ -1358,7 +1379,8 @@
   "links": [
    "/rooms/301.html",
    "/story/dog-car-travel-tips.html",
-   "/story/dog-winter-travel.html"
+   "/story/dog-winter-travel.html",
+   "/story/miwon-pet-pension.html"
   ],
   "sources": [],
   "date": "2026-11-22"
