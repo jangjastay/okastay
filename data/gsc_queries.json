@@ -1,10 +1,15 @@
 {
- "updated": "2026-11-21",
+ "updated": "2026-11-22",
  "queries": [],
- "note": "최근 28일 노출 6, 클릭 0, 평균순위 8.3. 검색어는 노출이 적어 서치콘솔에서 비공개 처리됨",
+ "note": "최근 28일 노출 16, 클릭 1, 평균순위 11.2. 검색어는 노출이 적어 서치콘솔에서 비공개 처리됨",
  "pages": [
   {
    "page": "https://okastay.kr/",
+   "impressions": 11,
+   "clicks": 1
+  },
+  {
+   "page": "https://okastay.kr/story/cheongju-winter-pension.html",
    "impressions": 3,
    "clicks": 0
   },
@@ -19,12 +24,12 @@
    "clicks": 0
   },
   {
-   "page": "https://okastay.kr/story/cheongju-winter-pension.html",
+   "page": "https://okastay.kr/story/",
    "impressions": 2,
    "clicks": 0
   },
   {
-   "page": "https://okastay.kr/story/",
+   "page": "https://okastay.kr/story/dog-winter-travel.html",
    "impressions": 2,
    "clicks": 0
   },
@@ -45,11 +50,6 @@
   },
   {
    "page": "https://okastay.kr/story/okhwa-forest-pet-stay.html",
-   "impressions": 1,
-   "clicks": 0
-  },
-  {
-   "page": "https://okastay.kr/story/dog-winter-travel.html",
    "impressions": 1,
    "clicks": 0
   }
