@@ -1,57 +1,113 @@
 {
- "updated": "2026-11-22",
- "queries": [],
- "note": "최근 28일 노출 16, 클릭 1, 평균순위 11.2. 검색어는 노출이 적어 서치콘솔에서 비공개 처리됨",
+ "updated": "2026-11-23",
+ "queries": [
+  {
+   "query": "킹 찰스 스파니엘",
+   "impressions": 2,
+   "clicks": 0,
+   "position": 61.5,
+   "page": "https://okastay.kr/dog/cavalier-king-charles-spaniel.html"
+  },
+  {
+   "query": "재패니즈 스피츠 성격",
+   "impressions": 1,
+   "clicks": 0,
+   "position": 19.0,
+   "page": "https://okastay.kr/dog/japanese-spitz.html"
+  },
+  {
+   "query": "킹 찰스",
+   "impressions": 1,
+   "clicks": 0,
+   "position": 61.0,
+   "page": "https://okastay.kr/dog/cavalier-king-charles-spaniel.html"
+  }
+ ],
+ "note": "최근 28일 노출 23, 클릭 1, 평균순위 18.2. 나머지 검색어는 노출이 적어 서치콘솔에서 비공개 처리됨",
  "pages": [
   {
    "page": "https://okastay.kr/",
    "impressions": 11,
-   "clicks": 1
+   "clicks": 1,
+   "position": 11.8
   },
   {
    "page": "https://okastay.kr/story/cheongju-winter-pension.html",
    "impressions": 3,
-   "clicks": 0
+   "clicks": 0,
+   "position": 7.0
   },
   {
    "page": "https://okastay.kr/rooms/",
    "impressions": 3,
-   "clicks": 0
+   "clicks": 0,
+   "position": 13.0
+  },
+  {
+   "page": "https://okastay.kr/dog/cavalier-king-charles-spaniel.html",
+   "impressions": 3,
+   "clicks": 0,
+   "position": 61.3
   },
   {
    "page": "https://okastay.kr/day/",
    "impressions": 2,
-   "clicks": 0
+   "clicks": 0,
+   "position": 4.0
+  },
+  {
+   "page": "https://okastay.kr/cheongju/cheongju-warm-pool-pension.html",
+   "impressions": 2,
+   "clicks": 0,
+   "position": 12.0
   },
   {
    "page": "https://okastay.kr/story/",
    "impressions": 2,
-   "clicks": 0
+   "clicks": 0,
+   "position": 23.0
   },
   {
    "page": "https://okastay.kr/story/dog-winter-travel.html",
    "impressions": 2,
-   "clicks": 0
+   "clicks": 0,
+   "position": 31.0
   },
   {
    "page": "https://okastay.kr/rooms/301.html",
    "impressions": 1,
-   "clicks": 0
+   "clicks": 0,
+   "position": 6.0
   },
   {
    "page": "https://okastay.kr/dog/",
    "impressions": 1,
-   "clicks": 0
+   "clicks": 0,
+   "position": 7.0
   },
   {
    "page": "https://okastay.kr/story/miwon-pet-pension.html",
    "impressions": 1,
-   "clicks": 0
+   "clicks": 0,
+   "position": 8.0
   },
   {
    "page": "https://okastay.kr/story/okhwa-forest-pet-stay.html",
    "impressions": 1,
-   "clicks": 0
+   "clicks": 0,
+   "position": 10.0
+  },
+  {
+   "page": "https://okastay.kr/cheongju/daejeon-near-kids-pension.html",
+   "impressions": 1,
+   "clicks": 0,
+   "position": 13.0
+  },
+  {
+   "page": "https://okastay.kr/dog/japanese-spitz.html",
+   "impressions": 1,
+   "clicks": 0,
+   "position": 19.0
   }
  ]
 }
