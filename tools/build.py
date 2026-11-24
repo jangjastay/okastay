@@ -296,7 +296,7 @@ def build_stories():
         faq = "".join(f"<details><summary>{e(q)}</summary><p>{e(a)}</p></details>" for q, a in s["faq"])
         tp = topic_map.get(s.get("topic"), s.get("topic"))
         rvs = [r for r in D["reviews"] if tp in r.get("topics", [])][:6]
-        names = dict(LINK_NAMES, **{f"/story/{o['slug']}.html": o["h1"] for o in STORIES}, **{f"/dog/{o['slug']}.html": o["name"] + " 여행 가이드" for o in BREEDS})
+        names = dict(LINK_NAMES, **{f"/story/{o['slug']}.html": o["h1"] for o in STORIES}, **{f"/dog/{o['slug']}.html": o["name"] + " 여행 가이드" for o in BREEDS}, **{f"/cheongju/{o['slug']}.html": o["h1"].split(" — ")[0] for o in LANDINGS})
         links = "".join(f'<li><a href="{BASE}{u}">{e(names.get(u, u))}</a></li>' for u in s.get("links", []))
         srcs = "".join(f'<li><a href="{e(u)}" target="_blank" rel="noopener">{e(t)}</a></li>' for t, u in s.get("sources", []))
         srcs = f'<h2>참고한 자료</h2><ul class="dots">{srcs}</ul><p class="note">운영 시간·요금은 바뀔 수 있으니 방문 전 공식 안내를 확인해 주세요.</p>' if srcs else ""
@@ -348,7 +348,7 @@ def build_breeds():
         same = [o for o in BREEDS if o["slug"] != b["slug"] and o["size"] == b["size"]][:4] or [o for o in BREEDS if o["slug"] != b["slug"]][:4]
         faq = [(f"{name}와 함께 갈 수 있는 청주 애견동반 펜션이 있나요?", stay_txt + " 반려견 전용 수영장과 인조잔디 애견운동장도 함께 이용할 수 있어요."),
                (f"{name}는 수영을 잘하나요?", b["swim"]),
-               (f"{name}와 여행 갈 때 무엇을 챙겨야 하나요?", "사료, 리드줄, 평소 쓰던 담요를 챙기세요. 오카맨션 객실에는 반려견 식기, 배변패드, 침대 계단이 준비돼 있어요. " + b["tips"][0])]
+               (f"{name}와 여행 갈 때 무엇을 챙겨야 하나요?", "사료, 리드줄, 평소 쓰던 담요를 챙기세요. 오카맨션 객실에는 반려견 식기, 배변패드, 침대 계단이 준비돼 있어요. " + b["tips"][0])] + [tuple(x) for x in b.get("faq_extra", [])]
         fq = "".join(f"<details><summary>{e(q)}</summary><p>{e(a)}</p></details>" for q, a in faq)
         facts = "".join(f"<tr><th>{k}</th><td>{e(v)}</td></tr>" for k, v in [("영문명", b["en"]), ("원산지", b["origin"]), ("크기", b["size"]),
                          ("평균 체중", f"{b['kg'][0]}~{b['kg'][1]}kg"), ("평균 수명", b["life"]), ("털", b["coat"]), ("활동량", "●" * b["energy"] + "○" * (5 - b["energy"]))])
@@ -359,6 +359,7 @@ def build_breeds():
 <h2>{e(name)}의 역사</h2><p>{e(b['history'])}</p>
 {swipe(ph, name + "와 함께하는 애견동반 여행")}
 <h2>{e(name)} 성격과 특징</h2><ul class="dots">{"".join(f"<li>{e(t)}</li>" for t in b['traits'])}</ul>
+{"".join(f"<h2>{e(h)}</h2><p>{e(t)}</p>" for h, t in b.get("extra", []))}
 <h2>{e(name)}와 여행할 때 팁</h2><ul class="dots">{"".join(f"<li>{e(t)}</li>" for t in b['tips'])}</ul>
 <h2>{e(name)} 물놀이 · 수영</h2><p>{e(b['swim'])} 오카맨션 반려견 전용 수영장은 수심이 얕고, 구명조끼를 빌려 드려요.</p>
 <h2>{e(name)}와 오카맨션에서 묵으려면</h2><p>{e(stay_txt)}</p><ul class="dots">{stay_li}</ul>
