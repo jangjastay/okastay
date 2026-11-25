@@ -573,11 +573,17 @@
    [
     "입장료가 있나요?",
     "청석굴과 옥화9경은 무료로 안내돼 있어요. 변동될 수 있으니 방문 전 확인해 주세요."
+   ],
+   [
+    "옥화9경을 걷고 나서 강아지랑 더 놀 곳이 있나요?",
+    "같은 운암리에 있는 오카맨션에 입실(15:00)하면 인조잔디 애견운동장과 어질리티에서 마저 뛰어놀 수 있어요. 더운 날엔 반려견 전용 수영장에서 열을 식혀 주세요. 구명조끼는 대여할 수 있어요."
    ]
   ],
   "links": [
    "/story/okhwa-gugok-family-trip.html",
    "/rooms/",
+   "/story/dog-after-trip-care.html",
+   "/reviews/pet.html",
    "/reserve.html"
   ],
   "sources": [
@@ -723,12 +729,19 @@
    [
     "대형견 몇 마리까지 되나요?",
     "견종과 크기에 따라 달라 전화로 먼저 문의해 주세요."
+   ],
+   [
+    "대형견도 수영장에 들어갈 수 있나요?",
+    "오카맨션의 대형 야외수영장은 사람 전용이라 반려견 입수가 안 돼요. 강아지 물놀이는 따로 마련된 반려견 전용 수영장에서 하실 수 있고 구명조끼를 빌려드려요. 대형견 동반은 301호 예약 시 이용 방법까지 함께 문의해 주세요."
    ]
   ],
   "links": [
    "/rooms/301.html",
    "/dog/golden-retriever.html",
-   "/dog/labrador-retriever.html"
+   "/dog/labrador-retriever.html",
+   "/story/two-dogs-travel.html",
+   "/story/senior-dog-travel.html",
+   "/reviews/pet.html"
   ],
   "sources": [],
   "date": "2026-11-18"

@@ -277,7 +277,7 @@ STORIES = json.load(open(os.path.join(ROOT, "data", "stories.json"), encoding="u
 LINK_NAMES = {"/rooms/301.html": "301호 단독 애견운동장 객실", "/day/bbq.html": "바베큐 안내", "/reviews.html": "실제 이용 후기",
               "/day/kids.html": "키즈 놀이터 · 물놀이장", "/day/pool.html": "대형 야외수영장", "/day/deck.html": "데크존 · 파라솔존",
               "/day/warm-pool.html": "온수풀 대여", "/day/fire.html": "불멍", "/rooms/": "객실 안내", "/guide.html": "이용안내 · 오시는 길",
-              "/reserve.html": "예약 신청", "/gallery.html": "사진", "/day/": "당일 이용", "/day/cafe.html": "카페 · 무인 편의점"}
+              "/reserve.html": "예약 신청", "/gallery.html": "사진", "/day/": "당일 이용", "/day/cafe.html": "카페 · 무인 편의점", "/reviews/pet.html": "반려견 동반 실제 후기"}
 
 
 def story_cards(items):
@@ -1047,7 +1047,7 @@ def build_reviews():
 
 # ---------- 주제별 실제 후기 페이지 ----------
 RV_TOPICS = [
-    ("pet", "반려견 동반 후기", "청주 애견펜션 후기 — 반려견과 다녀간 손님들의 실제 이야기",
+    ("pet", "반려견 동반 후기", "청주 애견펜션·강아지 동반 숙소 후기 — 반려견과 다녀간 손님들의 실제 이야기",
      "강아지와 함께 묵은 손님들이 네이버에 남긴 실제 후기예요. 애견운동장, 반려견 수영장, 객실 이야기가 많아요.",
      lambda r: "pet" in r["topics"] or any(k in r["text"] for k in ["강아지", "반려", "애견", "댕댕"]), ["/cheongju/cheongju-aegyeon-pension.html", "/rooms/301.html", "/cheongju/cheongju-dog-pool.html"]),
     ("kids", "아이랑 다녀간 후기", "청주 키즈펜션 후기 — 아이와 함께 다녀간 가족들의 실제 이야기",
@@ -1068,6 +1068,28 @@ RV_TOPICS = [
 ]
 
 
+# 주제별 후기 페이지에 덧붙이는 안내 섹션·FAQ (검색어에 직접 답하는 내용)
+RV_EXTRA = {
+    "pet": {
+        "h2": "청주 강아지 동반 호텔을 찾다가 이 후기를 보고 계신다면",
+        "p": ("청주 시내에서 강아지와 함께 잘 수 있는 호텔을 찾다 보면 선택지가 많지 않아 펜션까지 알아보게 되는 경우가 많아요. "
+              "오카맨션은 호텔처럼 객실 안에서 반려견과 같이 자는 구조이고, 모든 객실이 반려견 동반 객실이에요. "
+              "12kg 미만 소형견은 2마리까지 함께 묵을 수 있고 1마리당 20,000원이에요. 대형견은 단독 루프탑 애견운동장이 딸린 301호에서만 받으며 50,000원, 사전 문의가 필요해요. "
+              "호텔과 다른 점은 객실 밖에서도 강아지와 할 게 있다는 것 — 인조잔디 애견운동장과 어질리티, 구명조끼를 빌려주는 반려견 전용 수영장이 단지 안에 있어요. "
+              "위 후기에서 손님들이 가장 많이 이야기한 것도 바로 이 공간들이에요."),
+        "link": ("/cheongju/cheongju-dog-friendly-hotel.html", "청주 강아지 동반 호텔 대신 오카맨션 안내 보기"),
+        "faq": [
+            ("청주 강아지 동반 호텔처럼 체크인·체크아웃 시간이 정해져 있나요?",
+             "네, 입실은 15:00, 퇴실은 11:00예요. 늦게 도착해 사료나 간식이 떨어졌다면 단지 안 24시 무인 편의점을 이용하실 수 있어요."),
+            ("후기에 나오는 반려견 수영장은 숙박하면 누구나 쓸 수 있나요?",
+             "반려견 전용 수영장은 사람용 대형 야외수영장과 따로 있어요. 대형 야외수영장은 반려견 입수가 안 되니, 강아지 물놀이는 전용 수영장에서 해 주세요. 구명조끼는 대여할 수 있어요."),
+            ("예약은 어떻게 하나요?",
+             "홈페이지 예약 신청이나 전화 010-7369-1855로 문의해 주세요. 대형견 동반은 꼭 전화로 먼저 확인해 주세요."),
+        ],
+    },
+}
+
+
 def build_review_topics():
     names = dict(LINK_NAMES, **{f"/cheongju/{o['slug']}.html": o["kw"] for o in LANDINGS},
                  **{f"/day/{p['slug']}.html": p["name"] for p in D["day_products"]}, **{"/space/": "사진으로 둘러보기", "/rooms/301.html": "301호 단독 애견운동장 객실"})
@@ -1078,12 +1100,22 @@ def build_review_topics():
             continue
         items = sorted(items, key=lambda r: -len(r["text"]))
         lk = "".join(f'<li><a href="{BASE}{u}">{e(names.get(u, u))}</a></li>' for u in links)
+        X = RV_EXTRA.get(slug)
+        xsec = ""
+        if X:
+            xfaq = "".join(f"<details><summary>{e(q)}</summary><p>{e(a)}</p></details>" for q, a in X["faq"])
+            xsec = (f'<section class="sec"><div class="wrap narrow"><h2>{e(X["h2"])}</h2><p>{e(X["p"])}</p>'
+                    f'<p><a class="more" href="{BASE}{X["link"][0]}">{e(X["link"][1])} ›</a></p>'
+                    f'<h2>자주 묻는 질문</h2><div class="faq">{xfaq}</div></div></section>\n')
         body = f"""<section class="page-head"><div class="wrap"><p class="eyebrow dark">REAL REVIEWS · {len(items)}</p><h1>{e(h1)}</h1>
 <p>{e(intro)} 네이버 방문자 리뷰 원문 그대로이며, 아이디는 일부 가렸어요.</p>{naver_badge()}<div class="breed-chips" style="margin-top:14px">{tabs}</div></div></section>
 <section class="sec pt0"><div class="wrap">{review_cards(items)}</div></section>
-<section class="sec tint"><div class="wrap narrow"><h2>함께 보면 좋아요</h2><ul class="dots">{lk}<li><a href="{BASE}/reviews.html">전체 후기 보기</a></li><li><a href="{BASE}/reserve.html">직접 예약 신청</a></li></ul>
+{xsec}<section class="sec tint"><div class="wrap narrow"><h2>함께 보면 좋아요</h2><ul class="dots">{lk}<li><a href="{BASE}/reviews.html">전체 후기 보기</a></li><li><a href="{BASE}/reserve.html">직접 예약 신청</a></li></ul>
 <div class="hero-cta"><a class="btn lg" href="{BASE}/reserve.html">예약 문의</a><a class="btn lg ghost" href="tel:{e(S['phone'])}">☎ 전화 예약 {e(S['phone'])}</a></div></div></section>"""
         ld = [breadcrumb([("홈", "/"), ("후기", "/reviews.html"), (short, f"/reviews/{slug}.html")])]
+        if X:
+            ld.append({"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [
+                {"@type": "Question", "name": q, "acceptedAnswer": {"@type": "Answer", "text": a}} for q, a in X["faq"]]})
         layout(f"/reviews/{slug}.html", f"{h1.split(' — ')[0]} {len(items)}개 | {S['name']}", f"{h1.split(' — ')[0]}: {intro} 실제 후기 {len(items)}개.", body, jsonld=ld)
 
 
