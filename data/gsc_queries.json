@@ -1,9 +1,12 @@
 {
-  "updated": "2026-11-24",
+  "updated": "2026-11-25",
   "queries": [
-    {"query": "청주 강아지 동반 호텔", "impressions": 2, "clicks": 0, "position": 15.5, "page": "https://okastay.kr/reviews/pet.html"},
+    {"query": "청주 강아지 동반 호텔", "impressions": 3, "clicks": 0, "position": 16.7, "page": "https://okastay.kr/reviews/pet.html"},
     {"query": "킹 찰스 스파니엘", "impressions": 2, "clicks": 0, "position": 61.5, "page": "https://okastay.kr/dog/cavalier-king-charles-spaniel.html"},
     {"query": "재패니즈 스피츠 성격", "impressions": 1, "clicks": 0, "position": 19.0, "page": "https://okastay.kr/dog/japanese-spitz.html"},
+    {"query": "쿨로아", "impressions": 1, "clicks": 0, "position": 20.0, "page": "https://okastay.kr/reviews.html"},
+    {"query": "오송 펜션", "impressions": 1, "clicks": 0, "position": 32.0, "page": "https://okastay.kr/cheongju/osong-kids-pension.html"},
+    {"query": "카발리에 킹 찰스 스파니엘", "impressions": 1, "clicks": 0, "position": 47.0, "page": "https://okastay.kr/dog/cavalier-king-charles-spaniel.html"},
     {"query": "보더콜리 수명", "impressions": 1, "clicks": 0, "position": 58.0, "page": "https://okastay.kr/dog/border-collie.html"},
     {"query": "킹 찰스", "impressions": 1, "clicks": 0, "position": 61.0, "page": "https://okastay.kr/dog/cavalier-king-charles-spaniel.html"},
     {"query": "래브라도 리트리버", "impressions": 1, "clicks": 0, "position": 71.0, "page": "https://okastay.kr/dog/labrador-retriever.html"}
