@@ -162,7 +162,8 @@
    "/day/pool.html",
    "/day/deck.html",
    "/story/okhwa-gugok-family-trip.html",
-   "/story/daejeon-near-pet-kids-pension.html"
+   "/story/daejeon-near-pet-kids-pension.html",
+   "/cheongju/osong-kids-pension.html"
   ],
   "date": "2026-11-17"
  },
@@ -865,12 +866,18 @@
    [
     "침대에 올려도 되나요?",
     "숙소마다 규칙이 달라요. 예약할 때 확인해 주세요."
+   ],
+   [
+    "애견펜션에서 다른 손님 강아지와 같이 놀게 해도 되나요?",
+    "상대 보호자에게 먼저 물어보고, 두 아이가 편해 보일 때만 잠깐씩 어울리게 해 주세요. 오카맨션 인조잔디 애견운동장처럼 여럿이 쓰는 곳에서는 간식과 장난감을 꺼내 두지 않는 게 좋아요. 다른 개와 마주치지 않고 따로 놀고 싶다면, 단독 루프탑 애견운동장이 딸린 301호를 예약 전에 010-7369-1855로 문의해 보세요."
    ]
   ],
   "links": [
    "/story/dog-travel-checklist.html",
    "/guide.html",
-   "/rooms/"
+   "/rooms/",
+   "/story/dog-marking-new-place.html",
+   "/story/dog-barking-new-place.html"
   ],
   "sources": [],
   "date": "2026-11-18"
@@ -931,12 +938,18 @@
    [
     "구명조끼가 있나요?",
     "오카맨션 반려견 수영장에서 빌려 드려요."
+   ],
+   [
+    "반려견 수영장에 사람이 같이 들어갈 수 있나요? 사람 수영장은 어떻게 이용하나요?",
+    "처음 물에 들어가는 강아지라면 보호자가 곁에서 몸을 받쳐 주는 게 가장 안심돼요. 오카맨션은 반려견 전용 수영장과 사람용 대형 야외수영장이 나뉘어 있어요. 대형 야외수영장은 반려견이 들어갈 수 없고, 1인 10,000원(24개월 미만 무료)을 현장에서 결제해요."
    ]
   ],
   "links": [
    "/dog/golden-retriever.html",
    "/dog/french-bulldog.html",
-   "/story/dog-travel-checklist.html"
+   "/story/dog-travel-checklist.html",
+   "/story/dog-after-trip-care.html",
+   "/story/senior-dog-travel.html"
   ],
   "sources": [],
   "date": "2026-11-18"
@@ -1354,7 +1367,8 @@
    "/story/cheongju-kids-day-trip.html",
    "/story/dog-travel-checklist.html",
    "/story/cheongju-winter-pension.html",
-   "/cheongju/cheongju-warm-pool-pension.html"
+   "/cheongju/cheongju-warm-pool-pension.html",
+   "/cheongju/osong-kids-pension.html"
   ],
   "sources": [],
   "date": "2026-11-21"
