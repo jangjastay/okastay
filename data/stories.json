@@ -800,6 +800,10 @@
    [
     "오카맨션에 반려견 용품이 있나요?",
     "식기, 배변패드, 침대 계단이 있어요. 사료와 리드줄은 꼭 챙겨 주세요."
+   ],
+   [
+    "강아지 두 마리를 데려가면 준비물도 두 배로 챙겨야 하나요?",
+    "사료·간식·평소 먹는 약·담요처럼 아이마다 다른 건 따로 나눠 담고, 리드줄과 인식표도 한 마리당 하나씩 챙기세요. 오카맨션은 12kg 미만 소형견이면 2마리까지 전 객실에서 함께 묵을 수 있고, 반려견 요금은 1마리 20,000원이에요."
    ]
   ],
   "links": [
@@ -807,7 +811,9 @@
    "/story/pet-pension-manners.html",
    "/rooms/",
    "/story/okhwa-forest-pet-stay.html",
-   "/dog/japanese-spitz.html"
+   "/dog/japanese-spitz.html",
+   "/story/two-dogs-travel.html",
+   "/story/dog-marking-new-place.html"
   ],
   "sources": [],
   "date": "2026-11-18"
@@ -1101,12 +1107,18 @@
    [
     "대형견도 동반할 수 있나요?",
     "대형견은 단독 루프탑 애견운동장이 있는 301호만 가능하고 50,000원이며 사전 문의가 필요해요."
+   ],
+   [
+    "펜션 도착 시간은 언제로 맞추면 좋을까요?",
+    "오카맨션 입실은 15:00, 퇴실은 11:00예요. 중간에 쉬어 갈 시간을 넉넉히 더해 출발 시각을 잡으면 입실 시간에 쫓겨 휴식을 건너뛰는 일이 줄어요. 길을 나서면서 내비게이션에는 충청북도 청주시 상당구 미원면 운암옥화길 186-16을 입력하고, 도착이 늦어질 것 같으면 010-7369-1855로 미리 알려 주세요."
    ]
   ],
   "links": [
    "/story/dog-travel-checklist.html",
    "/story/pet-pension-manners.html",
-   "/story/okhwa-forest-pet-stay.html"
+   "/story/okhwa-forest-pet-stay.html",
+   "/story/dog-1night-schedule.html",
+   "/story/dog-park-first-visit.html"
   ],
   "sources": [],
   "date": "2026-11-19"
@@ -1526,12 +1538,18 @@
    [
     "대형견도 불멍을 할 수 있나요?",
     "대형견은 301호만 이용 가능하며, 301호 루프탑 애견운동장에 불멍존이 있어요. 대형견 요금은 50,000원이고 사전 문의가 필요해요."
+   ],
+   [
+    "불멍 전에 바베큐도 함께 하고 싶은데 무엇을 준비하면 되나요?",
+    "오카맨션 바베큐장은 실내 10,000원, 야외 30,000원이에요. 장비가 없다면 바베큐 장비 대여(10,000원)를, 장보기가 번거롭다면 간편 고기세트(65,000원)를 함께 신청하면 돼요. 식사를 마친 뒤 불멍세트(15,000원)로 이어 가면 강아지 자리를 한 번만 잡아도 저녁 내내 편해요."
    ]
   ],
   "links": [
    "/rooms/301.html",
    "/story/dog-bbq-food-safety.html",
-   "/story/dog-winter-travel.html"
+   "/story/dog-winter-travel.html",
+   "/story/pension-bbq-checklist.html",
+   "/story/christmas-dog-pension.html"
   ],
   "sources": [],
   "date": "2026-11-22"
